@@ -99,7 +99,7 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
     })
 
-    .controller('FriendsCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    .controller('BrosCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
         // Set Header
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();

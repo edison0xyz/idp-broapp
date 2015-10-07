@@ -55,12 +55,12 @@ angular.module('starter',
                 }
             })
 
-            .state('app.friends', {
-                url: '/friends',
+            .state('app.bros', {
+                url: '/bros',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/friends.html',
-                        controller: 'FriendsCtrl'
+                        templateUrl: 'templates/bros.html',
+                        controller: 'BrosCtrl'
                     },
                     'fabContent': {
                         template: '<button id="fab-friends" class="button button-fab button-fab-top-left expanded button-energized-900 spin"><i class="icon ion-chatbubbles"></i></button>',
@@ -143,6 +143,57 @@ angular.module('starter',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/brohelp.html',
+                        controller: 'BroHelpCtrl'
+                    },
+                    'fabContent': {
+                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                        controller: function ($timeout) {
+                            /*$timeout(function () {
+                             document.getElementById('fab-profile').classList.toggle('on');
+                             }, 800);*/
+                        }
+                    }
+                }
+            })
+            .state('app.tasks', {
+                url: '/tasks',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/tasks.list.html',
+                        controller: 'BroHelpCtrl'
+                    },
+                    'fabContent': {
+                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                        controller: function ($timeout) {
+                            /*$timeout(function () {
+                             document.getElementById('fab-profile').classList.toggle('on');
+                             }, 800);*/
+                        }
+                    }
+                }
+            })
+            .state('app.tasks.detail', {
+                url: '/tasks/detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/tasks.detail.html',
+                        controller: 'BroHelpCtrl'
+                    },
+                    'fabContent': {
+                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                        controller: function ($timeout) {
+                            /*$timeout(function () {
+                             document.getElementById('fab-profile').classList.toggle('on');
+                             }, 800);*/
+                        }
+                    }
+                }
+            })
+            .state('app.brommunity', {
+                url: '/brommunity',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/brommunity.html',
                         controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
