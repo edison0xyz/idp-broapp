@@ -4,7 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'ionMdInput'])
+angular.module('starter',
+    ['ionic', 'starter.controllers',
+        'ionic-material', 'ionMdInput', 'firebase'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -19,7 +21,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             }
         });
     })
-
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
         // Turn off caching for demo simplicity's sake
@@ -36,7 +37,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
             templateUrl: 'templates/menu.html',
             controller: 'AppCtrl'
         })
-
             .state('app.activity', {
                 url: '/activity',
                 views: {
@@ -127,6 +127,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-material', 'io
                     'menuContent': {
                         templateUrl: 'templates/main.html',
                         controller: 'MainCtrl'
+                    },
+                    'fabContent': {
+                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                        controller: function ($timeout) {
+                            /*$timeout(function () {
+                             document.getElementById('fab-profile').classList.toggle('on');
+                             }, 800);*/
+                        }
+                    }
+                }
+            })
+            .state('app.brohelp', {
+                url: '/brohelp',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/brohelp.html',
+                        controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
                         template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',

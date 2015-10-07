@@ -1,6 +1,8 @@
 <ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+        <ion-nav-bar class="bar-assertive-900"
+                     ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"
+                     align-title="left">
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="right">
@@ -9,27 +11,40 @@
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="fabContent"></ion-nav-view>
-        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="right" is-enabled="!isView('app.login')">
-        <ion-header-bar class="dark-bg expanded">
+        <ion-header-bar class="dark-bg expanded" ui-sref="app.profile">
             <span class="avatar" style="background: url('img/jj.jpg'); background-size: cover;"></span>
+
             <h2>Sebastian</h2>
         </ion-header-bar>
         <ion-content class="stable-bg has-expanded-header">
-            <ion-list>
-                <ion-item nav-clear menu-close ui-sref="app.main">
-                    Main
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.login">
+            <div class="list">
+                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.main">
+                    <i class="ion-home"></i>
+                    Home
+                </div>
+                <div class="item item-icon-left side-menu-item" nav-clear menu-close>
+                    <i class="ion-ios-people"></i>
+                    Brommunity
+                </div>
+                <div class="item item-icon-left side-menu-item" nav-clear menu-close>
+                    <i class="ion-hammer"></i>
+                    Bro Tasks
+                </div>
+                <div class="item item-icon-left side-menu-item" nav-clear menu-close>
+                    <i class="ion-android-hand"></i>
+                    Bro Help</div>
+            </div>
+            <div class="button-bar">
+                <a class="button button-icon icon ion-gear-a"></a>
+                <a class="button button-icon icon ion-log-out" nav-clear menu-close ui-sref="app.login">
                     Logout
-                </ion-item>
-                <ion-item nav-clear menu-close ui-sref="app.profile">
-                    Profile
-                </ion-item>
+                </a>
+            </div>
 
-                
-            </ion-list>
+
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>
