@@ -142,7 +142,7 @@ angular.module('starter',
                 url: '/brohelp',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/brohelp.html',
+                        templateUrl: 'templates/brohelp.main.html',
                         controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
@@ -159,7 +159,7 @@ angular.module('starter',
                 url: '/tasks',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/tasks.list.html',
+                        templateUrl: 'templates/task.list.html',
                         controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
@@ -176,7 +176,7 @@ angular.module('starter',
                 url: '/tasks/detail',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/tasks.detail.html',
+                        templateUrl: 'templates/task.detail.html',
                         controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
@@ -194,7 +194,7 @@ angular.module('starter',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/brommunity.html',
-                        controller: 'BroHelpCtrl'
+                        controller: 'ActivityCtrl'
                     },
                     'fabContent': {
                         template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
