@@ -1,5 +1,37 @@
 <ion-view view-title="Task details">
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        TODO
+    <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('img/login.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/jj.jpg');"></div>
+                <h3><a class="light">Sebastian</a></h3>
+                <h4>Super Bro </h4>
+            </div>
+        </div>
+        <!-- progress bar -->
+        <h4 class="content padding double-padding-x">Progress Bar</h4>
+        <div class="content padding">
+            Progress bar will be here
+        </div>
+
+        <!-- Badge -->
+        <h4 class="content padding double-padding-x">Badges</h4>
+        <div class="row">
+
+            <div ui-sref="app.profile" class=" col card card-gallery item item-text-wrap">
+                <div class="ink dark-bg">
+                    <h2>Noob bro</h2>
+                    <img class="full-image" src="img/jj.jpg">
+                </div>
+
+            </div>
+            <div ui-sref="app.profile" class=" col card card-gallery item item-text-wrap">
+                <div class="ink dark-bg">
+                    <h2>Noob bro</h2>
+                    <img class="full-image" src="img/jj.jpg">
+                </div>
+
+            </div>
+
+        </div>
     </ion-content>
 </ion-view>

@@ -1,14 +1,14 @@
 <ion-view view-title="BroHelp">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div class="item card-item">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.tasks.detail" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url('img/jj.jpg');"></span>
                     <strong>Sebastian asks </strong> can anyone get me flowers?<br>
                     <i class="icon ion-cash"></i> Reward: $10
                     <div class="card-footer text-right">
 
-                        <button class="button button-small button-light button-assertive">
+                        <button ui-sref="app.tasks.detail" class="button button-small button-light button-assertive">
                             Help this bro
                         </button>
                         <div class="pull-left">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="item card-item">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.tasks.detail" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url('img/derrick.png');"></span>
                     <strong>Derrick asks </strong> I need a birthday cake. Can someone get me a cake? URGENT! <br>
@@ -42,7 +42,7 @@
 
         </div>
         <div class="item card-item">
-            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
+            <div ui-sref="app.tasks.detail" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url('img/chan.png');"></span>
                     <strong>Joshua asks </strong> I need a car ride urgently. NO CABS AROUND. HELP!<br>
@@ -58,5 +58,11 @@
                     </div>
                 </div>
             </div>
+            </div>
+
+
+        <div class="bar bar-footer bar-assertive">
+            <div class="title">Call for Help!</div>
+        </div>
     </ion-content>
 </ion-view>

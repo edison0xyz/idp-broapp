@@ -146,8 +146,7 @@ angular.module('starter',
                         controller: 'ActivityCtrl'
                     },
                     'fabContent': {
-                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
-                        controller: function ($timeout) {
+                       controller: function ($timeout) {
                             /*$timeout(function () {
                              document.getElementById('fab-profile').classList.toggle('on');
                              }, 800);*/
@@ -155,25 +154,59 @@ angular.module('starter',
                     }
                 }
             })
+
+
+            //.state('app.tasks', {
+            //    url: '/tasks',
+            //    views: {
+            //        'menuContent': {
+            //            templateUrl: 'templates/task.list.html',
+            //            controller: 'BroHelpCtrl'
+            //        },
+            //        'fabContent': {
+            //            template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+            //            controller: function ($timeout) {
+            //                /*$timeout(function () {
+            //                 document.getElementById('fab-profile').classList.toggle('on');
+            //                 }, 800);*/
+            //            }
+            //        }
+            //    }
+            //})
+
             .state('app.tasks', {
-                url: '/tasks',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/task.list.html',
-                        controller: 'BroHelpCtrl'
-                    },
-                    'fabContent': {
-                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
-                        controller: function ($timeout) {
-                            /*$timeout(function () {
-                             document.getElementById('fab-profile').classList.toggle('on');
-                             }, 800);*/
-                        }
+                url:'/tasks',
+                'menuContent': {
+                    templateUrl: 'templates/task.html',
+                    controller: 'BroHelpCtrl'
+                },
+                'fabContent': {
+                    template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                    controller: function ($timeout) {
+                        /*$timeout(function () {
+                         document.getElementById('fab-profile').classList.toggle('on');
+                         }, 800);*/
                     }
                 }
             })
+            .state('app.tasks.list', {
+                url:'/list',
+                'menuContent': {
+                    templateUrl: 'templates/task.list.html',
+                    controller: 'BroHelpCtrl'
+                },
+                'fabContent': {
+                    template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                    controller: function ($timeout) {
+                        /*$timeout(function () {
+                         document.getElementById('fab-profile').classList.toggle('on');
+                         }, 800);*/
+                    }
+                }
+            })
+
             .state('app.tasks.detail', {
-                url: '/tasks/detail',
+                url: '/detail',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/task.detail.html',
