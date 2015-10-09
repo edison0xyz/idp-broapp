@@ -146,7 +146,7 @@ angular.module('starter',
                         controller: 'ActivityCtrl'
                     },
                     'fabContent': {
-                       controller: function ($timeout) {
+                        controller: function ($timeout) {
                             /*$timeout(function () {
                              document.getElementById('fab-profile').classList.toggle('on');
                              }, 800);*/
@@ -175,41 +175,11 @@ angular.module('starter',
             //})
 
             .state('app.tasks', {
-                url:'/tasks',
-                'menuContent': {
-                    templateUrl: 'templates/task.html',
-                    controller: 'BroHelpCtrl'
-                },
-                'fabContent': {
-                    template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
-                    controller: function ($timeout) {
-                        /*$timeout(function () {
-                         document.getElementById('fab-profile').classList.toggle('on');
-                         }, 800);*/
-                    }
-                }
-            })
-            .state('app.tasks.list', {
-                url:'/list',
-                'menuContent': {
-                    templateUrl: 'templates/task.list.html',
-                    controller: 'BroHelpCtrl'
-                },
-                'fabContent': {
-                    template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
-                    controller: function ($timeout) {
-                        /*$timeout(function () {
-                         document.getElementById('fab-profile').classList.toggle('on');
-                         }, 800);*/
-                    }
-                }
-            })
-
-            .state('app.tasks.detail', {
-                url: '/detail',
+                url: '/tasks',
+                abstract: true,
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/task.detail.html',
+                        templateUrl: 'templates/task.html',
                         controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
@@ -221,6 +191,17 @@ angular.module('starter',
                         }
                     }
                 }
+            })
+            .state('app.tasks.list', {
+                url: '/list',
+                templateUrl: 'templates/task.list.html',
+                controller: 'BroHelpCtrl'
+            })
+
+            .state('app.tasks.detail', {
+                url: '/detail',
+                templateUrl: 'templates/task.detail.html',
+                controller: 'BroHelpCtrl'
             })
             .state('app.brommunity', {
                 url: '/brommunity',
