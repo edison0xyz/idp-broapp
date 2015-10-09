@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
-    ['ionic', 'starter.controllers',
+    ['ionic', 'starter.controllers', 'starter.services',
         'ionic-material', 'ionMdInput', 'firebase'])
 
     .run(function ($ionicPlatform) {
@@ -143,7 +143,7 @@ angular.module('starter',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/brohelp.main.html',
-                        controller: 'ActivityCtrl'
+                        controller: 'BroHelpCtrl'
                     },
                     'fabContent': {
                         controller: function ($timeout) {
@@ -199,9 +199,9 @@ angular.module('starter',
             })
 
             .state('app.tasks.detail', {
-                url: '/detail',
+                url: '/:id',
                 templateUrl: 'templates/task.detail.html',
-                controller: 'BroHelpCtrl'
+                controller: 'TaskCtrl'
             })
             .state('app.brommunity', {
                 url: '/brommunity',
