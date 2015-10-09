@@ -12,6 +12,14 @@ h1 {
     width:33%;
 }
 
+.badge-grey {
+  img.desaturate {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+}
+
+
 
 
 /* Utilities
