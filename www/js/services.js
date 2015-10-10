@@ -39,18 +39,21 @@ angular.module('starter.services', [])
                 id:1,
                 name: 'Jia Jing',
                 points: '100',
+                rank: 'Noob Bro',
                 display_pic: 'img/jj.png'
             },
             {
                 id:2,
-                name: 'Sebastien',
+                name: 'Sebastian',
                 points: '240',
+                rank: 'Super Bro',
                 display_pic: 'img/derrick.png'
             },
             {
                 id:3,
                 name: 'Joshua',
                 points: '780',
+                rank: 'Big Bro',
                 display_pic: 'img/chan.png'
             }
         ];
