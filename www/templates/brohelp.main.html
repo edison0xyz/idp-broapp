@@ -1,6 +1,6 @@
 <ion-view view-title="BroHelp">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <div class="item card-item" ng-repeat="task in tasks">
+        <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
             <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
@@ -22,10 +22,8 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="bar bar-footer bar-assertive">
-            <div class="title">Call for Help!</div>
-        </div>
     </ion-content>
+    <div class="bar bar-footer bar-assertive" ui-sref="app.tasks.new">
+        <div class="title">Call for Help!</div>
+    </div>
 </ion-view>

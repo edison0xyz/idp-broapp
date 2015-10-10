@@ -205,8 +205,8 @@ angular.module('starter.controllers', [])
     .controller('BroHelpCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
 
         $timeout(function () {
@@ -223,8 +223,8 @@ angular.module('starter.controllers', [])
     .controller('TaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
 
         $timeout(function () {
@@ -237,5 +237,35 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
 
         $scope.task = Tasks.get($stateParams.id);
+    })
+    .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
+        Bros, Profile ,Tasks, $ionicPopup, $state) {
+        //$scope.$parent.showHeader();
+        //$scope.$parent.clearFabs();
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
+        $scope.$parent.setHeaderFab('right');
+
+        $timeout(function () {
+            ionicMaterialMotion.fadeSlideIn({
+                selector: '.animate-fade-slide-in .item'
+            });
+        }, 200);
+
+        // Activate ink for controller
+        ionicMaterialInk.displayEffect();
+
+        $scope.addTask = function(task){
+            task.bro = Bros.get(Profile.id);
+            task.status = open;
+            Tasks.add(task);
+            var alertPopup = $ionicPopup.alert({
+                title: 'Task request sent',
+                template: 'Awaiting for your true bro...'
+            });
+            alertPopup.then(function(res) {
+                $state.go('app.brohelp');
+            });
+        }
     })
 ;

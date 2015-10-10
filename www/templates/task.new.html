@@ -1,5 +1,44 @@
 <ion-view view-title="New task">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        Task list new.
+        <form ng-submit="addTask(newTask)">
+            <div class="list">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Task</span>
+                    <textarea required ng-required="true" ng-model="newTask.task"
+                              placeholder="Need for a gift for my girlfriend!"></textarea>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Reward</span>
+                    <input required ng-required="true" ng-model="newTask.reward" type="number" placeholder="20">
+                </label>
+                <ion-toggle ng-model="newTask.hasPurchase" toggle-class="toggle-calm">Requires purchase?</ion-toggle>
+                <div ng-show="newTask.hasPurchase">
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-input">
+                                <span class="input-label">Budget min</span>
+                                <input ng-required="newTask.hasPurchase" ng-model="newTask.budget[0]" type="number" placeholder="10">
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="item item-input">
+                                <span class="input-label">max</span>
+                                <input ng-required="newTask.hasPurchase" ng-model="newTask.budget[1]" type="number" placeholder="50">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ion-toggle ng-model="newTask.location" toggle-class="toggle-calm">Share you location</ion-toggle>
+            <div class="row">
+                <div class="col">
+                    <button class="button button-energized" type="submit">
+                        Get help
+                    </button>
+                </div>
+            </div>
+
+        </form>
     </ion-content>
 </ion-view>

@@ -197,7 +197,11 @@ angular.module('starter',
                 templateUrl: 'templates/task.list.html',
                 controller: 'BroHelpCtrl'
             })
-
+            .state('app.tasks.new', {
+                url: '/new',
+                templateUrl: 'templates/task.new.html',
+                controller: 'NewTaskCtrl'
+            })
             .state('app.tasks.detail', {
                 url: '/:id',
                 templateUrl: 'templates/task.detail.html',
