@@ -7,16 +7,16 @@ angular.module('starter.services', [])
             {
                 id: 1,
                 bro: Bros.get(2),
-                task: "can anyone get me flowers?",
+                task: "HELP! Can anyone get me some flowers?",
                 budget: 10.3,
                 reward: 10,
                 status: open
             },{
                 id:2,
                 bro: Bros.get(3),
-                task: "I need a car ride urgently. NO CABS AROUND. HELP!",
-                budget: 10.3,
-                reward: 10,
+                task: "Can anyone help me buy a cake please? Chocolate one will be great!",
+                budget: 0,
+                reward: 25,
                 status: open
             }
         ];
@@ -47,14 +47,16 @@ angular.module('starter.services', [])
                 name: 'Sebastian',
                 points: '240',
                 rank: 'Super Bro',
-                display_pic: 'img/derrick.png'
+                display_pic: 'img/derrick.png',
+                map: 'img/map-Sebastian.jpg'
             },
             {
                 id:3,
                 name: 'Joshua',
                 points: '780',
                 rank: 'Big Bro',
-                display_pic: 'img/chan.png'
+                display_pic: 'img/chan.png',
+                map: 'img/map-Joshua.jpg'
             }
         ];
         return {

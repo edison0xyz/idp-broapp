@@ -1,8 +1,5 @@
 <ion-view view-title="Task details">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="content">
-
-
         <div class="ionic">
 
         <div class="content double-padding">
@@ -16,6 +13,9 @@
             Reward: <b>{{task.reward |currency}}</b><br>
             Est. cost of item: <b>{{task.budget | currency}}</b>
           </p>
+
+          <h5>Location</h5>
+          <img class="map" src="{{task.bro.map}}"/>
 
 
 
@@ -38,7 +38,7 @@
             <div class="row">
               <button class="button button-assertive">Help this bro</button>
             </div>
-        </div>
+
 
     </ion-content>
 </ion-view>
