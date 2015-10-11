@@ -3,22 +3,21 @@
   <ion-tabs class="tabs-assertive tabs-striped tabs-top">
 
           <ion-tab title="My Requests">
-              <ion-nav-view name="tab-1">
+              <ion-nav-view>
                 <ion-content padding="true" has-header="true">
                   <div class="content double-padding">
                     <h4 class="assertive">My Requests</h4>
 
                   </div>
 
-
-                      <!-- <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
-                          <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
+                       <div class="item card-item" ng-repeat="history in histories |orderBy: '-id'">
+                          <div ui-sref="app.history.detail({id: task.id})" class="card stable-bg ink ink-dark">
                               <div class="item item-avatar item-text-wrap">
-                                  <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
-                                  <strong>{{task.bro.name}} asks </strong> {{task.task}}<br>
+                                  <span class="avatar" style="background-image: url({{history.bro.display_pic}});"></span>
+                                  <strong>{{history.bro.name}} asks </strong> {{history.task}}<br>
                                   <div class="card-footer text-right">
 
-                                      <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
+                                      <i class="icon ion-cash assertive"></i> {{history.reward | currency}}
                                       <div class="pull-left">
                                           <i class="icon ion-clock"></i> just now
                                       </div>
@@ -30,13 +29,13 @@
                                   </div>
                               </div>
                           </div>
-                      </div> -->
+                      </div>
                 </ion-content>
               </ion-nav-view>
           </ion-tab>
 
           <ion-tab title="Requests by Others">
-              <ion-nav-view name="tab-2">
+              <ion-nav-view>
                 <ion-content padding="true" has-header="true">
                   <div class="content double-padding">
                     <h4 class="assertive">Requests by Others</h4>

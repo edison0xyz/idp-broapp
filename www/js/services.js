@@ -81,6 +81,35 @@ angular.module('starter.services', [])
         };
     })
 
+    .factory('History', function(Bros) {
+      var taskHistories = [
+          {
+              id: 1,
+              bro: Bros.get(2),
+              task: "HELP! Can anyone get me some flowers?",
+              budget: [10, 20],
+              reward: 10,
+          },{
+              id:2,
+              bro: Bros.get(2),
+              task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
+              budget: [40, 60],
+              reward: 25,
+          },
+          {
+              id:3,
+              bro: Bros.get(2),
+              task: "Drive me somewhere! ",
+              budget: [40, 60],
+              reward: 25,
+          }
+      ];
+      return {
+          all: taskHistories ,
+
+      };
+    })
+
 
 
 

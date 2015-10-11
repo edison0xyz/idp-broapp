@@ -213,7 +213,7 @@ angular.module('starter',
               views: {
                   'menuContent': {
                     templateUrl: 'templates/task.history.html',
-                    controller: 'BroHelpCtrl'
+                    controller: 'HistoryCtrl'
                   },
                   'fabContent': {
                       template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
