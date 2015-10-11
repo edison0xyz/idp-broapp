@@ -1,39 +1,70 @@
-<div class="tabs-striped tabs-top tabs-background-assertive tabs-color-light">
-    <div class="tabs">
-      <a class="tab-item active">
-        By Me
-      </a>
-      <a class="tab-item" ui-sref="app.history.others">
-        By Others
-      </a>
-    </div>
-  </div>
+
 <ion-view view-title="History">
-    <ion-content ng-class="{expanded:isExpanded}" class="has-subheader animate-fade-slide-in">
+  <ion-tabs class="tabs-assertive tabs-striped tabs-top">
 
-    <div class="content double-padding">
-      <h4 class="assertive">Tasks Done by Me</h4>
-      <p>History of tasks that you have helped others with will be shown here.</p>
-    </div>
-        <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
-            <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
-                <div class="item item-avatar item-text-wrap">
-                    <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
-                    <strong>{{task.bro.name}} asks </strong> {{task.task}}<br>
-                    <div class="card-footer text-right">
+          <ion-tab title="My Requests">
+              <ion-nav-view name="tab-1">
+                <ion-content padding="true" has-header="true">
+                  <div class="content double-padding">
+                    <h4 class="assertive">My Requests</h4>
 
-                        <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
-                        <div class="pull-left">
-                            <i class="icon ion-clock"></i> just now
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <button ui-sref="app.tasks.detail({id: task.id})" class="button button-small button-light button-assertive">
-                            View More
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ion-content>
+                  </div>
+
+
+                      <!-- <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
+                          <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
+                              <div class="item item-avatar item-text-wrap">
+                                  <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
+                                  <strong>{{task.bro.name}} asks </strong> {{task.task}}<br>
+                                  <div class="card-footer text-right">
+
+                                      <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
+                                      <div class="pull-left">
+                                          <i class="icon ion-clock"></i> just now
+                                      </div>
+                                  </div>
+                                  <div class="card-footer text-right">
+                                      <button ui-sref="app.tasks.detail({id: task.id})" class="button button-small button-light button-assertive">
+                                          View More
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> -->
+                </ion-content>
+              </ion-nav-view>
+          </ion-tab>
+
+          <ion-tab title="Requests by Others">
+              <ion-nav-view name="tab-2">
+                <ion-content padding="true" has-header="true">
+                  <div class="content double-padding">
+                    <h4 class="assertive">Requests by Others</h4>
+
+                  </div>
+                      <!-- <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
+                          <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
+                              <div class="item item-avatar item-text-wrap">
+                                  <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
+                                  <strong>{{task.bro.name}} asks </strong> {{task.task}}<br>
+                                  <div class="card-footer text-right">
+
+                                      <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
+                                      <div class="pull-left">
+                                          <i class="icon ion-clock"></i> just now
+                                      </div>
+                                  </div>
+                                  <div class="card-footer text-right">
+                                      <button ui-sref="app.tasks.detail({id: task.id})" class="button button-small button-light button-assertive">
+                                          View More
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div> -->
+                </ion-content>
+              </ion-nav-view>
+          </ion-tab>
+
+      </ion-tabs>
 </ion-view>

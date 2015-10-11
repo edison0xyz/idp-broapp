@@ -225,13 +225,6 @@ angular.module('starter',
                   }
               }
             })
-            .state('app.history.others', {
-                url: '/others',
-                templateUrl: 'templates/task.history.others.html',
-                controller: 'BroHelpCtrl'
-            })
-
-
             .state('app.brommunity', {
                 url: '/brommunity',
                 views: {
