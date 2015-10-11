@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
     ['ionic', 'starter.controllers', 'starter.services',
-        'ionic-material', 'ionMdInput', 'firebase'])
+        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -192,10 +192,10 @@ angular.module('starter',
                     }
                 }
             })
-            .state('app.tasks.list', {
-                url: '/list',
-                templateUrl: 'templates/task.list.html',
-                controller: 'BroHelpCtrl'
+            .state('app.tasks.active', {
+                url: '/active',
+                templateUrl: 'templates/task.active.html',
+                controller: 'ActiveTaskCtrl'
             })
             .state('app.tasks.new', {
                 url: '/new',

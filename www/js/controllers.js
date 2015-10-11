@@ -242,9 +242,9 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.tasks = Tasks.all;
+        $scope.tasks = Tasks.opened();
     })
-    .controller('TaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -261,9 +261,14 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
 
         $scope.task = Tasks.get($stateParams.id);
+
+        $scope.acceptTask = function () {
+            Tasks.setActive($scope.task.id);
+            $state.go('app.tasks.active');
+        }
     })
     .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
-        Bros, Profile ,Tasks, $ionicPopup, $state) {
+                                         Bros, Profile, Tasks, $ionicPopup, $state) {
         //$scope.$parent.showHeader();
         //$scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -279,7 +284,7 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.addTask = function(task){
+        $scope.addTask = function (task) {
             task.bro = Bros.get(Profile.id);
             task.status = open;
             Tasks.add(task);
@@ -287,9 +292,42 @@ angular.module('starter.controllers', [])
                 title: 'Task request sent',
                 template: 'Awaiting for your true bro...'
             });
-            alertPopup.then(function(res) {
+            alertPopup.then(function (res) {
                 $state.go('app.brohelp');
             });
+        }
+    }).controller('ActiveTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+        $scope.$parent.showHeader();
+        $scope.$parent.clearFabs();
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
+        $scope.$parent.setHeaderFab('right');
+
+        $timeout(function () {
+            ionicMaterialMotion.fadeSlideIn({
+                selector: '.animate-fade-slide-in .item'
+            });
+        }, 200);
+
+        // Activate ink for controller
+        ionicMaterialInk.displayEffect();
+
+        $scope.task = Tasks.active();
+        if ($scope.task.hasPurchase) {
+            $scope.stages = [
+                "Task started",
+                "Item purchased",
+                "Item delivered"
+            ];
+        } else {
+            $scope.stages = [
+                "Task started",
+                "Task completed"
+            ];
+        }
+        $scope.addMessage = function (task) {
+            $scope.task.messages.push(task.message);
+            task.message = "";
         }
     })
 ;
