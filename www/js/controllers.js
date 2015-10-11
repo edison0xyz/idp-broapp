@@ -118,7 +118,7 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
     })
 
-    .controller('HistoryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    .controller('HistoryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, History) {
         // Set Header
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();

@@ -85,23 +85,29 @@ angular.module('starter.services', [])
       var taskHistories = [
           {
               id: 1,
-              bro: Bros.get(2),
+              requestedBy: Bros.get(2),
               task: "HELP! Can anyone get me some flowers?",
               budget: [10, 20],
               reward: 10,
+              completedBy: Bros.get(3),
+              dateCompleted: 1413020671
           },{
               id:2,
-              bro: Bros.get(2),
+              requestedBy: Bros.get(2),
               task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
               budget: [40, 60],
               reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(3)
           },
           {
               id:3,
-              bro: Bros.get(2),
+              requestedBy: Bros.get(2),
               task: "Drive me somewhere! ",
               budget: [40, 60],
               reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(3)
           }
       ];
       return {

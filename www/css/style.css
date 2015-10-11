@@ -21,7 +21,12 @@ h1 {
 
 .map {
   height:50%;
-  width: 100% ; 
+  width: 100% ;
+}
+
+.history-displayPic {
+  width:20% ;
+  heigh:"20%";
 }
 
 
