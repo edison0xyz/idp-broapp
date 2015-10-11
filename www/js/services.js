@@ -109,14 +109,14 @@ angular.module('starter.services', [])
                 name: 'Jia Jing',
                 points: '100',
                 rank: 'Noob Bro',
-                display_pic: 'img/derrick.png'
+                display_pic: 'img/jj.jpg'
             },
             {
                 id: 2,
                 name: 'Sebastian',
                 points: '240',
                 rank: 'Super Bro',
-                display_pic: 'img/jj.jpg',
+                display_pic: 'img/derrick.png',
                 map: 'img/map-Sebastian.jpg'
             },
             {
@@ -141,6 +141,7 @@ angular.module('starter.services', [])
         };
     })
 
+<<<<<<< HEAD
     .factory('History', function (Bros) {
         var taskHistories = [
             {
@@ -166,6 +167,69 @@ angular.module('starter.services', [])
         ];
         return {
             all: taskHistories,
+=======
+    .factory('History', function(Bros) {
+      var taskHistories = [
+          {
+              id: 1,
+              requestedBy: Bros.get(2),
+              task: "HELP! Can anyone get me some flowers?",
+              budget: [10, 20],
+              reward: 10,
+              completedBy: Bros.get(3),
+              dateCompleted: 1413020671
+          },{
+              id:2,
+              requestedBy: Bros.get(2),
+              task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
+              budget: [40, 60],
+              reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(3)
+          },
+          {
+              id:3,
+              requestedBy: Bros.get(2),
+              task: "Drive me somewhere! ",
+              budget: [40, 60],
+              reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(1)
+          },
+          {
+              id:4,
+              requestedBy: Bros.get(3),
+              task: "Drive me somewhere! ",
+              budget: [40, 60],
+              reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(2)
+          }
+      ];
+      return {
+          all: taskHistories,
+          getMyRequest: function(i){
+            // get list of tasks requested by user (i)
+              var myRequests = [];
+              taskHistories.forEach(function (taskHistories) {
+                  if(taskHistories.requestedBy == Bros.get(i))
+                      myRequests.push(taskHistories);
+              });
+              return myRequests;
+          },
+
+          getRequestByOthers: function(i) {
+            // get list of tasks requested by user (i)
+              var otherRequests = [];
+              taskHistories.forEach(function (taskHistories) {
+                  if(taskHistories.completedBy == Bros.get(i))
+                      otherRequests.push(taskHistories);
+              });
+              return otherRequests;
+
+          }
+
+>>>>>>> master
 
         };
     })
