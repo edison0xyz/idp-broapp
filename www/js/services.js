@@ -49,14 +49,14 @@ angular.module('starter.services', [])
                 name: 'Jia Jing',
                 points: '100',
                 rank: 'Noob Bro',
-                display_pic: 'img/derrick.png'
+                display_pic: 'img/jj.jpg'
             },
             {
                 id:2,
                 name: 'Sebastian',
                 points: '240',
                 rank: 'Super Bro',
-                display_pic: 'img/jj.jpg',
+                display_pic: 'img/derrick.png',
                 map: 'img/map-Sebastian.jpg'
             },
             {
@@ -107,11 +107,41 @@ angular.module('starter.services', [])
               budget: [40, 60],
               reward: 25,
               dateCompleted: 1413020671,
-              completedBy: Bros.get(3)
+              completedBy: Bros.get(1)
+          },
+          {
+              id:4,
+              requestedBy: Bros.get(3),
+              task: "Drive me somewhere! ",
+              budget: [40, 60],
+              reward: 25,
+              dateCompleted: 1413020671,
+              completedBy: Bros.get(2)
           }
       ];
       return {
-          all: taskHistories ,
+          all: taskHistories,
+          getMyRequest: function(i){
+            // get list of tasks requested by user (i)
+              var myRequests = [];
+              taskHistories.forEach(function (taskHistories) {
+                  if(taskHistories.requestedBy == Bros.get(i))
+                      myRequests.push(taskHistories);
+              });
+              return myRequests;
+          },
+
+          getRequestByOthers: function(i) {
+            // get list of tasks requested by user (i)
+              var otherRequests = [];
+              taskHistories.forEach(function (taskHistories) {
+                  if(taskHistories.completedBy == Bros.get(i))
+                      otherRequests.push(taskHistories);
+              });
+              return otherRequests;
+
+          }
+
 
       };
     })

@@ -136,7 +136,8 @@ angular.module('starter.controllers', [])
         // Set Ink
         ionicMaterialInk.displayEffect();
 
-        $scope.histories = History.all;
+        $scope.myRequests = History.getMyRequest(2);
+        $scope.otherRequests = History.getRequestByOthers(2) ;
 
 
     })

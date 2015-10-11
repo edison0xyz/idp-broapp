@@ -11,8 +11,8 @@
                   </div>
 
                   <!-- Display all completed tasks requested by user -->
-                   <div class="item card-item" ng-repeat="history in histories |orderBy: '-id'">
-                      <div ui-sref="app.history.detail({id: task.id})" class="card stable-bg ink ink-dark">
+                   <div class="item card-item" ng-repeat="history in myRequests |orderBy: '-id'">
+                      <div class="card stable-bg ink ink-dark">
                           <div class="item item-text-wrap">
                             <strong>Task: {{history.task}}</strong> <br>
                             Date: {{history.dateCompleted | date:'medium'}} <br>
@@ -45,26 +45,30 @@
                     <h4 class="assertive">Requests by Others</h4>
 
                   </div>
-                      <!-- <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
-                          <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
-                              <div class="item item-avatar item-text-wrap">
-                                  <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
-                                  <strong>{{task.bro.name}} asks </strong> {{task.task}}<br>
-                                  <div class="card-footer text-right">
+                  <!-- Display all completed tasks requested by user -->
+                   <div class="item card-item" ng-repeat="history in otherRequests |orderBy: '-id'">
+                      <div class="card stable-bg ink ink-dark">
+                          <div class="item item-text-wrap">
+                            <strong>Task: {{history.task}}</strong> <br>
+                            Date: {{history.dateCompleted | date:'medium'}} <br>
+                            Paid: {{history.reward | currency}}
+                            <!-- Completed by member details  -->
+                              <div class="card-footer">
+                                <div class="row">
+                                  <!-- Display Pic  -->
+                                  <div class="col col-25"><span class="avatar" style="background-image: url({{history.completedBy.display_pic}});"></span></div>
+                                  <div class="col">
+                                    <!-- Bro details -->
+                                    <strong>Requested by:</strong><br>
+                                    {{history.requestedBy.name}}<br>
+                                    {{history.requestedBy.rank}}
+                                  </div>
 
-                                      <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
-                                      <div class="pull-left">
-                                          <i class="icon ion-clock"></i> just now
-                                      </div>
-                                  </div>
-                                  <div class="card-footer text-right">
-                                      <button ui-sref="app.tasks.detail({id: task.id})" class="button button-small button-light button-assertive">
-                                          View More
-                                      </button>
-                                  </div>
                               </div>
+                            </div>
                           </div>
-                      </div> -->
+                      </div>
+                  </div>
                 </ion-content>
               </ion-nav-view>
           </ion-tab>
