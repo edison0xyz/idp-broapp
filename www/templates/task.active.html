@@ -1,0 +1,62 @@
+<ion-view view-title="Active request">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <ul class="progress-indicator">
+            <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
+                <span class="bubble"></span><span class="fa fa-minus"></span>
+                {{stage}}
+            </li>
+        </ul>
+
+        <div class="card">
+            <div class="item item-avatar item-divider">
+                <img src="{{task.bro.display_pic}}">
+                <h2>{{task.bro.name}}</h2>
+                <p am-time-ago="task.date"></p>
+            </div>
+            <div class="item item-text-wrap">
+                {{task.task}}
+            </div>
+        </div>
+
+        <div class="card" ng-if="task.hasPurchase">
+            <div class="item item-divider">
+                Purchase
+            </div>
+            <div class="row">
+                <div class="col">Budget:</div>
+                <div class="col">{{task.budget[0] | currency}}</div>
+                <div class="col">{{task.budget[1] | currency}}</div>
+            </div>
+            <form ng-submit="updatePrice()">
+                <label class="item item-input">
+                    <span class="input-label">Actual price</span>
+                    <input ng-model="task.price" type="number" placeholder="10">
+                </label>
+                <button class="button button-full button-energized" type="submit">
+                    Update price
+                </button>
+            </form>
+        </div>
+        <div class="card">
+            <div class="item item-divider">
+                Updates
+            </div>
+            <div class="item item-text-wrap">
+                <ul class="list">
+                    <li ng-repeat="message in task.messages track by $index">
+                        {{message}}
+                    </li>
+                    <li ng-show="!task.messages.length">No messages</li>
+                </ul>
+            </div>
+            <form ng-submit="addMessage(task)">
+                <label class="item item-input">
+                    <input ng-model="task.message" type="text" placeholder="New message">
+                </label>
+                <button class="button button-block button-positive" type="submit">
+                    Send message
+                </button>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
