@@ -41,7 +41,8 @@ angular.module('starter.services', [])
                 tasks.push(new_task);
             }
         };
-    }).factory('Bros', function () {
+    })
+    .factory('Bros', function () {
         var bros = [
             {
                 id:1,
@@ -78,7 +79,13 @@ angular.module('starter.services', [])
                 return theBro;
             }
         };
-    }).factory('Profile', function () {
+    })
+
+
+
+
+
+    .factory('Profile', function () {
         var me = {
                 id:2,
                 name: 'Sebastian',

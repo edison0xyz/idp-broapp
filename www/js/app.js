@@ -207,6 +207,31 @@ angular.module('starter',
                 templateUrl: 'templates/task.detail.html',
                 controller: 'TaskCtrl'
             })
+
+            .state('app.history', {
+              url:'/history',
+              views: {
+                  'menuContent': {
+                    templateUrl: 'templates/task.history.html',
+                    controller: 'BroHelpCtrl'
+                  },
+                  'fabContent': {
+                      template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
+                      controller: function ($timeout) {
+                          /*$timeout(function () {
+                           document.getElementById('fab-profile').classList.toggle('on');
+                           }, 800);*/
+                      }
+                  }
+              }
+            })
+            .state('app.history.others', {
+                url: '/others',
+                templateUrl: 'templates/task.history.others.html',
+                controller: 'BroHelpCtrl'
+            })
+
+
             .state('app.brommunity', {
                 url: '/brommunity',
                 views: {
