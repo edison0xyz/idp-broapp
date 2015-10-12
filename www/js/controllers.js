@@ -286,7 +286,8 @@ angular.module('starter.controllers', [])
 
         $scope.addTask = function (task) {
             task.bro = Bros.get(Profile.id);
-            task.status = open;
+            task.status = "open";
+            task.date = new Date();
             Tasks.add(task);
             var alertPopup = $ionicPopup.alert({
                 title: 'Task request sent',
@@ -325,7 +326,17 @@ angular.module('starter.controllers', [])
                 "Task completed"
             ];
         }
+        $scope.nextStage = function(){
+            if(!$scope.task.stage)
+                $scope.task.stage = 1;
+            else if($scope.task.stage < $scope.stages.length){
+                $scope.task.stage += 1;
+            }
+        }
         $scope.addMessage = function (task) {
+            if(!$scope.task.messages)
+                $scope.task.messages = [];
+
             $scope.task.messages.push(task.message);
             task.message = "";
         }

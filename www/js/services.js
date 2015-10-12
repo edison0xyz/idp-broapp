@@ -10,10 +10,10 @@ angular.module('starter.services', [])
                 task: "HELP! Can anyone get me some flowers?",
                 hasPurchase: true,
                 budget: [10, 20],
+                date: moment().subtract(5, 'minutes'),
                 reward: 10,
                 status: 'open',
                 savior: null,
-                stage: 1,
                 messages: []
             }, {
                 id: 2,
@@ -25,8 +25,7 @@ angular.module('starter.services', [])
                 // open, active, completed
                 status: 'open',
                 savior: null,
-                date: new Date(),
-                stage: 1,
+                date: moment().subtract(2, 'minutes'),
                 messages: []
             }, {
                 id: 3,
@@ -39,7 +38,6 @@ angular.module('starter.services', [])
                 status: 'active',
                 savior: Bros.get(1),
                 date: new Date(),
-                stage: 1,
                 messages: []
             }, {
                 id: 4,
@@ -52,7 +50,6 @@ angular.module('starter.services', [])
                 status: 'completed',
                 savior: Bros.get(3),
                 date: new Date(),
-                stage: 1,
                 messages: []
             }
         ];

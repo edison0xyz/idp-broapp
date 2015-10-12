@@ -1,6 +1,6 @@
 <ion-view view-title="BroHelp">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <div class="item card-item" ng-repeat="task in tasks |orderBy: '-id'">
+        <div class="item card-item" ng-repeat="task in tasks |orderBy: '-date'">
             <div ui-sref="app.tasks.detail({id: task.id})" class="card stable-bg ink ink-dark">
                 <div class="item item-avatar item-text-wrap">
                     <span class="avatar" style="background-image: url({{task.bro.display_pic}});"></span>
@@ -9,7 +9,7 @@
 
                         <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
                         <div class="pull-left">
-                            <i class="icon ion-clock"></i> just now
+                            <i class="icon ion-clock"></i> <span am-time-ago="task.date"></span>
                         </div>
                     </div>
                     <div class="card-footer text-right">

@@ -6,6 +6,9 @@
                 {{stage}}
             </li>
         </ul>
+        <button ng-if="stages[task.stage || 0]" class="button button-full button-energized" ng-click="nextStage()">
+            {{stages[task.stage || 0]}}
+        </button>
 
         <div class="card">
             <div class="item item-avatar item-divider">
