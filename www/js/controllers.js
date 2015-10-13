@@ -253,7 +253,8 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
 
         $scope.tasks = Tasks.opened;
-        $scope.tasks.$watch(function(){
+        //$scope.tasks.$watch(function(){
+        Tasks.$watch(function(){
             $timeout(function () {
                 ionicMaterialMotion.fadeSlideIn({
                     selector: '.animate-fade-slide-in .item'

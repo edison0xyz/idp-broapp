@@ -4,26 +4,41 @@
 angular.module('starter.services', ['firebase'])
     .factory('Tasks', function (Bros, $firebaseArray) {
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
-
-
         var taskArr = $firebaseArray(TaskRef);
-        var opened = $firebaseArray(TaskRef.child("open"));
+        var openArr = $firebaseArray(TaskRef.orderByChild('status').equalTo('open'));
+        //var openArr = [];
+        var listener = undefined;
+        taskArr.$watch(function(event, key) {
+            console.log(event);
+            if(event == 'child_removed'){
+                console.log('removed', key);
+            }
+            if(event == 'child_added'){
+                console.log('added', key);
+            }
+            if(listener){
+                listener();
+            }
+        });
         return {
             all: taskArr,
-            opened: opened,
-            get: function (i) {
-                return opened.$getRecord(i);
+            opened: openArr,
+            get: function (key) {
+                return taskArr.$getRecord(key);
             },
             add: function (new_task) {
                 console.log('added');
                 if (new_task.status) {
                     new_task.date = Firebase.ServerValue.TIMESTAMP;
-                    TaskRef.child(new_task.status).push().set(new_task);
-                    tasks.push(new_task);
+                    TaskRef.push().set(new_task);
                 }
             },
             setActive: function (activeTask) {
-                TaskRef.child("active").set(activeTask);
+                activeTask.status = 'active';
+                taskArr.$save(activeTask);
+            },
+            $watch: function(cb){
+                listener = cb;
             }
         };
     })

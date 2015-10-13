@@ -1,7 +1,7 @@
 <ion-view view-title="Browse">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div class="item card-item" ng-repeat="task in tasks | orderBy: '-date'">
-            <div ui-sref="app.tasks.detail({id: task.$id})" class="card stable-bg ink ink-dark">
+            <div ng-if="task.bro.id != user.id" ui-sref="app.tasks.detail({id: task.$id})" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
                   <div class="row">
                       <div class="col">
