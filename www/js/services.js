@@ -2,72 +2,15 @@
 'use strict';
 
 angular.module('starter.services', ['firebase'])
-    .factory('Tasks', function (Bros, $firebaseArray, $firebaseObject) {
+    .factory('Tasks', function (Bros, $firebaseArray) {
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
 
-        var tasks = [
-            {
-                id: 1,
-                bro: Bros.get(2),
-                task: "HELP! Can anyone get me some flowers?",
-                hasPurchase: true,
-                budget: [10, 20],
-                date: moment().subtract(5, 'minutes').valueOf(),
-                reward: 10,
-                status: 'open',
-                savior: null,
-                messages: []
-            }, {
-                id: 2,
-                bro: Bros.get(3),
-                task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
-                hasPurchase: true,
-                budget: [40, 60],
-                reward: 25,
-                // open, active, completed
-                status: 'open',
-                savior: null,
-                date: moment().subtract(2, 'minutes').valueOf(),
-                messages: []
-            }, {
-                id: 3,
-                bro: Bros.get(3),
-                task: "I need a Bro to take care of our pet dog tonight!",
-                hasPurchase: false,
-                //budget: [40, 60],
-                reward: 50,
-                // open, active, completed
-                status: 'active',
-                savior: Bros.get(1),
-                date: moment().valueOf(),
-                messages: []
-            }, {
-                id: 4,
-                bro: Bros.get(1),
-                task: "Can someone help buy a gift for my girlfriend",
-                hasPurchase: true,
-                budget: [50, 70],
-                reward: 30,
-                // open, active, completed
-                status: 'completed',
-                savior: Bros.get(3),
-                date: moment().valueOf(),
-                messages: []
-            }
-        ];
-
-        //TaskRef.set({});
-        //for (var i = 0; i < tasks.length; i++) {
-        //    TaskRef.child(tasks[i].status).push().set(tasks[i]);
-        //}
 
         var taskArr = $firebaseArray(TaskRef);
         var opened = $firebaseArray(TaskRef.child("open"));
-        var active = $firebaseObject(TaskRef.child("active"));
         return {
             all: taskArr,
             opened: opened,
-            active: active,
             get: function (i) {
                 return opened.$getRecord(i);
             },
@@ -84,41 +27,14 @@ angular.module('starter.services', ['firebase'])
             }
         };
     })
-    .factory('Bros', function () {
-        var bros = [
-            {
-                id: 1,
-                name: 'Jia Jing',
-                points: '100',
-                rank: 'Noob Bro',
-                display_pic: 'img/jj.jpg'
-            },
-            {
-                id: 2,
-                name: 'Sebastian',
-                points: '240',
-                rank: 'Super Bro',
-                display_pic: 'img/derrick.png',
-                map: 'img/map-Sebastian.jpg'
-            },
-            {
-                id: 3,
-                name: 'Joshua',
-                points: '780',
-                rank: 'Big Bro',
-                display_pic: 'img/chan.png',
-                map: 'img/map-Joshua.jpg'
-            }
-        ];
+    .factory('Bros', function ($firebaseArray) {
+        var BrosRef = new Firebase("https://broapp.firebaseio.com/bros");
+        var BrosArr = $firebaseArray(BrosRef);
+
         return {
-            all: bros,
+            all: BrosArr,
             get: function (i) {
-                var theBro = undefined;
-                bros.forEach(function (bros) {
-                    if (bros.id == i)
-                        theBro = bros;
-                });
-                return theBro;
+                return BrosArr.getRecord(BrosArr.keyAt(i));
             }
         };
     })
@@ -185,17 +101,108 @@ angular.module('starter.services', ['firebase'])
             }
         };
     })
+    .factory('Reset', function (Bros, $firebaseArray) {
+        var BrosRef = new Firebase("https://broapp.firebaseio.com/bros");
+        var BrosArr = $firebaseArray(BrosRef);
+        var bros = [
+            {
+                id: 1,
+                name: 'Jia Jing',
+                points: '100',
+                rank: 'Noob Bro',
+                display_pic: 'img/jj.jpg'
+            },
+            {
+                id: 2,
+                name: 'Sebastian',
+                points: '240',
+                rank: 'Super Bro',
+                display_pic: 'img/derrick.png',
+                map: 'img/map-Sebastian.jpg'
+            },
+            {
+                id: 3,
+                name: 'Joshua',
+                points: '780',
+                rank: 'Big Bro',
+                display_pic: 'img/chan.png',
+                map: 'img/map-Joshua.jpg'
+            }
+        ];
+        var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
+        var TaskArr = $firebaseArray(TaskRef);
+        var tasks = [
+            {
+                id: 1,
+                bro: bros[1],
+                task: "HELP! Can anyone get me some flowers?",
+                hasPurchase: true,
+                budget: [10, 20],
+                date: moment().subtract(5, 'minutes').valueOf(),
+                reward: 10,
+                status: 'open',
+                savior: null,
+                messages: []
+            }, {
+                id: 2,
+                bro: bros[2],
+                task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
+                hasPurchase: true,
+                budget: [40, 60],
+                reward: 25,
+                // open, active, completed
+                status: 'open',
+                savior: null,
+                date: moment().subtract(2, 'minutes').valueOf(),
+                messages: []
+            }, {
+                id: 3,
+                bro: bros[2],
+                task: "I need a Bro to take care of our pet dog tonight!",
+                hasPurchase: false,
+                //budget: [40, 60],
+                reward: 50,
+                // open, active, completed
+                status: 'active',
+                savior: bros[1],
+                date: moment().valueOf(),
+                messages: []
+            }, {
+                id: 4,
+                bro: bros[0],
+                task: "Can someone help buy a gift for my girlfriend",
+                hasPurchase: true,
+                budget: [50, 70],
+                reward: 30,
+                // open, active, completed
+                status: 'completed',
+                savior: bros[2],
+                date: moment().valueOf(),
+                messages: []
+            }
+        ];
 
-
-    .factory('Profile', function () {
-        var me = {
-            id: 2,
-            name: 'Sebastian',
-            points: '240',
-            display_pic: 'img/jj.jpg',
-            badges: [],
-            my_tasks: []
+        return {
+            reset: function(){
+                TaskRef.set({});
+                for (var i = 0; i < tasks.length; i++) {
+                    TaskArr.$add(tasks[i]);
+                }
+                BrosRef.set({});
+                for (var i = 0; i < bros.length; i++) {
+                    BrosArr.$add(bros[i]);
+                }
+            }
         };
-        return me;
+    })
+    .factory('User', function ($rootScope) {
+        var me = {};
+        return {
+            login: function(bro){
+                me = bro;
+                $rootScope.user = bro;
+            },
+            current: me
+        };
     });
 ;

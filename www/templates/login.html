@@ -13,12 +13,13 @@
             <button ng-click="chooseUser=!chooseUser" class="button button-full button-positive-900 ink icon-left ion-social-facebook button-positive-900">Login with Facebook
             </button>
         </div>
-        <div class="row" ng-if="chooseUser">
-            <!--<h3>Login as:</h3>-->
+        <div ng-if="chooseUser">
+            <span style="color:white">Login as:</span>
+            <button ng-click="loginAs(bro)" class="button button-block button-positive" ng-repeat="bro in bros">
+                {{bro.name}}
+            </button>
 
-            <button>Derrick</button>
-            <button>Sebastian</button>
-            <button>Joshua</button>
+            <button class="button button-small button-assertive" ng-click="reset()">Reset DB</button>
         </div>
 
     </ion-content>

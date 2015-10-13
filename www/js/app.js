@@ -20,6 +20,14 @@ angular.module('starter',
                 StatusBar.styleDefault();
             }
         });
+    }).run(function ($rootScope, $location, $state) {
+        // Redirect to login if route requires auth and you're not logged in
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+            if (!$rootScope.user) {
+                // Unauthenticated
+                $location.path('/login');
+            }
+        })
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 

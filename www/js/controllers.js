@@ -91,12 +91,20 @@ angular.module('starter.controllers', [])
         }
     })
 
-    .controller('LoginCtrl', function ($scope, $timeout, $stateParams, ionicMaterialInk) {
+    .controller('LoginCtrl', function ($scope, $timeout, $stateParams, ionicMaterialInk, Bros, Reset, User, $state) {
         //$scope.$parent.clearFabs();
         //$timeout(function () {
         //    $scope.$parent.hideHeader();
         //}, 0);
         ionicMaterialInk.displayEffect();
+        $scope.bros = Bros.all;
+        $scope.loginAs = function(bro){
+            User.login(bro);
+            $state.go('app.main')
+        }
+        $scope.reset = function(){
+           Reset.reset();
+        }
     })
 
     .controller('BrosCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
@@ -142,14 +150,14 @@ angular.module('starter.controllers', [])
 
     })
 
-    .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    .controller('ProfileCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, $rootScope) {
         // Set Header
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab(false);
-
+        $scope.user = $rootScope.user;
         // Set Motion
         $timeout(function () {
             ionicMaterialMotion.slideUp({
