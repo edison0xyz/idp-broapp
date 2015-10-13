@@ -1,8 +1,10 @@
 /* global angular, document, window */
 'use strict';
 
-angular.module('starter.services', [])
-    .factory('Tasks', function (Bros) {
+angular.module('starter.services', ['firebase'])
+    .factory('Tasks', function (Bros, $firebaseArray, $firebaseObject) {
+        var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
+
         var tasks = [
             {
                 id: 1,
@@ -10,7 +12,7 @@ angular.module('starter.services', [])
                 task: "HELP! Can anyone get me some flowers?",
                 hasPurchase: true,
                 budget: [10, 20],
-                date: moment().subtract(5, 'minutes'),
+                date: moment().subtract(5, 'minutes').valueOf(),
                 reward: 10,
                 status: 'open',
                 savior: null,
@@ -25,7 +27,7 @@ angular.module('starter.services', [])
                 // open, active, completed
                 status: 'open',
                 savior: null,
-                date: moment().subtract(2, 'minutes'),
+                date: moment().subtract(2, 'minutes').valueOf(),
                 messages: []
             }, {
                 id: 3,
@@ -37,7 +39,7 @@ angular.module('starter.services', [])
                 // open, active, completed
                 status: 'active',
                 savior: Bros.get(1),
-                date: new Date(),
+                date: moment().valueOf(),
                 messages: []
             }, {
                 id: 4,
@@ -49,53 +51,36 @@ angular.module('starter.services', [])
                 // open, active, completed
                 status: 'completed',
                 savior: Bros.get(3),
-                date: new Date(),
+                date: moment().valueOf(),
                 messages: []
             }
         ];
+
+        //TaskRef.set({});
+        //for (var i = 0; i < tasks.length; i++) {
+        //    TaskRef.child(tasks[i].status).push().set(tasks[i]);
+        //}
+
+        var taskArr = $firebaseArray(TaskRef);
+        var opened = $firebaseArray(TaskRef.child("open"));
+        var active = $firebaseObject(TaskRef.child("active"));
         return {
-            all: tasks,
-            opened: function () {
-                var opened = [];
-                tasks.forEach(function (task) {
-                    if (task.status == "open")
-                        opened.push(task);
-                });
-                return opened;
-            },
+            all: taskArr,
+            opened: opened,
+            active: active,
             get: function (i) {
-                var theTask = undefined;
-                tasks.forEach(function (task) {
-                    if (task.id == i)
-                        theTask = task;
-                });
-                return theTask;
+                return opened.$getRecord(i);
             },
             add: function (new_task) {
-                var next_id = 0;
-                tasks.forEach(function (task) {
-                    if (task.id > next_id) {
-                        next_id = task.id;
-                    }
-                });
-                new_task.id = next_id + 1;
-                tasks.push(new_task);
+                console.log('added');
+                if (new_task.status) {
+                    new_task.date = Firebase.ServerValue.TIMESTAMP;
+                    TaskRef.child(new_task.status).push().set(new_task);
+                    tasks.push(new_task);
+                }
             },
-            active: function () {
-                var theTask = undefined;
-                tasks.forEach(function (task) {
-                    if (task.status == "active")
-                        theTask = task;
-                });
-                return theTask;
-            },
-            setActive: function (id) {
-                tasks.forEach(function (task) {
-                    if (task.id == id)
-                        task.status = "active";
-                    else
-                        task.status = task.status == "active" ? "open" : task.status;
-                });
+            setActive: function (activeTask) {
+                TaskRef.child("active").set(activeTask);
             }
         };
     })
@@ -138,66 +123,66 @@ angular.module('starter.services', [])
         };
     })
 
-    .factory('History', function(Bros) {
-      var taskHistories = [
-          {
-              id: 1,
-              requestedBy: Bros.get(2),
-              task: "HELP! Can anyone get me some flowers?",
-              budget: [10, 20],
-              reward: 10,
-              completedBy: Bros.get(3),
-              dateCompleted: 1413020671
-          },{
-              id:2,
-              requestedBy: Bros.get(2),
-              task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
-              budget: [40, 60],
-              reward: 25,
-              dateCompleted: 1413020671,
-              completedBy: Bros.get(3)
-          },
-          {
-              id:3,
-              requestedBy: Bros.get(2),
-              task: "Drive me somewhere! ",
-              budget: [40, 60],
-              reward: 25,
-              dateCompleted: 1413020671,
-              completedBy: Bros.get(1)
-          },
-          {
-              id:4,
-              requestedBy: Bros.get(3),
-              task: "Drive me somewhere! ",
-              budget: [40, 60],
-              reward: 25,
-              dateCompleted: 1413020671,
-              completedBy: Bros.get(2)
-          }
-      ];
-      return {
-          all: taskHistories,
-          getMyRequest: function(i){
-            // get list of tasks requested by user (i)
-              var myRequests = [];
-              taskHistories.forEach(function (taskHistories) {
-                  if(taskHistories.requestedBy == Bros.get(i))
-                      myRequests.push(taskHistories);
-              });
-              return myRequests;
-          },
+    .factory('History', function (Bros) {
+        var taskHistories = [
+            {
+                id: 1,
+                requestedBy: Bros.get(2),
+                task: "HELP! Can anyone get me some flowers?",
+                budget: [10, 20],
+                reward: 10,
+                completedBy: Bros.get(3),
+                dateCompleted: 1413020671
+            }, {
+                id: 2,
+                requestedBy: Bros.get(2),
+                task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
+                budget: [40, 60],
+                reward: 25,
+                dateCompleted: 1413020671,
+                completedBy: Bros.get(3)
+            },
+            {
+                id: 3,
+                requestedBy: Bros.get(2),
+                task: "Drive me somewhere! ",
+                budget: [40, 60],
+                reward: 25,
+                dateCompleted: 1413020671,
+                completedBy: Bros.get(1)
+            },
+            {
+                id: 4,
+                requestedBy: Bros.get(3),
+                task: "Drive me somewhere! ",
+                budget: [40, 60],
+                reward: 25,
+                dateCompleted: 1413020671,
+                completedBy: Bros.get(2)
+            }
+        ];
+        return {
+            all: taskHistories,
+            getMyRequest: function (i) {
+                // get list of tasks requested by user (i)
+                var myRequests = [];
+                taskHistories.forEach(function (taskHistories) {
+                    if (taskHistories.requestedBy == Bros.get(i))
+                        myRequests.push(taskHistories);
+                });
+                return myRequests;
+            },
 
-          getRequestByOthers: function(i) {
-            // get list of tasks requested by user (i)
-              var otherRequests = [];
-              taskHistories.forEach(function (taskHistories) {
-                  if(taskHistories.completedBy == Bros.get(i))
-                      otherRequests.push(taskHistories);
-              });
-              return otherRequests;
+            getRequestByOthers: function (i) {
+                // get list of tasks requested by user (i)
+                var otherRequests = [];
+                taskHistories.forEach(function (taskHistories) {
+                    if (taskHistories.completedBy == Bros.get(i))
+                        otherRequests.push(taskHistories);
+                });
+                return otherRequests;
 
-          }
+            }
         };
     })
 

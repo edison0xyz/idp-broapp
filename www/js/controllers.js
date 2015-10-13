@@ -242,7 +242,14 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.tasks = Tasks.opened();
+        $scope.tasks = Tasks.opened;
+        $scope.tasks.$watch(function(){
+            $timeout(function () {
+                ionicMaterialMotion.fadeSlideIn({
+                    selector: '.animate-fade-slide-in .item'
+                });
+            }, 200);
+        });
     })
     .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
@@ -259,11 +266,11 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-
         $scope.task = Tasks.get($stateParams.id);
 
         $scope.acceptTask = function () {
-            Tasks.setActive($scope.task.id);
+            console.log($scope.task);
+            Tasks.setActive($scope.task);
             $state.go('app.tasks.active');
         }
     })
@@ -313,7 +320,14 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.task = Tasks.active();
+        $scope.task = Tasks.active;
+        $scope.task.$watch(function(){
+            $timeout(function () {
+                ionicMaterialMotion.fadeSlideIn({
+                    selector: '.animate-fade-slide-in .item'
+                });
+            }, 200);
+        });
         if ($scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",
