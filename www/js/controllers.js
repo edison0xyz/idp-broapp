@@ -239,6 +239,8 @@ angular.module('starter.controllers', [])
             });
         }, 200);
 
+
+
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
@@ -251,7 +253,7 @@ angular.module('starter.controllers', [])
             }, 200);
         });
     })
-    .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -267,6 +269,23 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
         $scope.task = Tasks.get($stateParams.id);
+
+        // A confirm dialog
+         $scope.showConfirm = function() {
+           var confirmPopup = $ionicPopup.confirm({
+             title: 'Confirm',
+             template: 'Are you sure you want to help this bro?',
+             cancelText: "No",
+             okText: "Yes"
+           });
+           confirmPopup.then(function(res) {
+             if(res) {
+               $scope.acceptTask() ;
+             } else {
+               console.log('You are not sure');
+             }
+           });
+         };
 
         $scope.acceptTask = function () {
             console.log($scope.task);
