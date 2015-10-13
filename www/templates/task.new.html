@@ -1,4 +1,4 @@
-<ion-view view-title="New request">
+<ion-view view-title="Request for Help">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <form ng-submit="addTask(newTask)">
             <div class="list">
@@ -6,13 +6,13 @@
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Task</span>
                     <textarea required ng-required="true" ng-model="newTask.task"
-                              placeholder="Need for a gift for my girlfriend!"></textarea>
+                              placeholder="E.g. Can someone help me buy some flowers?"></textarea>
                 </label>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Reward</span>
-                    <input required ng-required="true" ng-model="newTask.reward" type="number" placeholder="20">
+                    <input required ng-required="true" ng-model="newTask.reward" type="number" placeholder="E.g. $20.00">
                 </label>
-                <ion-toggle ng-model="newTask.hasPurchase" toggle-class="toggle-calm">Requires purchase?</ion-toggle>
+                <ion-toggle ng-model="newTask.hasPurchase" toggle-class="toggle-calm">Require Purchase?</ion-toggle>
                 <div ng-show="newTask.hasPurchase">
                     <div class="row">
                         <div class="col">
