@@ -6,17 +6,27 @@
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
     <!-- Dashboard Tab -->
-    <ion-tab title="Status" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" ui-sref="app.brohelp">
+    <ion-tab title="Browse" icon-off="ion-ios-glasses-outline" icon-on="ion-ios-glasses" ui-sref="app.brohelp">
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
     </ion-tab>
 
     <!-- Chats Tab -->
-    <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" ui-sref="app.brommunity">
+    <ion-tab title="Brommunity" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ui-sref="app.brommunity">
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
     </ion-tab>
 
+    <!-- Chats Tab -->
+    <ion-tab title="Help" icon-off="ion-ios-telephone-outline" icon-on="ion-ios-telephone" ui-sref="app.brommunity">
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab title="My Task" icon-off="ion-ios-list-outline" icon-on="ion-ios-list" ui-sref="app.brommunity">
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
+    </ion-tab>
+
+
     <!-- Account Tab -->
-    <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="app.tasks.list">
+    <ion-tab title="Profile" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="app.profile">
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
     </ion-tab>
 </ion-tabs>
