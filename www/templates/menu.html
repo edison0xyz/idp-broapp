@@ -1,57 +1,80 @@
-<ion-side-menus enable-menu-with-back-views="true">
-    <ion-side-menu-content>
-        <ion-nav-bar class="bar-assertive-900"
-                     ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"
-                     align-title="left">
-            <ion-nav-back-button class="no-text">
-            </ion-nav-back-button>
-            <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
-                </button>
-            </ion-nav-buttons>
-        </ion-nav-bar>
-        <ion-nav-view name="fabContent"></ion-nav-view>
+<ion-nav-bar class="bar-assertive-900" align-title="left">
+    <!--ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"-->
+    <ion-nav-back-button class="no-text">
+    </ion-nav-back-button>
+</ion-nav-bar>
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+    <!-- Dashboard Tab -->
+    <ion-tab title="Status" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" ui-sref="app.brohelp">
         <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
-    </ion-side-menu-content>
-    <ion-side-menu side="right" is-enabled="!isView('app.login')">
-        <ion-header-bar class="dark-bg expanded" nav-clear menu-close ui-sref="app.profile">
-            <span class="avatar" style="background: url('img/derrick.png'); background-size: cover;"></span>
+    </ion-tab>
 
-            <h2>Sebastian</h2>
-        </ion-header-bar>
-        <ion-content class="stable-bg has-expanded-header">
-            <div class="list">
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.main">
-                    <i class="ion-home"></i>
-                    Home
-                </div>
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.brommunity">
-                    <i class="ion-ios-people"></i>
-                    Brommunity
-                </div>
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.tasks.list">
-                    <i class="ion-hammer"></i>
-                    Bro Tasks
-                </div>
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.history">
-                    <i class="ion-clock"></i>
-                    History
-                </div>
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.brohelp">
-                    <i class="ion-android-hand"></i>
-                    Bro Help</div>
-                <div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.bros">
-                    <i class="ion-ios-people"></i>
-                    Bros List</div>
-            </div>
-            <div class="button-bar">
-                <a class="button button-icon icon ion-gear-a"></a>
-                <a class="button button-icon icon ion-log-out" nav-clear menu-close ui-sref="app.login">
-                    Logout
-                </a>
-            </div>
+    <!-- Chats Tab -->
+    <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" ui-sref="app.brommunity">
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Account Tab -->
+    <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="app.tasks.list">
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
+    </ion-tab>
+</ion-tabs>
+
+<!--<ion-side-menus enable-menu-with-back-views="true">-->
+<!--<ion-side-menu-content>-->
+<!--<ion-nav-bar class="bar-assertive-900"-->
+<!--ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"-->
+<!--align-title="left">-->
+<!--<ion-nav-back-button class="no-text">-->
+<!--</ion-nav-back-button>-->
+<!--<ion-nav-buttons side="right">-->
+<!--<button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">-->
+<!--</button>-->
+<!--</ion-nav-buttons>-->
+<!--</ion-nav-bar>-->
+<!--<ion-nav-view name="fabContent"></ion-nav-view>-->
+<!--<ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}"></ion-nav-view>-->
+<!--</ion-side-menu-content>-->
+<!--<ion-side-menu side="right" is-enabled="!isView('app.login')">-->
+<!--<ion-header-bar class="dark-bg expanded" nav-clear menu-close ui-sref="app.profile">-->
+<!--<span class="avatar" style="background: url('img/derrick.png'); background-size: cover;"></span>-->
+
+<!--<h2>Sebastian</h2>-->
+<!--</ion-header-bar>-->
+<!--<ion-content class="stable-bg has-expanded-header">-->
+<!--<div class="list">-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.main">-->
+<!--<i class="ion-home"></i>-->
+<!--Home-->
+<!--</div>-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.brommunity">-->
+<!--<i class="ion-ios-people"></i>-->
+<!--Brommunity-->
+<!--</div>-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.tasks.list">-->
+<!--<i class="ion-hammer"></i>-->
+<!--Bro Tasks-->
+<!--</div>-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.history">-->
+<!--<i class="ion-clock"></i>-->
+<!--History-->
+<!--</div>-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.brohelp">-->
+<!--<i class="ion-android-hand"></i>-->
+<!--Bro Help</div>-->
+<!--<div class="item item-icon-left side-menu-item" nav-clear menu-close ui-sref="app.bros">-->
+<!--<i class="ion-ios-people"></i>-->
+<!--Bros List</div>-->
+<!--</div>-->
+<!--<div class="button-bar">-->
+<!--<a class="button button-icon icon ion-gear-a"></a>-->
+<!--<a class="button button-icon icon ion-log-out" nav-clear menu-close ui-sref="app.login">-->
+<!--Logout-->
+<!--</a>-->
+<!--</div>-->
 
 
-        </ion-content>
-    </ion-side-menu>
-</ion-side-menus>
+<!--</ion-content>-->
+<!--</ion-side-menu>-->
+<!--</ion-side-menus>-->
