@@ -1,4 +1,4 @@
-<ion-view view-title="Browse">
+<ion-view view-title="Browse requests">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div class="item card-item" ng-repeat="task in tasks | orderBy: '-date'">
             <div ng-if="task.bro.id != user.id" ui-sref="app.tasks.detail({id: task.$id})" class="card stable-bg ink ink-dark">
@@ -39,7 +39,7 @@
                 </div>
               </div>
     </ion-content>
-    <div class="bar bar-footer bar-assertive" ui-sref="app.tasks.new">
+    <div class="bar bar-footer bar-assertive" ui-sref="app.callForHelp">
         <div class="title">Call for Help!</div>
     </div>
 </ion-view>

@@ -100,7 +100,7 @@ angular.module('starter.controllers', [])
         $scope.bros = Bros.all;
         $scope.loginAs = function(bro){
             User.login(bro);
-            $state.go('app.main')
+            $state.go('app.tasks.list')
         }
         $scope.reset = function(){
            Reset.reset();
@@ -297,13 +297,12 @@ angular.module('starter.controllers', [])
          };
 
         $scope.acceptTask = function () {
-            console.log($scope.task);
             Tasks.setActive($scope.task);
-            $state.go('app.tasks.active');
+            $state.go('app.active');
         }
     })
     .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
-                                         Bros, Profile, Tasks, $ionicPopup, $state) {
+                                         Bros, $rootScope, Tasks, $ionicPopup, $state) {
         //$scope.$parent.showHeader();
         //$scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -320,7 +319,7 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
 
         $scope.addTask = function (task) {
-            task.bro = Bros.get(Profile.id);
+            task.bro = $rootScope.user;
             task.status = "open";
             task.date = new Date();
             Tasks.add(task);
@@ -348,14 +347,7 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.task = Tasks.active;
-        $scope.task.$watch(function(){
-            $timeout(function () {
-                ionicMaterialMotion.fadeSlideIn({
-                    selector: '.animate-fade-slide-in .item'
-                });
-            }, 200);
-        });
+        $scope.task = Tasks.mine.task;
         if ($scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",

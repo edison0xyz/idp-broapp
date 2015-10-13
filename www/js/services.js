@@ -2,40 +2,51 @@
 'use strict';
 
 angular.module('starter.services', ['firebase'])
-    .factory('Tasks', function (Bros, $firebaseArray) {
+    .factory('Tasks', function (Bros, $firebaseArray, $rootScope) {
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
         var taskArr = $firebaseArray(TaskRef);
         var openArr = $firebaseArray(TaskRef.orderByChild('status').equalTo('open'));
-        //var openArr = [];
+        var mine = {
+            task: null
+        };
         var listener = undefined;
-        taskArr.$watch(function(event, key) {
-            console.log(event);
-            if(event == 'child_removed'){
-                console.log('removed', key);
+        taskArr.$watch(function(event) {
+            //console.log(event);
+            if(event.event == 'child_removed'){
+                console.log('removed', event.key);
             }
-            if(event == 'child_added'){
-                console.log('added', key);
+            if(event.event == "child_added"){
+                console.log('added', event.key);
+                if(!mine.task){
+                    var task = taskArr.$getRecord(event.key);
+                    if(task.bro.id == $rootScope.user.id){
+                        mine.task = task;
+                    }
+                }
             }
             if(listener){
                 listener();
             }
         });
+
         return {
             all: taskArr,
             opened: openArr,
-            get: function (key) {
-                return taskArr.$getRecord(key);
-            },
+            mine: mine,
             add: function (new_task) {
                 console.log('added');
                 if (new_task.status) {
                     new_task.date = Firebase.ServerValue.TIMESTAMP;
-                    TaskRef.push().set(new_task);
+                    taskArr.$add(new_task);
                 }
+            },
+            get: function(key){
+                return taskArr.$getRecord(key);
             },
             setActive: function (activeTask) {
                 activeTask.status = 'active';
                 taskArr.$save(activeTask);
+                mine.task = activeTask;
             },
             $watch: function(cb){
                 listener = cb;

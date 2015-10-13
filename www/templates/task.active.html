@@ -1,7 +1,7 @@
 <ion-view view-title="Active request">
 
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <ul class="progress-indicator">
+        <ul class="progress-indicator" style="margin-top:20px;">
             <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
