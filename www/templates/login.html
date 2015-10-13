@@ -10,8 +10,15 @@
         </div>
 
         <div class="padding">
-            <button ui-sref="app.main" class="button button-full button-positive-900 ink icon-left ion-social-facebook button-positive-900">Login with Facebook
+            <button ng-click="chooseUser=!chooseUser" class="button button-full button-positive-900 ink icon-left ion-social-facebook button-positive-900">Login with Facebook
             </button>
+        </div>
+        <div class="row" ng-if="chooseUser">
+            <!--<h3>Login as:</h3>-->
+
+            <button>Derrick</button>
+            <button>Sebastian</button>
+            <button>Joshua</button>
         </div>
 
     </ion-content>

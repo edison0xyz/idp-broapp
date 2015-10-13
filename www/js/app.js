@@ -31,7 +31,18 @@ angular.module('starter',
          $ionicConfigProvider.backButton.previousTitleText(false);
          */
 
-        $stateProvider.state('app', {
+        $stateProvider.state('login', {
+            url: '/login',
+            //views: {
+            //    'menuContent': {
+            templateUrl: 'templates/login.html',
+            controller: 'LoginCtrl'
+            //},
+            //'fabContent': {
+            //    template: ''
+            //}
+            //}
+        }).state('app', {
             url: '/app',
             abstract: true,
             templateUrl: 'templates/menu.html',
@@ -91,18 +102,7 @@ angular.module('starter',
                 }
             })
 
-            .state('app.login', {
-                url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    },
-                    'fabContent': {
-                        template: ''
-                    }
-                }
-            })
+
 
             .state('app.profile', {
                 url: '/profile',
