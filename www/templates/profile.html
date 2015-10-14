@@ -1,4 +1,8 @@
 <ion-view view-title="Profile">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-log-out" ng-click="showLogoutConfirmation()">
+        </button>
+    </ion-nav-buttons>
     <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('img/login.jpg');">
             <div class="content">
