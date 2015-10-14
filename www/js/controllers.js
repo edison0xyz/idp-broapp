@@ -371,7 +371,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($state, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
