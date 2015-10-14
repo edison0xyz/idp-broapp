@@ -1,4 +1,4 @@
-<ion-view view-title="Browse requests" ng-if="!activeTask">
+<ion-view view-title="Browse requests" ng-if="!activeTask.task">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div ng-if="tasks.length == 0">
             No open requests
@@ -42,12 +42,32 @@
                 </div>
               </div>
     </ion-content>
-    <div class="bar bar-footer bar-assertive" ui-sref="app.tasks.new">
+    <div class="bar bar-footer bar-assertive has-tabs" ui-sref="app.tasks.new">
         <div class="title">Call for Help!</div>
     </div>
 </ion-view>
-<ion-view ng-if="activeTask">
+<ion-view ng-if="activeTask.task">
     <ion-content>
+        <div class="card stable-bg ink ink-dark" ui-sref="app.tasks.active">
+            <div class="item item-text-wrap">
+                <strong>Task: {{activeTask.task.task}}</strong> <br>
+                Date: {{activeTask.task.date | date:'medium'}} <br>
+                Reward: {{activeTask.task.reward | currency}}
+                <!-- Completed by member details  -->
+                <div class="card-footer">
+                    <div class="row">
+                        <!-- Display Pic  -->
+                        <div class="col col-25"><span class="avatar" style="background-image: url({{activeTask.task.bro.display_pic}});"></span></div>
+                        <div class="col" ng-if="activeTask.task.savior">
+                            <!-- Bro details -->
+                            <strong>Savior Details:</strong><br>
+                            {{activeTask.task.savior.name}}<br>
+                            {{activeTask.task.savior.rank}}
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+        </div>
     </ion-content>
 </ion-view>

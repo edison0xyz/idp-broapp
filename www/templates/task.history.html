@@ -13,7 +13,7 @@
                     <!--Not Active-->
                     You do not have any active tasks at the moment.
                 </div>
-                <div class="item card-item" ng-if="activeTask.task.bro.id == user.id">
+                <div class="item card-item" ng-if="activeTask.task.bro.id == user.id" ng-click="gotoActive()">
                     <!--User is requester-->
                     <div class="card stable-bg ink ink-dark">
                         <div class="item item-text-wrap">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="item card-item" ng-if="activeTask.task.savior.id == user.id">
+                <div class="item card-item" ng-if="activeTask.task.savior.id == user.id" ng-click="gotoActive()">
                     <!--User is savior-->
                     <div class="card stable-bg ink ink-dark">
                         <div class="item item-text-wrap">

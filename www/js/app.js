@@ -176,7 +176,7 @@ angular.module('starter',
             .state('app.tasks.list', {
                 url: '/list',
                 templateUrl: 'templates/task.list.html',
-
+                controller: 'BroHelpCtrl'
             })
             .state('app.tasks.active', {
                 url: '/active',

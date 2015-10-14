@@ -39,7 +39,7 @@ angular.module('starter.controllers', [])
         };
 
         // A confirm dialog
-        $scope.showLogoutConfirmation = function() {
+        $scope.showLogoutConfirmation = function () {
 
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Are you sure you want to log out?',
@@ -47,8 +47,8 @@ angular.module('starter.controllers', [])
                 okText: 'yes',
                 cancelText: 'no'
             });
-            confirmPopup.then(function(res) {
-                if(res) {
+            confirmPopup.then(function (res) {
+                if (res) {
                     $state.go('login');
 
                 } else {
@@ -108,6 +108,7 @@ angular.module('starter.controllers', [])
         $scope.isView = function (viewName) {
             return $state.is(viewName);
         }
+        console.log('appctrl')
     })
 
     .controller('LoginCtrl', function ($scope, $timeout, $stateParams, ionicMaterialInk, Bros, Reset, User, $state) {
@@ -117,35 +118,35 @@ angular.module('starter.controllers', [])
         //}, 0);
         ionicMaterialInk.displayEffect();
         $scope.bros = Bros.all;
-        $scope.loginAs = function(bro){
+        $scope.loginAs = function (bro) {
             User.login(bro);
             $state.go('app.tasks.list');
         }
-        $scope.reset = function(){
-           Reset.reset();
+        $scope.reset = function () {
+            Reset.reset();
         }
     })
 
-    .controller('BrosCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-        // Set Header
-        $scope.$parent.showHeader();
-        $scope.$parent.clearFabs();
-        $scope.$parent.setHeaderFab('left');
+    //.controller('BrosCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    //    // Set Header
+    //    $scope.$parent.showHeader();
+    //    $scope.$parent.clearFabs();
+    //    $scope.$parent.setHeaderFab('left');
+    //
+    //    // Delay expansion
+    //    $timeout(function () {
+    //        $scope.isExpanded = true;
+    //        $scope.$parent.setExpanded(true);
+    //    }, 300);
+    //
+    //    // Set Motion
+    //    ionicMaterialMotion.fadeSlideInRight();
+    //
+    //    // Set Ink
+    //    ionicMaterialInk.displayEffect();
+    //})
 
-        // Delay expansion
-        $timeout(function () {
-            $scope.isExpanded = true;
-            $scope.$parent.setExpanded(true);
-        }, 300);
-
-        // Set Motion
-        ionicMaterialMotion.fadeSlideInRight();
-
-        // Set Ink
-        ionicMaterialInk.displayEffect();
-    })
-
-    .controller('HistoryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, Tasks) {
+    .controller('HistoryCtrl', function ($scope,$ionicTabsDelegate,$stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, Tasks) {
         // Set Header
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
@@ -166,9 +167,13 @@ angular.module('starter.controllers', [])
         //$scope.myRequests = History.getMyRequest(2);
         //$scope.otherRequests = History.getRequestByOthers(2) ;
 
-        $scope.histories =  Tasks.history ;
-        $scope.activeTask = Tasks.mine ;
-        console.log($scope.activeTask) ;
+        $scope.histories = Tasks.history;
+        $scope.activeTask = Tasks.mine;
+        console.log($scope.activeTask);
+
+        $scope.gotoActive = function(){
+            $ionicTabsDelegate.select(1);
+        }
 
 
     })
@@ -200,6 +205,7 @@ angular.module('starter.controllers', [])
 
     .controller('ActivityCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
         $scope.$parent.showHeader();
+        $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = true;
         $scope.$parent.setExpanded(true);
@@ -215,50 +221,51 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
     })
 
-    .controller('GalleryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-        //$scope.$parent.showHeader();
-        $scope.$parent.clearFabs();
-        $scope.isExpanded = false;
-        $scope.$parent.setExpanded(false);
-        $scope.$parent.setHeaderFab(false);
-
-        // Activate ink for controller
-        ionicMaterialInk.displayEffect();
-
-        ionicMaterialMotion.pushDown({
-            selector: '.push-down'
-        });
-        ionicMaterialMotion.fadeSlideInRight({
-            selector: '.animate-fade-slide-in .item'
-        });
-
-    })
-    .controller('MainCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-        // Set Header
-        //$scope.$parent.noHeader();
-        $scope.$parent.clearFabs();
-        $scope.isExpanded = false;
-        $scope.$parent.setExpanded(false);
-        $scope.$parent.setHeaderFab(false);
-
-        // Set Motion
-        $timeout(function () {
-            ionicMaterialMotion.slideUp({
-                selector: '.slide-up'
-            });
-        }, 300);
-
-        $timeout(function () {
-            ionicMaterialMotion.fadeSlideInRight({
-                startVelocity: 3000
-            });
-        }, 700);
-
-        // Set Ink
-        ionicMaterialInk.displayEffect();
-    })
+    //.controller('GalleryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    //    //$scope.$parent.showHeader();
+    //    $scope.$parent.clearFabs();
+    //    $scope.isExpanded = false;
+    //    $scope.$parent.setExpanded(false);
+    //    $scope.$parent.setHeaderFab(false);
+    //
+    //    // Activate ink for controller
+    //    ionicMaterialInk.displayEffect();
+    //
+    //    ionicMaterialMotion.pushDown({
+    //        selector: '.push-down'
+    //    });
+    //    ionicMaterialMotion.fadeSlideInRight({
+    //        selector: '.animate-fade-slide-in .item'
+    //    });
+    //
+    //})
+    //.controller('MainCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
+    //    // Set Header
+    //    //$scope.$parent.noHeader();
+    //    $scope.$parent.clearFabs();
+    //    $scope.isExpanded = false;
+    //    $scope.$parent.setExpanded(false);
+    //    $scope.$parent.setHeaderFab(false);
+    //
+    //    // Set Motion
+    //    $timeout(function () {
+    //        ionicMaterialMotion.slideUp({
+    //            selector: '.slide-up'
+    //        });
+    //    }, 300);
+    //
+    //    $timeout(function () {
+    //        ionicMaterialMotion.fadeSlideInRight({
+    //            startVelocity: 3000
+    //        });
+    //    }, 700);
+    //
+    //    // Set Ink
+    //    ionicMaterialInk.displayEffect();
+    //})
     .controller('BroHelpCtrl', function ($scope, $state, $ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
+        $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
@@ -272,25 +279,25 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-        $scope.activeTask = Tasks.mine.task;
+        $scope.activeTask = Tasks.mine;
 
-        if($scope.activeTask){
+        if ($scope.activeTask.task) {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
             });
             console.log('brohelpctrl to active');
             $state.go('app.tasks.active');
-        }else{
+        } else {
             $scope.tasks = Tasks.opened;
         }
         //$scope.tasks.$watch(function(){
-        Tasks.$watch(function(){
+        Tasks.$watch(function () {
             $timeout(function () {
                 ionicMaterialMotion.fadeSlideIn({
                     selector: '.animate-fade-slide-in .item'
                 });
-            }, 200);
+            }, 100);
         });
 
         console.log('brohelpctrl');
@@ -306,28 +313,28 @@ angular.module('starter.controllers', [])
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
             });
-        }, 200);
+        }, 100);
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
         $scope.task = Tasks.get($stateParams.id);
 
         // A confirm dialog
-         $scope.showConfirm = function() {
-           var confirmPopup = $ionicPopup.confirm({
-             title: 'Confirm',
-             template: 'Are you sure you want to help this bro?',
-             cancelText: "No",
-             okText: "Yes"
-           });
-           confirmPopup.then(function(res) {
-             if(res) {
-               $scope.acceptTask() ;
-             } else {
-               console.log('You are not sure');
-             }
-           });
-         };
+        $scope.showConfirm = function () {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Confirm',
+                template: 'Are you sure you want to help this bro?',
+                cancelText: "No",
+                okText: "Yes"
+            });
+            confirmPopup.then(function (res) {
+                if (res) {
+                    $scope.acceptTask();
+                } else {
+                    console.log('You are not sure');
+                }
+            });
+        };
 
         $scope.acceptTask = function () {
             Tasks.setActive($scope.task);
@@ -387,19 +394,22 @@ angular.module('starter.controllers', [])
             }, 1000);
         };
 
-        if(!Tasks.mine.task){
+        if (!Tasks.mine.task) {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
             });
             console.log('activectrl to list');
             $state.go('app.tasks.list');
-        }else{
+        } else {
             $scope.task = Tasks.mine.task;
+            var title = $scope.task.bro.id == $rootScope.user.id ? 'My request' : 'My Task';
+            console.log(title)
+            $ionicNavBarDelegate.title(title);
         }
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-        $scope.$on('cancelled',function(){
+        $scope.$on('cancelled', function () {
             var alertPopup = $ionicPopup.alert({
                 title: 'Task cancelled',
                 template: 'The requester has cancelled this task'
@@ -422,12 +432,12 @@ angular.module('starter.controllers', [])
             ];
         }
         updateElapsed();
-        $scope.setStage = function(index){
+        $scope.setStage = function (index) {
             index += 1;
-            if(!$scope.task.stage)
+            if (!$scope.task.stage)
                 $scope.task.stage = 1;
-            else if($scope.task.stage < $scope.stages.length && index !== $scope.task.stage){
-                if($scope.task.stage < index )
+            else if ($scope.task.stage < $scope.stages.length && index !== $scope.task.stage) {
+                if ($scope.task.stage < index)
                     $scope.task.stage += 1;
                 else
                     $scope.task.stage = index
@@ -445,9 +455,16 @@ angular.module('starter.controllers', [])
                 template: 'Canceling a task will forfeit reward or incur penalty'
             });
             confirmPopup.then(function (res) {
-                Tasks.cancel($scope.task);
-                $state.go('app.tasks.list');
+                if (res) {
+                    Tasks.cancel($scope.task);
+                    $state.go('app.tasks.list');
+                }
             });
+        }
+
+        $scope.completeTask = function(){
+            Tasks.complete($scope.task);
+            $state.go('app.tasks.list');
         }
         console.log('activectrl');
 

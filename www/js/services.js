@@ -12,13 +12,22 @@ angular.module('starter.services', ['firebase'])
         };
         var listener = undefined;
         taskArr.$watch(function (event) {
-            //console.log(event);
+            console.log(event);
             if (event.event == 'child_removed') {
                 console.log('removed', event.key);
                 if ((mine.task && mine.task.$id == event.key)) {
                     if(mine.task.bro.id !== $rootScope.user.id)
                         $rootScope.$broadcast('cancelled');
                     mine.task = null;
+                }
+            }
+            if (event.event == 'child_changed') {
+                console.log('changed', event.key);
+                if ((mine.task && mine.task.$id == event.key)) {
+                    mine.task = null;
+                    var task = taskArr.$getRecord(event.key);
+                    $rootScope.$broadcast('completed');
+                    updateActive();
                 }
             }
             if (event.event == "child_added") {
@@ -86,6 +95,11 @@ angular.module('starter.services', ['firebase'])
                     mine.task = null;
                     taskArr.$save(task);
                 }
+            },
+            complete: function(task){
+                task.status = 'completed';
+                mine.task = null;
+                taskArr.$save(task);
             },
             save: function (task) {
                 taskArr.$save(task);

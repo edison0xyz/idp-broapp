@@ -22,10 +22,10 @@ $dark:                            #444 !default;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", "Segoe UI", sans-serif;
 }
 
-.progress-top{
+.progress-indicator.progress-top{
   margin-top: 15px;
 }
-.progress-step:hover{
+.progress-indicator > li:hover{
   background-color: grey;
 }
 
