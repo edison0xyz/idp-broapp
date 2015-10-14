@@ -45,8 +45,18 @@ angular.module('starter.services', ['firebase'])
             },
             setActive: function (activeTask) {
                 activeTask.status = 'active';
+                activeTask.savior = $rootScope.user;
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
+            },
+            save: function(task){
+                taskArr.$save(task);
+            },
+            addMessage: function(task, message){
+                if(!task.messages)
+                    task.messages = [];
+                task.messages.push(message);
+                taskArr.$save(task);
             },
             $watch: function(cb){
                 listener = cb;

@@ -328,10 +328,10 @@ angular.module('starter.controllers', [])
                 template: 'Awaiting for your true bro...'
             });
             alertPopup.then(function (res) {
-                $state.go('app.brohelp');
+                $state.go('app.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($rootScope, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -366,12 +366,10 @@ angular.module('starter.controllers', [])
             else if($scope.task.stage < $scope.stages.length){
                 $scope.task.stage += 1;
             }
+            Tasks.save($scope.task);
         }
         $scope.addMessage = function (task) {
-            if(!$scope.task.messages)
-                $scope.task.messages = [];
-
-            $scope.task.messages.push(task.message);
+            Tasks.addMessage($scope.task, {user: $rootScope.user, message: task.message});
             task.message = "";
         }
     })
