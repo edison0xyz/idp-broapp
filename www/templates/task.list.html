@@ -1,4 +1,4 @@
-<ion-view view-title="Browse requests">
+<ion-view view-title="Browse requests" ng-if="!activeTask">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div ng-if="tasks.length == 0">
             No open requests
@@ -45,4 +45,9 @@
     <div class="bar bar-footer bar-assertive" ui-sref="app.tasks.new">
         <div class="title">Call for Help!</div>
     </div>
+</ion-view>
+<ion-view ng-if="activeTask">
+    <ion-content>
+
+    </ion-content>
 </ion-view>

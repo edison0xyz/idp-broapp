@@ -271,8 +271,9 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
+        $scope.activeTask = Tasks.mine.task;
 
-        if(Tasks.mine.task){
+        if($scope.activeTask){
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
@@ -420,11 +421,15 @@ angular.module('starter.controllers', [])
             ];
         }
         updateElapsed();
-        $scope.nextStage = function(){
+        $scope.setStage = function(index){
+            index += 1;
             if(!$scope.task.stage)
                 $scope.task.stage = 1;
-            else if($scope.task.stage < $scope.stages.length){
-                $scope.task.stage += 1;
+            else if($scope.task.stage < $scope.stages.length && index !== $scope.task.stage){
+                if($scope.task.stage < index )
+                    $scope.task.stage += 1;
+                else
+                    $scope.task.stage = index
             }
             Tasks.save($scope.task);
         }

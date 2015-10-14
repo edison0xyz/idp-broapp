@@ -9,13 +9,13 @@
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
 
         <ul class="progress-indicator progress-top">
-            <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
+            <li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages" ng-click="setStage($index)">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
             </li>
         </ul>
-        <button ng-if="stages[task.stage || 0]" class="button button-full button-energized" ng-click="nextStage()">
-            {{stages[task.stage || 0]}}
+        <button ng-if="task.stage == stages.length" class="button button-full button-energized" ng-click="completeTask()">
+            Task complete!
         </button>
 
         <div class="card">
@@ -81,13 +81,13 @@
     <ion-content class="animate-fade-slide-in has-subheader">
 
         <ul class="progress-indicator progress-top">
-            <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
+            <li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages" ng-click="setStage($index)">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
             </li>
         </ul>
-        <button ng-if="stages[task.stage || 0]" class="button button-full button-energized" ng-click="nextStage()">
-            {{stages[task.stage || 0]}}
+        <button ng-if="task.stage == stages.length" class="button button-full button-energized" ng-click="completeTask()">
+            Task complete!
         </button>
 
         <div class="card">
