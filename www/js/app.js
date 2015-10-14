@@ -264,7 +264,7 @@ angular.module('starter',
             .state('app.history', {
                 url: '/history',
                 views: {
-                    'menuContent': {
+                    'historyContent': {
                         templateUrl: 'templates/task.history.html',
                         controller: 'HistoryCtrl'
                     },

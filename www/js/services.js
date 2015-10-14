@@ -108,7 +108,7 @@ angular.module('starter.services', ['firebase'])
         return {
             all: BrosArr,
             get: function (i) {
-                return BrosArr.getRecord(BrosArr.keyAt(i));
+                return BrosArr.$getRecord(BrosArr.$keyAt(i));
             }
         };
     })
