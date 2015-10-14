@@ -167,7 +167,8 @@ angular.module('starter.controllers', [])
         //$scope.otherRequests = History.getRequestByOthers(2) ;
 
         $scope.histories =  Tasks.history ;
-        console.log($scope.histories) ;
+        $scope.activeTask = Tasks.mine ;
+        console.log($scope.activeTask) ;
 
 
     })
