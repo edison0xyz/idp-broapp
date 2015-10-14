@@ -277,6 +277,7 @@ angular.module('starter.controllers', [])
                 disableAnimate: true,
                 disableBack: true
             });
+            console.log('brohelpctrl to active');
             $state.go('app.tasks.active');
         }else{
             $scope.tasks = Tasks.opened;
@@ -289,6 +290,8 @@ angular.module('starter.controllers', [])
                 });
             }, 200);
         });
+
+        console.log('brohelpctrl');
     })
     .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
@@ -381,6 +384,17 @@ angular.module('starter.controllers', [])
                 updateElapsed();
             }, 1000);
         };
+
+        if(!Tasks.mine.task){
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+            console.log('activectrl to list');
+            $state.go('app.tasks.list');
+        }else{
+            $scope.task = Tasks.mine.task;
+        }
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
         $scope.$on('cancelled',function(){
@@ -393,8 +407,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.list');
             });
         });
-        $scope.task = Tasks.mine.task;
-        if ($scope.task.hasPurchase) {
+        if ($scope.task && $scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",
                 "Item purchased",
@@ -430,5 +443,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.list');
             });
         }
+        console.log('activectrl');
+
     })
 ;

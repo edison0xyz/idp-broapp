@@ -83,6 +83,7 @@ angular.module('starter.services', ['firebase'])
                 } else {
                     task.status = 'open';
                     task.savior = null;
+                    mine.task = null;
                     taskArr.$save(task);
                 }
             },

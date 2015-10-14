@@ -8,7 +8,7 @@
     </div>
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
 
-        <ul class="progress-indicator">
+        <ul class="progress-indicator progress-top">
             <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
@@ -80,7 +80,7 @@
     </div>
     <ion-content class="animate-fade-slide-in has-subheader">
 
-        <ul class="progress-indicator">
+        <ul class="progress-indicator progress-top">
             <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
