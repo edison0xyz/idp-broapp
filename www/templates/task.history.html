@@ -1,77 +1,107 @@
 
-<ion-view view-title="History">
-  <ion-tabs class="tabs-assertive tabs-striped tabs-top">
+<ion-view view-title="My Tasks">
+    <ion-nav-view></ion-nav-view>
+        <ion-content padding="true"">
+            <!-- Title -->
+            <div class="row content">
+                <h4 class="assertive">Active</h4>
+            </div>
 
-          <ion-tab title="My Requests">
-              <ion-nav-view>
-                <ion-content padding="true" has-header="true">
-                  <!-- Title -->
-                  <div class="content double-padding">
-                    <h4 class="assertive">My Requests</h4>
-                  </div>
+            <div class="row">
+                <button ui-sref="app.active">Active card here next time.</button>
+            </div>
 
-                  <!-- Display all completed tasks requested by user -->
-                   <div class="item card-item" ng-repeat="history in myRequests |orderBy: '-id'">
-                      <div class="card stable-bg ink ink-dark">
-                          <div class="item item-text-wrap">
-                            <strong>Task: {{history.task}}</strong> <br>
-                            Date: {{history.dateCompleted | date:'medium'}} <br>
-                            Paid: {{history.reward | currency}}
-                            <!-- Completed by member details  -->
-                              <div class="card-footer">
-                                <div class="row">
-                                  <!-- Display Pic  -->
-                                  <div class="col col-25"><span class="avatar" style="background-image: url({{history.completedBy.display_pic}});"></span></div>
-                                  <div class="col">
-                                    <!-- Bro details -->
-                                    <strong>Completed by:</strong><br>
-                                    {{history.completedBy.name}}<br>
-                                    {{history.completedBy.rank}}
-                                  </div>
+            <div class="row content">
+                <h4 class="assertive">Completed</h4>
+            </div>
 
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-            </ion-content>
-          </ion-nav-view>
-      </ion-tab>
 
-          <ion-tab title="Requests by Others">
-              <ion-nav-view>
-                <ion-content padding="true" has-header="true">
-                  <div class="content double-padding">
-                    <h4 class="assertive">Requests by Others</h4>
-
-                  </div>
-                  <!-- Display all completed tasks requested by user -->
-                   <div class="item card-item" ng-repeat="history in otherRequests |orderBy: '-id'">
-                      <div class="card stable-bg ink ink-dark">
-                          <div class="item item-text-wrap">
-                            <strong>Task: {{history.task}}</strong> <br>
-                            Date: {{history.dateCompleted | date:'medium'}} <br>
-                            Paid: {{history.reward | currency}}
-                            <!-- Completed by member details  -->
-                              <div class="card-footer">
-                                <div class="row">
-                                  <!-- Display Pic  -->
-                                  <div class="col col-25"><span class="avatar" style="background-image: url({{history.completedBy.display_pic}});"></span></div>
-                                  <div class="col">
+            <div class="item card-item" ng-if="history.bro.id == user.id || history.savior.id == user.id" ng-repeat="history in histories |orderBy: '-history.date'">
+                <div class="card stable-bg ink ink-dark">
+                    <div class="item item-text-wrap">
+                        <strong>Task: {{history.task}}</strong> <br>
+                        Date: {{history.date | date:'medium'}} <br>
+                        Paid: {{history.reward | currency}}
+                        <!-- Completed by member details  -->
+                        <div class="card-footer">
+                            <div class="row">
+                                <!-- Display Pic  -->
+                                <div class="col col-25"><span class="avatar" style="background-image: url({{history.bro.display_pic}});"></span></div>
+                                <div class="col">
                                     <!-- Bro details -->
                                     <strong>Requested by:</strong><br>
-                                    {{history.requestedBy.name}}<br>
-                                    {{history.requestedBy.rank}}
-                                  </div>
+                                    {{history.bro.name}}<br>
+                                    {{history.bro.rank}}
+                                </div>
 
-                              </div>
                             </div>
-                          </div>
-                      </div>
-                  </div>
-                </ion-content>
-              </ion-nav-view>
-          </ion-tab>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
 
-      </ion-tabs>
+
+              <!--&lt;!&ndash; Display all completed tasks requested by user &ndash;&gt;-->
+               <!--<div class="item card-item" ng-repeat="history in myRequests |orderBy: '-id'">-->
+                  <!--<div class="card stable-bg ink ink-dark">-->
+                      <!--<div class="item item-text-wrap">-->
+                        <!--&lt;!&ndash;<strong>Task: {{history.task}}</strong> <br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;Date: {{history.date | date:'medium'}} <br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;Paid: {{history.reward | currency}}&ndash;&gt;-->
+                        <!--&lt;!&ndash; Completed by member details  &ndash;&gt;-->
+                          <!--<div class="card-footer">-->
+                            <!--<div class="row">-->
+                              <!--&lt;!&ndash; Display Pic  &ndash;&gt;-->
+                              <!--<div class="col col-25"><span class="avatar" style="background-image: url({{history.completedBy.display_pic}});"></span></div>-->
+                              <!--<div class="col">-->
+                                <!--&lt;!&ndash; Bro details &ndash;&gt;-->
+                                <!--<strong>Completed by:</strong><br>-->
+                                <!--&lt;!&ndash;{{history.savior.name}}<br>&ndash;&gt;-->
+                                <!--&lt;!&ndash;{{history.savior.rank}}&ndash;&gt;-->
+                              <!--</div>-->
+
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                  <!--</div>-->
+              <!--</div>-->
+        <!--</ion-content>-->
+      <!--</ion-nav-view>-->
+
+
+
+          <!--<ion-nav-view>-->
+            <!--<ion-content padding="true" has-header="true">-->
+              <!--<div class="content double-padding">-->
+                <!--<h4 class="assertive">Requests by Others</h4>-->
+
+              <!--</div>-->
+              <!--&lt;!&ndash; Display all completed tasks requested by user &ndash;&gt;-->
+               <!--<div class="item card-item" ng-repeat="history in otherRequests |orderBy: '-id'">-->
+                  <!--<div class="card stable-bg ink ink-dark">-->
+                      <!--<div class="item item-text-wrap">-->
+                        <!--&lt;!&ndash;<strong>Task: {{history.task}}</strong> <br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;Date: {{history.dateCompleted | date:'medium'}} <br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;Paid: {{history.reward | currency}}&ndash;&gt;-->
+                        <!--&lt;!&ndash; Completed by member details  &ndash;&gt;-->
+                          <!--<div class="card-footer">-->
+                            <!--<div class="row">-->
+                              <!--&lt;!&ndash; Display Pic  &ndash;&gt;-->
+                              <!--<div class="col col-25"><span class="avatar" style="background-image: url({{history.completedBy.display_pic}});"></span></div>-->
+                              <!--<div class="col">-->
+                                <!--&lt;!&ndash; Bro details &ndash;&gt;-->
+                                <!--<strong>Requested by:</strong><br>-->
+                                <!--&lt;!&ndash;{{history.requestedBy.name}}<br>&ndash;&gt;-->
+                                <!--&lt;!&ndash;{{history.requestedBy.rank}}&ndash;&gt;-->
+                              <!--</div>-->
+
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                  <!--</div>-->
+              <!--</div>-->
+            <!--</ion-content>-->
+          <!--</ion-nav-view>-->
+
 </ion-view>
