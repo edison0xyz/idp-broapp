@@ -1,7 +1,10 @@
-<!--savior view-->
-<ion-view view-title="My task" ng-if="task.savior.id == user.id">
+<!--requester view-->
+<ion-view view-title="My request">
     <div class="bar bar-subheader bar-calm">
-        <h2 class="title">Helping {{task.bro.name}}</h2>
+        <h2 class="title" ng-if="!task.savior && task.bro.id == user.id">Awaiting your true bro...
+            <span>{{elasped | amDateFormat:'mm:ss'}}</span>
+        </h2>
+        <h2 class="title" ng-if="task.savior">{{task.savior.name}} is on his way!</h2>
     </div>
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
 

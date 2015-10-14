@@ -20,14 +20,25 @@ angular.module('starter',
                 StatusBar.styleDefault();
             }
         });
-    }).run(function ($rootScope, $location, $state) {
+    }).run(function ($rootScope, $location) {
         // Redirect to login if route requires auth and you're not logged in
-        $rootScope.$on('$stateChangeStart', function (event, next) {
+        $rootScope.$on('$stateChangeStart', function (event, next, current) {
             if (!$rootScope.user) {
                 // Unauthenticated
                 $location.path('/login');
             }
-        })
+            //ensures redirect to active task page
+            //console.log('have active', !!(Tasks.mine.task || Tasks.mine.request));
+            //console.log('match state', next.name == "app.tasks.list");
+            //if(next.name == "app.tasks.list" && !!(Tasks.mine.task || Tasks.mine.request)){
+            //    var activeUrl = '/app/tasks/'+ (!!Tasks.mine.task ? 'task':'request');
+            //    var activeState = "app.tasks." + (!!Tasks.mine.task ? 'task':'request');
+            //    console.log('redirect', activeState);
+            //    $location.path(activeUrl);
+            //    $state.go(activeState);
+            //}
+
+        });
     })
     .config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
@@ -149,7 +160,7 @@ angular.module('starter',
                 views: {
                     'helpListContent': {
                         templateUrl: 'templates/task.layout.html',
-                        controller: 'BroHelpCtrl'
+                        controller: 'MainCtrl'
                     },
                     'fabContent': {
                         controller: function ($timeout) {
@@ -163,6 +174,17 @@ angular.module('starter',
             .state('app.tasks.list', {
                 url: '/list',
                 templateUrl: 'templates/task.list.html',
+                controller: 'BroHelpCtrl'
+            })
+            .state('app.tasks.request', {
+                url: '/request',
+                templateUrl: 'templates/request.active.html',
+                controller: 'ActiveTaskCtrl'
+            })
+            .state('app.tasks.task', {
+                url: '/task',
+                templateUrl: 'templates/task.active.html',
+                controller: 'ActiveTaskCtrl'
             })
             .state('app.tasks.new', {
                 url: '/new',

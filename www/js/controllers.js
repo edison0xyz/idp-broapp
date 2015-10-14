@@ -100,7 +100,7 @@ angular.module('starter.controllers', [])
         $scope.bros = Bros.all;
         $scope.loginAs = function(bro){
             User.login(bro);
-            $state.go('app.tasks.list')
+            $state.go('app.tasks.list');
         }
         $scope.reset = function(){
            Reset.reset();
@@ -212,7 +212,7 @@ angular.module('starter.controllers', [])
     })
     .controller('MainCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
         // Set Header
-        $scope.$parent.showHeader();
+        //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
@@ -235,7 +235,7 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
     })
     .controller('BroHelpCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
-        $scope.$parent.showHeader();
+        //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
@@ -247,11 +247,8 @@ angular.module('starter.controllers', [])
             });
         }, 200);
 
-
-
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-
         $scope.tasks = Tasks.opened;
         //$scope.tasks.$watch(function(){
         Tasks.$watch(function(){
@@ -298,7 +295,7 @@ angular.module('starter.controllers', [])
 
         $scope.acceptTask = function () {
             Tasks.setActive($scope.task);
-            $state.go('app.active');
+            $state.go('app.tasks.task');
         }
     })
     .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
@@ -328,16 +325,19 @@ angular.module('starter.controllers', [])
                 template: 'Awaiting for your true bro...'
             });
             alertPopup.then(function (res) {
-                $state.go('app.active');
+                $state.go('app.tasks.request');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($rootScope, $scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($rootScope, $scope,$ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
 
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
@@ -355,7 +355,7 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        $scope.task = Tasks.mine.task;
+        $scope.task = Tasks.mine.task || Tasks.mine.request;
         if ($scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",

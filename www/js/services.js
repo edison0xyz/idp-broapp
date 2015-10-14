@@ -6,33 +6,62 @@ angular.module('starter.services', ['firebase'])
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
         var taskArr = $firebaseArray(TaskRef);
         var openArr = $firebaseArray(TaskRef.orderByChild('status').equalTo('open'));
+        var historyArr = $firebaseArray(TaskRef.orderByChild('status').equalTo('completed'));
         var mine = {
-            task: null
+            task: null,
+            request: null
         };
         var listener = undefined;
-        taskArr.$watch(function(event) {
+        taskArr.$watch(function (event) {
             //console.log(event);
-            if(event.event == 'child_removed'){
+            if (event.event == 'child_removed') {
                 console.log('removed', event.key);
+                updateActive(event);
             }
-            if(event.event == "child_added"){
+            if (event.event == "child_added") {
                 console.log('added', event.key);
-                if(!mine.task){
-                    var task = taskArr.$getRecord(event.key);
-                    if(task.bro.id == $rootScope.user.id){
-                        mine.task = task;
-                    }
-                }
+                updateActive(event);
             }
-            if(listener){
+            if (listener) {
                 listener();
             }
         });
 
+        function updateActive(event) {
+            if (!mine.task && !mine.request) {
+                if (event) {
+                    var task = taskArr.$getRecord(event.key);
+                    //console.log('adding task', task);
+                    if ($rootScope.user && task.bro.id == $rootScope.user.id) {
+                        mine.request = task;
+                        mine.task = null;
+                    } else if ($rootScope.user && task.savior.id == $rootScope.user.id) {
+                        mine.task = task;
+                        mine.request = null;
+                    }
+                } else {
+                    taskArr.forEach(function (task) {
+                        //console.log('updating task', task);
+                        if ($rootScope.user && task.bro.id == $rootScope.user.id) {
+                            mine.request = task;
+                            mine.task = null;
+                        } else if ($rootScope.user && task.savior && task.savior.id == $rootScope.user.id) {
+                            mine.task = task;
+                            mine.request = null;
+                        }
+                    });
+                }
+            }
+        }
+
         return {
             all: taskArr,
             opened: openArr,
+            history: historyArr,
             mine: mine,
+            update: function () {
+                updateActive();
+            },
             add: function (new_task) {
                 console.log('added');
                 if (new_task.status) {
@@ -40,7 +69,7 @@ angular.module('starter.services', ['firebase'])
                     taskArr.$add(new_task);
                 }
             },
-            get: function(key){
+            get: function (key) {
                 return taskArr.$getRecord(key);
             },
             setActive: function (activeTask) {
@@ -49,25 +78,25 @@ angular.module('starter.services', ['firebase'])
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
             },
-            cancel: function(task){
-                if(task.bro.id = $rootScope.user.id){
+            cancel: function (task) {
+                if ($rootScope.user && task.bro.id == $rootScope.user.id) {
                     taskArr.$delete(task);
-                }else{
+                } else {
                     task.savior = null;
                     taskArr.$save(task);
                 }
             },
-            save: function(task){
+            save: function (task) {
                 taskArr.$save(task);
             },
-            addMessage: function(task, message){
-                if(!task.messages)
+            addMessage: function (task, message) {
+                if (!task.messages)
                     task.messages = [];
                 delete task.message;
                 task.messages.push(message);
                 taskArr.$save(task);
             },
-            $watch: function(cb){
+            $watch: function (cb) {
                 listener = cb;
             }
         };
@@ -179,7 +208,7 @@ angular.module('starter.services', ['firebase'])
         var tasks = [
             {
                 id: 1,
-                bro: bros[1],
+                bro: bros[0],
                 task: "HELP! Can anyone get me some flowers?",
                 hasPurchase: true,
                 budget: [10, 20],
@@ -187,10 +216,11 @@ angular.module('starter.services', ['firebase'])
                 reward: 10,
                 status: 'open',
                 savior: null,
+                distance: 2,
                 messages: []
             }, {
                 id: 2,
-                bro: bros[2],
+                bro: bros[1],
                 task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
                 hasPurchase: true,
                 budget: [40, 60],
@@ -198,6 +228,7 @@ angular.module('starter.services', ['firebase'])
                 // open, active, completed
                 status: 'open',
                 savior: null,
+                distance: 8,
                 date: moment().subtract(2, 'minutes').valueOf(),
                 messages: []
             }, {
@@ -210,6 +241,7 @@ angular.module('starter.services', ['firebase'])
                 // open, active, completed
                 status: 'completed',
                 savior: bros[1],
+                distance: 6,
                 date: moment().valueOf(),
                 messages: []
             }, {
@@ -222,13 +254,14 @@ angular.module('starter.services', ['firebase'])
                 // open, active, completed
                 status: 'completed',
                 savior: bros[2],
+                distance: 4,
                 date: moment().valueOf(),
                 messages: []
             }
         ];
 
         return {
-            reset: function(){
+            reset: function () {
                 TaskRef.set({});
                 for (var i = 0; i < tasks.length; i++) {
                     TaskArr.$add(tasks[i]);
@@ -240,12 +273,13 @@ angular.module('starter.services', ['firebase'])
             }
         };
     })
-    .factory('User', function ($rootScope) {
+    .factory('User', function ($rootScope, Tasks) {
         var me = {};
         return {
-            login: function(bro){
+            login: function (bro) {
                 me = bro;
                 $rootScope.user = bro;
+                Tasks.update();
             },
             current: me
         };
