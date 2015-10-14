@@ -1,5 +1,8 @@
 <ion-view view-title="Browse requests">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+        <div ng-if="tasks.length == 0">
+            No open requests
+        </div>
         <div class="item card-item" ng-repeat="task in tasks | orderBy: '-date'">
             <div ng-if="task.bro.id != user.id" ui-sref="app.tasks.detail({id: task.$id})" class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">

@@ -1,14 +1,14 @@
 <!--requester view-->
-<ion-view view-title="My request">
+<ion-view view-title="My request" ng-if="task.bro.id == user.id">
     <div class="bar bar-subheader bar-calm">
-        <h2 class="title" ng-if="!task.savior && task.bro.id == user.id">Awaiting your true bro...
+        <h2 class="title" ng-if="!task.savior">Awaiting your true bro...
             <span>{{elasped | amDateFormat:'mm:ss'}}</span>
         </h2>
         <h2 class="title" ng-if="task.savior">{{task.savior.name}} is on his way!</h2>
     </div>
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
 
-        <ul class="progress-indicator" style="margin-top:65px;">
+        <ul class="progress-indicator">
             <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}
@@ -78,9 +78,9 @@
     <div class="bar bar-subheader bar-calm">
         <h2 class="title">Helping {{task.bro.name}}</h2>
     </div>
-    <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
+    <ion-content class="animate-fade-slide-in has-subheader">
 
-        <ul class="progress-indicator" style="margin-top:65px;">
+        <ul class="progress-indicator">
             <li ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages">
                 <span class="bubble"></span><span class="fa fa-minus"></span>
                 {{stage}}

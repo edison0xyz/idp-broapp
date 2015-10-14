@@ -212,10 +212,10 @@ angular.module('starter.controllers', [])
     })
 
     .controller('GalleryCtrl', function ($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
-        $scope.$parent.showHeader();
+        //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab(false);
 
         // Activate ink for controller
@@ -231,7 +231,7 @@ angular.module('starter.controllers', [])
     })
     .controller('MainCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
         // Set Header
-        //$scope.$parent.showHeader();
+        //$scope.$parent.noHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
@@ -269,7 +269,7 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
-        if(Tasks.mine.request || Tasks.mine.task){
+        if(Tasks.mine.task){
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
                 disableBack: true
@@ -323,7 +323,7 @@ angular.module('starter.controllers', [])
 
         $scope.acceptTask = function () {
             Tasks.setActive($scope.task);
-            $state.go('app.tasks.task');
+            $state.go('app.tasks.active');
         }
     })
     .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
@@ -353,16 +353,17 @@ angular.module('starter.controllers', [])
                 template: 'Awaiting for your true bro...'
             });
             alertPopup.then(function (res) {
-                $state.go('app.tasks.request');
+                $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($rootScope, $scope,$ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
+        $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
-
+        $ionicNavBarDelegate.showBackButton(false);
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
@@ -379,8 +380,17 @@ angular.module('starter.controllers', [])
         };
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-
-        $scope.task = Tasks.mine.task || Tasks.mine.request;
+        $scope.$on('cancelled',function(){
+            var alertPopup = $ionicPopup.alert({
+                title: 'Task cancelled',
+                template: 'The requester has cancelled this task'
+            });
+            alertPopup.then(function (res) {
+                //Tasks.cancel($scope.task);
+                $state.go('app.tasks.list');
+            });
+        });
+        $scope.task = Tasks.mine.task;
         if ($scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",
@@ -412,9 +422,9 @@ angular.module('starter.controllers', [])
                 title: 'Are you sure?',
                 template: 'Canceling a task will forfeit reward or incur penalty'
             });
-            alertPopup.then(function (res) {
+            confirmPopup.then(function (res) {
                 Tasks.cancel($scope.task);
-                $state.go('app.active');
+                $state.go('app.tasks.list');
             });
         }
     })

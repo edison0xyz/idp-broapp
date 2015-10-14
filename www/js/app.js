@@ -160,7 +160,8 @@ angular.module('starter',
                 views: {
                     'helpListContent': {
                         templateUrl: 'templates/task.layout.html',
-                        controller: 'MainCtrl'
+                        //controller: 'MainCtrl'
+                        controller: 'BroHelpCtrl'
                     },
                     'taskListFabContent': {
                         template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900" ui-sref=""><i class="icon ion-funnel"></i></button>',
@@ -175,7 +176,7 @@ angular.module('starter',
             .state('app.tasks.list', {
                 url: '/list',
                 templateUrl: 'templates/task.list.html',
-                controller: 'BroHelpCtrl'
+
             })
             .state('app.tasks.active', {
                 url: '/active',
