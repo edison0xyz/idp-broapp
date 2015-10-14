@@ -3,7 +3,7 @@
 
 angular.module('starter.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $ionicPopover, $timeout, $state, $ionicPopup) {
         // Form data for the login modal
         $scope.loginData = {};
         $scope.isExpanded = false;
@@ -36,6 +36,25 @@ angular.module('starter.controllers', [])
                     content[i].classList.toggle('has-header');
                 }
             }
+        };
+
+        // A confirm dialog
+        $scope.showLogoutConfirmation = function() {
+
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Are you sure you want to log out?',
+                template: 'We hate to see you go.',
+                okText: 'yes',
+                cancelText: 'no'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $state.go('login');
+
+                } else {
+
+                }
+            });
         };
 
         $scope.setExpanded = function (bool) {
