@@ -234,7 +234,7 @@ angular.module('starter.controllers', [])
         // Set Ink
         ionicMaterialInk.displayEffect();
     })
-    .controller('BroHelpCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    .controller('BroHelpCtrl', function ($scope, $state, $ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -249,7 +249,16 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-        $scope.tasks = Tasks.opened;
+
+        if(Tasks.mine.request || Tasks.mine.task){
+            $ionicHistory.nextViewOptions({
+                disableAnimate: true,
+                disableBack: true
+            });
+            $state.go('app.tasks.active');
+        }else{
+            $scope.tasks = Tasks.opened;
+        }
         //$scope.tasks.$watch(function(){
         Tasks.$watch(function(){
             $timeout(function () {
@@ -329,15 +338,12 @@ angular.module('starter.controllers', [])
             });
         }
     }).controller('ActiveTaskCtrl', function ($rootScope, $scope,$ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
-        $scope.$parent.showHeader();
+        //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
 
-        $ionicHistory.nextViewOptions({
-            disableBack: true
-        });
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'

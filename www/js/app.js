@@ -176,16 +176,16 @@ angular.module('starter',
                 templateUrl: 'templates/task.list.html',
                 controller: 'BroHelpCtrl'
             })
-            .state('app.tasks.request', {
-                url: '/request',
-                templateUrl: 'templates/request.active.html',
-                controller: 'ActiveTaskCtrl'
-            })
-            .state('app.tasks.task', {
-                url: '/task',
+            .state('app.tasks.active', {
+                url: '/active',
                 templateUrl: 'templates/task.active.html',
                 controller: 'ActiveTaskCtrl'
             })
+            //.state('app.tasks.task', {
+            //    url: '/task',
+            //    templateUrl: 'templates/task.active.html',
+            //    controller: 'ActiveTaskCtrl'
+            //})
             .state('app.tasks.new', {
                 url: '/new',
                 templateUrl: 'templates/task.new.html',
