@@ -164,6 +164,11 @@ angular.module('starter',
                 url: '/list',
                 templateUrl: 'templates/task.list.html',
             })
+            .state('app.tasks.new', {
+                url: '/new',
+                templateUrl: 'templates/task.new.html',
+                controller: 'NewTaskCtrl'
+            })
             .state('app.tasks.detail', {
                 url: '/:id',
                 templateUrl: 'templates/task.detail.html',
@@ -189,23 +194,6 @@ angular.module('starter',
             //    }
             //})
 
-            .state('app.callForHelp', {
-                url: '/callForHelp',
-                views: {
-                    'callForHelp': {
-                        templateUrl: 'templates/task.new.html',
-                        controller: 'NewTaskCtrl'
-                    },
-                    'fabContent': {
-                        template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-chatbubbles"></i></button>',
-                        controller: function ($timeout) {
-                            /*$timeout(function () {
-                             document.getElementById('fab-profile').classList.toggle('on');
-                             }, 800);*/
-                        }
-                    }
-                }
-            })
 
             .state('app.active', {
                 url: '/active',

@@ -343,7 +343,15 @@ angular.module('starter.controllers', [])
                 selector: '.animate-fade-slide-in .item'
             });
         }, 200);
+        var updateElapsed = function () {
+            $timeout(function () {
+                if ($scope.task) {
 
+                    $scope.elasped = moment().diff($scope.task.date);
+                }
+                updateElapsed();
+            }, 1000);
+        };
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
 
@@ -360,6 +368,7 @@ angular.module('starter.controllers', [])
                 "Task completed"
             ];
         }
+        updateElapsed();
         $scope.nextStage = function(){
             if(!$scope.task.stage)
                 $scope.task.stage = 1;
@@ -371,6 +380,17 @@ angular.module('starter.controllers', [])
         $scope.addMessage = function (task) {
             Tasks.addMessage($scope.task, {user: $rootScope.user, message: task.message});
             task.message = "";
+        }
+
+        $scope.cancelTask = function () {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Are you sure?',
+                template: 'Canceling a task will forfeit reward or incur penalty'
+            });
+            alertPopup.then(function (res) {
+                Tasks.cancel($scope.task);
+                $state.go('app.active');
+            });
         }
     })
 ;

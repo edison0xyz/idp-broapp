@@ -49,12 +49,21 @@ angular.module('starter.services', ['firebase'])
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
             },
+            cancel: function(task){
+                if(task.bro.id = $rootScope.user.id){
+                    taskArr.$delete(task);
+                }else{
+                    task.savior = null;
+                    taskArr.$save(task);
+                }
+            },
             save: function(task){
                 taskArr.$save(task);
             },
             addMessage: function(task, message){
                 if(!task.messages)
                     task.messages = [];
+                delete task.message;
                 task.messages.push(message);
                 taskArr.$save(task);
             },
@@ -199,7 +208,7 @@ angular.module('starter.services', ['firebase'])
                 //budget: [40, 60],
                 reward: 50,
                 // open, active, completed
-                status: 'active',
+                status: 'completed',
                 savior: bros[1],
                 date: moment().valueOf(),
                 messages: []
