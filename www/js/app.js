@@ -151,7 +151,8 @@ angular.module('starter',
                         templateUrl: 'templates/task.layout.html',
                         controller: 'BroHelpCtrl'
                     },
-                    'fabContent': {
+                    'taskListFabContent': {
+                        template: '<button id="fab-activity" class="button button-fab button-fab-top-right expanded button-energized-900" ui-sref=""><i class="icon ion-funnel"></i></button>',
                         controller: function ($timeout) {
                             /*$timeout(function () {
                              document.getElementById('fab-profile').classList.toggle('on');
@@ -274,5 +275,5 @@ angular.module('starter',
         ;
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/login');
+        $urlRouterProvider.otherwise('/login');
     });
