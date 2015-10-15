@@ -473,7 +473,7 @@ angular.module('starter.controllers', [])
             index += 1;
             if (!$scope.task.stage)
                 $scope.task.stage = 1;
-            else if ($scope.task.stage < $scope.stages.length && index !== $scope.task.stage) {
+            else if (index !== $scope.task.stage) {
                 if ($scope.task.stage < index)
                     $scope.task.stage += 1;
                 else
