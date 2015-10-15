@@ -27,6 +27,10 @@ $dark:                            #444 !default;
 .progress-indicator > li:hover {
   background-color: grey; }
 
+.popover.cancel-menu {
+  height: 80px;
+  overflow: hidden; }
+
 /* Copyright 2013-2015 etc Chris Tabor. Licensed under MIT. */
 .flexer, .progress-indicator {
   display: -webkit-box;

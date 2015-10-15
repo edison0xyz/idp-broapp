@@ -44,7 +44,7 @@ angular.module('starter',
 
         // Turn off caching for demo simplicity's sake
         $ionicConfigProvider.views.maxCache(0);
-
+        $ionicConfigProvider.tabs.position('bottom');
         /*
          // Turn off back button text
          $ionicConfigProvider.backButton.previousTitleText(false);

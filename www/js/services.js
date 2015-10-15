@@ -23,12 +23,12 @@ angular.module('starter.services', ['firebase'])
             }
             if (event.event == 'child_changed') {
                 console.log('changed', event.key);
-                if ((mine.task && mine.task.$id == event.key)) {
-                    mine.task = null;
-                    var task = taskArr.$getRecord(event.key);
-                    $rootScope.$broadcast('completed');
-                    updateActive();
-                }
+                //if ((mine.task && mine.task.$id == event.key)) {
+                //    //mine.task = null;
+                //    var task = taskArr.$getRecord(event.key);
+                //    $rootScope.$broadcast('completed');
+                //    updateActive();
+                //}
             }
             if (event.event == "child_added") {
                 console.log('added', event.key);

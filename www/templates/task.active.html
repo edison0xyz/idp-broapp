@@ -1,15 +1,33 @@
-<!--requester view-->
-<div ng-if="task.bro.id == user.id">
-    <ion-view view-title="My request">
-        <div class="bar bar-subheader bar-calm">
-            <h2 class="title" ng-if="!task.savior">Awaiting your true bro...
+
+<!--<script id="task_options.html" type="text/ng-template">-->
+    <!--<ion-popover-view class="cancel-menu">-->
+        <!--<ion-content>-->
+            <!--<div class="button button-full button-warn" ng-click="cancelTask()">Cancel task</div>-->
+        <!--</ion-content>-->
+    <!--</ion-popover-view>-->
+<!--</script>-->
+<ion-view view-title="My request">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">
+        </button>
+    </ion-nav-buttons>
+    <!--requester view-->
+    <div ng-if="task.bro.id == user.id">
+        <div class="bar bar-subheader"
+             ng-class="{'bar-balanced': task.status == 'completed',
+                        'bar-calm': !!task.savior,
+                        'bar-energized' : !task.savior
+                        }">
+            <h2 class="title" ng-if="!task.savior && task.status !== 'completed'">Awaiting your true bro...
                 <span>{{elasped | amDateFormat:'mm:ss'}}</span>
             </h2>
 
-            <h2 class="title" ng-if="task.savior">{{task.savior.name}} is on his way!</h2>
+            <h2 class="title" ng-if="task.status === 'completed'">Task completed! + 50 bro points</h2>
+
+            <h2 class="title" ng-if="task.savior && task.status !== 'completed'">{{task.savior.name}} is on his
+                way!</h2>
         </div>
         <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
-
             <ul class="progress-indicator progress-top">
                 <li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"
                     ng-click="setStage($index)">
@@ -21,6 +39,11 @@
                     ng-click="completeTask()">
                 Task complete!
             </button>
+            <div class="row">
+                <div class="col">
+                    <a ng-click="cancelTask()">Cancel task</a>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="item item-avatar item-divider">
@@ -33,26 +56,6 @@
                 <div class="item item-text-wrap">
                     {{task.task}}
                 </div>
-            </div>
-
-            <div class="card" ng-if="task.hasPurchase">
-                <div class="item item-divider">
-                    Purchase
-                </div>
-                <div class="row">
-                    <div class="col">Budget:</div>
-                    <div class="col">{{task.budget[0] | currency}}</div>
-                    <div class="col">{{task.budget[1] | currency}}</div>
-                </div>
-                <form ng-submit="updatePrice()">
-                    <label class="item item-input">
-                        <span class="input-label">Actual price</span>
-                        <input ng-model="task.price" type="number" placeholder="10">
-                    </label>
-                    <button class="button button-full button-energized" type="submit">
-                        Update price
-                    </button>
-                </form>
             </div>
             <div class="card">
                 <div class="item item-divider">
@@ -74,16 +77,46 @@
                         Send message
                     </button>
                 </form>
-                <a ng-click="cancelTask()">Cancel task</a>
             </div>
+
+            <div class="card" ng-if="task.hasPurchase">
+                <div class="item item-divider">
+                    Purchase
+                </div>
+                <div class="row">
+                    <div class="col">Budget:</div>
+                    <div class="col">{{task.budget[0] | currency}}</div>
+                    <div class="col">{{task.budget[1] | currency}}</div>
+                </div>
+
+                <form ng-submit="updatePrice()">
+                    <div class="row">
+                        <div class="col"><label class="item item-input" style="margin-left:-10px;">
+                            <span class="input-label">Actual price</span>
+                            <input ng-model="task.price" type="number" placeholder="10">
+                        </label></div>
+                        <div class="col">
+                            <button class="button button-small button-energized" style="margin-right:5px;"
+                                    type="submit">
+                                Update price
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
         </ion-content>
-    </ion-view>
-</div>
-<!--savior view-->
-<div ng-if="task.savior.id == user.id">
-    <ion-view view-title="My task">
-        <div class="bar bar-subheader bar-calm">
-            <h2 class="title">Helping {{task.bro.name}}</h2>
+    </div>
+    <!--savior view-->
+    <div ng-if="task.savior.id == user.id">
+        <div class="bar bar-subheader"
+             ng-class="{'bar-balanced': task.status == 'completed',
+                        'bar-calm': !!task.savior
+                        }">
+            <h2 class="title" ng-if="task.status !== 'completed'">Helping {{task.bro.name}}</h2>
+
+            <h2 class="title" ng-if="task.status == 'completed'">Task completed! + 50 bro points</h2>
         </div>
         <ion-content class="animate-fade-slide-in has-subheader">
 
@@ -154,5 +187,94 @@
                 <a ng-click="cancelTask()">Cancel task</a>
             </div>
         </ion-content>
-    </ion-view>
-</div>
+    </div>
+</ion-view>
+<!--</div>-->
+<!--savior view-->
+<!--<div ng-if="task.savior.id == user.id">-->
+<!--<ion-view view-title="My task">-->
+    <!--<ion-nav-buttons side="right">-->
+        <!--<button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">-->
+        <!--</button>-->
+    <!--</ion-nav-buttons>-->
+    <!--<div ng-if="task.savior.id == user.id">-->
+        <!--<div class="bar bar-subheader"-->
+             <!--ng-class="{'bar-balanced': task.status == 'completed',-->
+                        <!--'bar-calm': !!task.savior-->
+                        <!--}">-->
+            <!--<h2 class="title" ng-if="task.status !== 'completed'">Helping {{task.bro.name}}</h2>-->
+
+            <!--<h2 class="title" ng-if="task.status == 'completed'">Task completed! + 50 bro points</h2>-->
+        <!--</div>-->
+        <!--<ion-content class="animate-fade-slide-in has-subheader">-->
+
+            <!--<ul class="progress-indicator progress-top">-->
+                <!--<li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"-->
+                    <!--ng-click="setStage($index)">-->
+                    <!--<span class="bubble"></span><span class="fa fa-minus"></span>-->
+                    <!--{{stage}}-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<button ng-if="task.stage == stages.length" class="button button-full bar-balanced"-->
+                    <!--ng-click="completeTask()">-->
+                <!--Task complete!-->
+            <!--</button>-->
+
+            <!--<div class="card">-->
+                <!--<div class="item item-avatar item-divider">-->
+                    <!--<img src="{{task.bro.display_pic}}">-->
+
+                    <!--<h2>{{task.bro.name}}</h2>-->
+
+                    <!--<p am-time-ago="task.date"></p>-->
+                <!--</div>-->
+                <!--<div class="item item-text-wrap">-->
+                    <!--{{task.task}}-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="card" ng-if="task.hasPurchase">-->
+                <!--<div class="item item-divider">-->
+                    <!--Purchase-->
+                <!--</div>-->
+                <!--<div class="row">-->
+                    <!--<div class="col">Budget:</div>-->
+                    <!--<div class="col">{{task.budget[0] | currency}}</div>-->
+                    <!--<div class="col">{{task.budget[1] | currency}}</div>-->
+                <!--</div>-->
+                <!--<form ng-submit="updatePrice()">-->
+                    <!--<label class="item item-input">-->
+                        <!--<span class="input-label">Actual price</span>-->
+                        <!--<input ng-model="task.price" type="number" placeholder="10">-->
+                    <!--</label>-->
+                    <!--<button class="button button-full button-energized" type="submit">-->
+                        <!--Update price-->
+                    <!--</button>-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div class="card">-->
+                <!--<div class="item item-divider">-->
+                    <!--Updates-->
+                <!--</div>-->
+                <!--<div class="item item-text-wrap">-->
+                    <!--<ul class="list">-->
+                        <!--<li ng-repeat="message in task.messages track by $index">-->
+                            <!--{{message.user.name}} - {{message.message}}-->
+                        <!--</li>-->
+                        <!--<li ng-show="!task.messages.length">No messages</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+                <!--<form ng-submit="addMessage(task)">-->
+                    <!--<label class="item item-input">-->
+                        <!--<input ng-model="task.message" type="text" placeholder="New message">-->
+                    <!--</label>-->
+                    <!--<button class="button button-block button-positive" type="submit">-->
+                        <!--Send message-->
+                    <!--</button>-->
+                <!--</form>-->
+                <!--<a ng-click="cancelTask()">Cancel task</a>-->
+            <!--</div>-->
+        <!--</ion-content>-->
+    <!--</div>-->
+<!--</ion-view>-->
+<!--</div>-->

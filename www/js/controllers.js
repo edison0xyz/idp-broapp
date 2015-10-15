@@ -371,7 +371,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($state, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state,$ionicActionSheet, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -394,6 +394,43 @@ angular.module('starter.controllers', [])
             }, 1000);
         };
 
+        $scope.openPopover = function() {
+
+            // Show the action sheet
+            var hideSheet = $ionicActionSheet.show({
+                //buttons: [
+                //    { text: 'edit' }
+                //],
+                destructiveText: 'Cancel task',
+                //titleText: 'Modify your album',
+                cancelText: 'back',
+                cancel: function() {
+                    // add cancel code..
+                },
+                buttonClicked: function(index) {
+                    return true;
+                },
+                destructiveButtonClicked: function(){
+                    $scope.cancelTask();
+                }
+            });
+
+            // For example's sake, hide the sheet after two seconds
+            $timeout(function() {
+                hideSheet();
+            }, 2000);
+
+        };
+
+        //$ionicPopover.fromTemplateUrl('task_options.html', {
+        //    scope: $scope
+        //}).then(function(popover) {
+        //    $scope.popover = popover;
+        //});
+        //$scope.openPopover = function($event) {
+        //    console.log('pop');
+        //    $scope.popover.show($event);
+        //};
         if (!Tasks.mine.task) {
             $ionicHistory.nextViewOptions({
                 disableAnimate: true,
