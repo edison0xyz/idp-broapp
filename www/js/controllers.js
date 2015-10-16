@@ -371,7 +371,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($state,$ionicActionSheet, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state,$ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -501,12 +501,23 @@ angular.module('starter.controllers', [])
 
         $scope.completeTask = function(){
             Tasks.complete($scope.task);
+            $scope.modal.hide();
         }
         $scope.dismissTask = function(){
             Tasks.mine.task = null;
             $state.go('app.tasks.list');
         }
-        console.log('activectrl');
-
+        $ionicModal.fromTemplateUrl('completion-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
+        $scope.closeModal = function() {
+            $scope.modal.hide();
+        };
+        $scope.openModal = function() {
+            $scope.modal.show();
+        };
     })
 ;
