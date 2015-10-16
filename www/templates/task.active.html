@@ -26,9 +26,13 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length" class="button button-full bar-balanced"
+            <button ng-if="task.stage == stages.length && task.status !=='completed'" class="button button-full bar-balanced"
                     ng-click="completeTask()">
-                Mark request as completed
+                Confirm completion
+            </button>
+            <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
+                    ng-click="dismissTask()">
+                Close
             </button>
 
             <div class="card">
@@ -113,9 +117,13 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length" class="button button-full bar-balanced"
+            <button ng-if="task.stage == stages.length && task.status !=='completed'" class="button button-full bar-balanced"
                     ng-click="completeTask()">
                 Confirm completion
+            </button>
+            <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
+                    ng-click="dismissTask()">
+                Close
             </button>
 
             <div class="card">

@@ -98,7 +98,6 @@ angular.module('starter.services', ['firebase'])
             },
             complete: function(task){
                 task.status = 'completed';
-                mine.task = null;
                 taskArr.$save(task);
             },
             save: function (task) {

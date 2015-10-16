@@ -1,6 +1,6 @@
 {
-  "name": "sample",
-  "app_id": "8862ab16",
+  "name": "BroApp",
+  "app_id": "3d2eec56",
   "gulpStartupTasks": [
     "sass",
     "watch"

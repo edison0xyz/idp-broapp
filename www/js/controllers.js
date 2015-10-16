@@ -501,6 +501,9 @@ angular.module('starter.controllers', [])
 
         $scope.completeTask = function(){
             Tasks.complete($scope.task);
+        }
+        $scope.dismissTask = function(){
+            Tasks.mine.task = null;
             $state.go('app.tasks.list');
         }
         console.log('activectrl');
