@@ -503,23 +503,43 @@ angular.module('starter.controllers', [])
         $scope.completeTask = function(){
             //Tasks.complete($scope.task);
             Tasks.confirm($scope.task);
-            $scope.modal.hide();
+            $scope.completion_modal.hide();
         }
         $scope.dismissTask = function(){
             Tasks.mine.task = null;
             $state.go('app.tasks.list');
         }
+        $ionicModal.fromTemplateUrl('report-modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function(modal) {
+            $scope.report_modal = modal;
+        });
         $ionicModal.fromTemplateUrl('completion-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function(modal) {
-            $scope.modal = modal;
+            $scope.completion_modal = modal;
         });
         $scope.closeModal = function() {
-            $scope.modal.hide();
+            $scope.completion_modal.hide();
         };
         $scope.openModal = function() {
-            $scope.modal.show();
+            $scope.completion_modal.show();
         };
+
+        $scope.reportUser = function(){
+            $scope.report_modal.show();
+        }
+        $scope.closeReportModal = function() {
+            $scope.report_modal.hide();
+        };
+        $scope.submitReport = function(report){
+            console.log('reporting');
+            $scope.report_modal.hide();
+            $scope.completion_modal.hide();
+            //Tasks.mine.task.status = "In review";
+            Tasks.report();
+        }
     })
 ;

@@ -7,6 +7,7 @@
 
             <div class="row row-center">
                 <h3>Rate your bro!</h3>
+
                 <div class="col col-offset-10">
                     <fieldset class="rating">
                         <input type="radio" id="star5" name="rating" value="5"/><label class="full" for="star5"
@@ -38,7 +39,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <a class='warning center-block assertive' ng-click="report()">Report user</a>
+                    <a class='warning center-block assertive' ng-click="reportUser()">Report user</a>
                 </div>
             </div>
             <button class="button button-full button-balanced"
@@ -47,6 +48,32 @@
             </button>
             <button class="button button-full button-stable"
                     ng-click="closeModal()">
+                Cancel
+            </button>
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script id="report-modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-stable">
+            <h1 class="title">Report user</h1>
+        </ion-header-bar>
+        <ion-content>
+            <form name="reportForm" ng-submit="submitReport(report)">
+
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Situation</span>
+                    <textarea required name='problemTest' ng-required="true" ng-model="report.problem"
+                              placeholder="Explain the situation"></textarea>
+                </label>
+
+                <button class="button button-full button-assertive"
+                        type="submit">
+                    Submit Report
+                </button>
+            </form>
+            <button class="button button-full button-stable"
+                    ng-click="closeReportModal()">
                 Cancel
             </button>
         </ion-content>
@@ -62,15 +89,18 @@
         <div class="bar bar-subheader"
              ng-class="{'bar-balanced': task.status == 'completed',
                         'bar-calm': !!task.savior,
-                        'bar-energized' : !task.savior
+                        'bar-energized' : !task.savior,
+                        'bar-dark' : task.status == 'In review'
                         }">
+            <h2 class="title" ng-if="task.status === 'In review'">Rewards in review</h2>
+
             <h2 class="title" ng-if="!task.savior && task.status !== 'completed'">Awaiting your true bro...
                 <span>{{elasped | amDateFormat:'mm:ss'}}</span>
             </h2>
 
             <h2 class="title" ng-if="task.status === 'completed'">Task completed! + 50 bro points</h2>
 
-            <h2 class="title" ng-if="task.savior && task.status !== 'completed'">{{task.savior.name}} is on his
+            <h2 class="title" ng-if="task.savior && task.status === 'active'">{{task.savior.name}} is on his
                 way!</h2>
         </div>
         <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
@@ -111,10 +141,15 @@
                     Updates
                 </div>
                 <div class="item item-text-wrap">
-                    <ul class="list">
-                        <li ng-repeat="message in task.messages track by $index">
-                            {{message.user.name}} - {{message.message}}
+                    <ul class="list discussion">
+                        <li ng-repeat="message in task.messages track by $index">{{message.user.name}} -
+                            {{message.message}}
                         </li>
+                        <!--<li class="chat" ng-class="{'me': message.user.id==user.id, 'you': message.user.id!==user.id}"-->
+                        <!--ng-repeat="message in task.messages track by $index">-->
+                        <!--<img class='avatar' src="{{message.user.display_pic}}"/>-->
+                        <!--<span class="chat-text">{{message.message}} </span>-->
+                        <!--</li>-->
                         <li ng-show="!task.messages.length">No messages</li>
                     </ul>
                 </div>
@@ -161,9 +196,11 @@
     <div ng-if="task.savior.id == user.id">
         <div class="bar bar-subheader"
              ng-class="{'bar-balanced': task.status == 'completed',
-                        'bar-calm': !!task.savior
+                        'bar-calm': !!task.savior,
+                        'bar-dark' : task.status == 'In review'
                         }">
-            <h2 class="title" ng-if="task.status !== 'completed'">Helping {{task.bro.name}}</h2>
+            <h2 class="title" ng-if="task.status === 'In review'">Rewards in review</h2>
+            <h2 class="title" ng-if="task.status === 'active'">Helping {{task.bro.name}}</h2>
 
             <h2 class="title" ng-if="task.status == 'completed'">Task completed! + 50 bro points</h2>
         </div>

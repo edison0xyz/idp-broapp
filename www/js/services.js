@@ -86,6 +86,10 @@ angular.module('starter.services', ['firebase'])
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
             },
+            report: function (task) {
+                mine.task.status = 'In review';
+                taskArr.$save(mine.task);
+            },
             cancel: function (task) {
                 if ($rootScope.user && task.bro.id == $rootScope.user.id) {
                     taskArr.$remove(task);
@@ -114,6 +118,7 @@ angular.module('starter.services', ['firebase'])
                 if (!task.messages)
                     task.messages = [];
                 delete task.message;
+                message.time = Firebase.ServerValue.TIMESTAMP;
                 task.messages.push(message);
                 taskArr.$save(task);
             },
