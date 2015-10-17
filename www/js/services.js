@@ -208,14 +208,16 @@ angular.module('starter.services', ['firebase'])
             {
                 id: 1,
                 name: 'Jia Jing',
-                points: '100',
+                points: 100,
+                nextLevel: 120,
                 rank: 'Noob Bro',
                 display_pic: 'img/jj.jpg'
             },
             {
                 id: 2,
                 name: 'Sebastian',
-                points: '240',
+                points: 240,
+                nextLevel: 320,
                 rank: 'Super Bro',
                 display_pic: 'img/derrick.png',
                 map: 'img/map-Sebastian.jpg'
@@ -223,7 +225,8 @@ angular.module('starter.services', ['firebase'])
             {
                 id: 3,
                 name: 'Joshua',
-                points: '780',
+                points: 780,
+                nextLevel: 900,
                 rank: 'Big Bro',
                 display_pic: 'img/chan.png',
                 map: 'img/map-Joshua.jpg'
@@ -304,6 +307,7 @@ angular.module('starter.services', ['firebase'])
         return {
             login: function (bro) {
                 me = bro;
+                Tasks.mine.task = null;
                 $rootScope.user = bro;
                 Tasks.update();
             },

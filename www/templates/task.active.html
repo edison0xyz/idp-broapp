@@ -92,7 +92,7 @@
                         'bar-energized' : !task.savior,
                         'bar-dark' : task.status == 'In review'
                         }">
-            <h2 class="title" ng-if="task.status === 'In review'">Rewards in review</h2>
+            <h2 class="title" ng-if="task.status === 'In review'">Task in review</h2>
 
             <h2 class="title" ng-if="!task.savior && task.status !== 'completed'">Awaiting your true bro...
                 <span>{{elasped | amDateFormat:'mm:ss'}}</span>
@@ -110,7 +110,7 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.bro.confirmed"
+            <button ng-if="task.stage == stages.length && task.status =='active' && !task.bro.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
@@ -119,10 +119,30 @@
                     class="button button-clear button-full">
                 <i class="icon ion-loading-c"></i> Awaiting other party to confirm...
             </button>
+
             <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
                     ng-click="dismissTask()">
                 Close
             </button>
+            <div class="card" ng-if="task.status === 'In review'">
+                <div class="item item-divider">
+                    <div class="bar bar-stable" ng-if="task.status === 'In review'">
+                        <div class="center-block">Task in review
+                        </div>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    <span>
+                        Thank you for your feedback.We will review the case and get back to you soon.
+                    </span>
+                </div>
+                <div class="item item-text-wrap">
+                    <button class="button button-full button-dark"
+                            ng-click="dismissTask()">
+                        Close
+                    </button>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="item item-avatar item-divider">
@@ -138,7 +158,7 @@
             </div>
             <div class="card">
                 <div class="item item-divider">
-                    Updates
+                    Chat
                 </div>
                 <div class="item item-text-wrap">
                     <ul class="list discussion">
@@ -199,7 +219,7 @@
                         'bar-calm': !!task.savior,
                         'bar-dark' : task.status == 'In review'
                         }">
-            <h2 class="title" ng-if="task.status === 'In review'">Rewards in review</h2>
+            <h2 class="title" ng-if="task.status === 'In review'">Task in review</h2>
             <h2 class="title" ng-if="task.status === 'active'">Helping {{task.bro.name}}</h2>
 
             <h2 class="title" ng-if="task.status == 'completed'">Task completed! + 50 bro points</h2>
@@ -219,7 +239,7 @@
                 </div>
             </div>
 
-            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.savior.confirmed"
+            <button ng-if="task.stage == stages.length && task.status ==='active' && !task.savior.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
@@ -232,6 +252,25 @@
                     ng-click="dismissTask()">
                 Close
             </button>
+            <div class="card" ng-if="task.status === 'In review'">
+                <div class="item item-divider">
+                    <div class="bar bar-stable" ng-if="task.status === 'In review'">
+                        <div class="center-block">Task in review
+                        </div>
+                    </div>
+                </div>
+                <div class="item item-divider">
+                    <p>
+                    Thank you for your feedback.We will review the case and get back to you soon.
+                    </p>
+                </div>
+                <div class="item item-text-wrap">
+                    <button class="button button-full button-dark"
+                            ng-click="dismissTask()">
+                        Close
+                    </button>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="item item-avatar item-divider">
@@ -249,7 +288,7 @@
 
             <div class="card">
                 <div class="item item-divider">
-                    Updates
+                    Chat
                 </div>
                 <div class="item item-text-wrap">
                     <ul class="list">
