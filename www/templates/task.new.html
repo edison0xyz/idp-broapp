@@ -21,6 +21,15 @@
                   <span class="center-block assertive" ng-show="taskForm.$submitted && taskForm.reward.$error.required">
                    Please enter the reward amount</span>
                 </div>
+                <label class="item item-input item-stack-label">
+                    <span class="input-label">Due time</span>
+                    <input type="datetime-local" id="exampleInput" name="duetime" ng-model="newTask.duetime"
+                           placeholder="yyyy-MM-ddTHH:mm" min="currentTime" required />
+                </label>
+                <div role="alert">
+                  <span class="center-block assertive" ng-show="taskForm.$submitted && taskForm.duetime.$error.required">
+                   Please enter the request due date and time</span>
+                </div>
                 <ion-toggle ng-model="newTask.hasPurchase" toggle-class="toggle-calm">Require Purchase?</ion-toggle>
                 <div ng-show="newTask.hasPurchase">
                     <div class="row">

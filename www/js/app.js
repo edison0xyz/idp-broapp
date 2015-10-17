@@ -5,11 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
-    ['ionic', 'starter.controllers', 'starter.services',
-        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment'])
+    ['ionic','ionic.service.core', 'starter.controllers', 'starter.services', 'ionic.service.analytics',
+        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment', 'ui.bootstrap.datetimepicker'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $ionicAnalytics) {
         $ionicPlatform.ready(function () {
+
+            $ionicAnalytics.register();
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {

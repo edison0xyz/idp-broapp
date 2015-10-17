@@ -280,12 +280,7 @@ angular.module('starter.controllers', [])
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
         $scope.activeTask = Tasks.mine;
-
         if ($scope.activeTask.task) {
-            $ionicHistory.nextViewOptions({
-                disableAnimate: true,
-                disableBack: true
-            });
             console.log('brohelpctrl to active');
             $state.go('app.tasks.active');
         } else {
@@ -357,6 +352,11 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
+        $scope.currentTime = new Date();
+        var defaultTime = moment().add(2, 'hours').toDate();
+        $scope.newTask = {
+            duetime: defaultTime
+        }
 
         $scope.addTask = function (task) {
             //console.log('submit')
