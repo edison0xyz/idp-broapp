@@ -461,7 +461,9 @@ angular.module('starter.controllers', [])
         $scope.$on('onPrice', function () {
             var approvalPopup = $ionicPopup.confirm({
                 title: 'Price approval',
-                template: 'Approve purchase price of $' + $scope.task.price + '?'
+                template: 'Approve purchase price of $' + $scope.task.price + '?',
+                cancelText: "No",
+                okText: "Yes"
             });
             approvalPopup.then(function (res) {
                 if(res){
@@ -513,7 +515,9 @@ angular.module('starter.controllers', [])
         $scope.cancelTask = function () {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Are you sure?',
-                template: 'Canceling a task will forfeit reward or incur penalty'
+                template: 'Canceling a task will forfeit reward or incur penalty',
+                cancelText: "No",
+                okText: "Yes"
             });
             confirmPopup.then(function (res) {
                 if (res) {
