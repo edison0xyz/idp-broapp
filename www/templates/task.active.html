@@ -5,7 +5,7 @@
         </ion-header-bar>
         <ion-content>
 
-            <div class="row row-center">
+            <div class="padding row row-center">
                 <h3>Rate your bro!</h3>
 
                 <div class="col col-offset-10">
@@ -37,7 +37,7 @@
                     </fieldset>
                 </div>
             </div>
-            <div class="row">
+            <div class="padding row">
                 <div class="col">
                     <a class='warning center-block assertive' ng-click="reportUser()">Report user</a>
                 </div>
@@ -55,7 +55,7 @@
 </script>
 <script id="report-modal.html" type="text/ng-template">
     <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-stable">
+        <ion-header-bar class="padding bar bar-header bar-stable">
             <h1 class="title">Report user</h1>
         </ion-header-bar>
         <ion-content>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="item item-text-wrap">
                     <span>
-                        Thank you for your feedback.We will review the case and get back to you soon.
+                        Thank you for your feedback. We will review the case and get back to you soon.
                     </span>
                 </div>
                 <div class="item item-text-wrap">
@@ -281,7 +281,7 @@
                 </div>
                 <div class="item item-text-wrap">
                     <p>
-                        Thank you for your feedback.We will review the case and get back to you soon.
+                        Thank you for your feedback. It seems that there is a misunderstanding between two of you. We will review the case and get back to you soon.
                     </p>
                 </div>
                 <div class="item item-text-wrap">
@@ -384,92 +384,3 @@
         </ion-content>
     </div>
 </ion-view>
-<!--</div>-->
-<!--savior view-->
-<!--<div ng-if="task.savior.id == user.id">-->
-<!--<ion-view view-title="My task">-->
-<!--<ion-nav-buttons side="right">-->
-<!--<button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">-->
-<!--</button>-->
-<!--</ion-nav-buttons>-->
-<!--<div ng-if="task.savior.id == user.id">-->
-<!--<div class="bar bar-subheader"-->
-<!--ng-class="{'bar-balanced': task.status == 'completed',-->
-<!--'bar-calm': !!task.savior-->
-<!--}">-->
-<!--<h2 class="title" ng-if="task.status !== 'completed'">Helping {{task.bro.name}}</h2>-->
-
-<!--<h2 class="title" ng-if="task.status == 'completed'">Task completed! + 50 bro points</h2>-->
-<!--</div>-->
-<!--<ion-content class="animate-fade-slide-in has-subheader">-->
-
-<!--<ul class="progress-indicator progress-top">-->
-<!--<li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"-->
-<!--ng-click="setStage($index)">-->
-<!--<span class="bubble"></span><span class="fa fa-minus"></span>-->
-<!--{{stage}}-->
-<!--</li>-->
-<!--</ul>-->
-<!--<button ng-if="task.stage == stages.length" class="button button-full bar-balanced"-->
-<!--ng-click="completeTask()">-->
-<!--Task complete!-->
-<!--</button>-->
-
-<!--<div class="card">-->
-<!--<div class="item item-avatar item-divider">-->
-<!--<img src="{{task.bro.display_pic}}">-->
-
-<!--<h2>{{task.bro.name}}</h2>-->
-
-<!--<p am-time-ago="task.date"></p>-->
-<!--</div>-->
-<!--<div class="item item-text-wrap">-->
-<!--{{task.task}}-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="card" ng-if="task.hasPurchase">-->
-<!--<div class="item item-divider">-->
-<!--Purchase-->
-<!--</div>-->
-<!--<div class="row">-->
-<!--<div class="col">Budget:</div>-->
-<!--<div class="col">{{task.budget[0] | currency}}</div>-->
-<!--<div class="col">{{task.budget[1] | currency}}</div>-->
-<!--</div>-->
-<!--<form ng-submit="updatePrice()">-->
-<!--<label class="item item-input">-->
-<!--<span class="input-label">Actual price</span>-->
-<!--<input ng-model="task.price" type="number" placeholder="10">-->
-<!--</label>-->
-<!--<button class="button button-full button-energized" type="submit">-->
-<!--Update price-->
-<!--</button>-->
-<!--</form>-->
-<!--</div>-->
-<!--<div class="card">-->
-<!--<div class="item item-divider">-->
-<!--Updates-->
-<!--</div>-->
-<!--<div class="item item-text-wrap">-->
-<!--<ul class="list">-->
-<!--<li ng-repeat="message in task.messages track by $index">-->
-<!--{{message.user.name}} - {{message.message}}-->
-<!--</li>-->
-<!--<li ng-show="!task.messages.length">No messages</li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--<form ng-submit="addMessage(task)">-->
-<!--<label class="item item-input">-->
-<!--<input ng-model="task.message" type="text" placeholder="New message">-->
-<!--</label>-->
-<!--<button class="button button-block button-positive" type="submit">-->
-<!--Send message-->
-<!--</button>-->
-<!--</form>-->
-<!--<a ng-click="cancelTask()">Cancel task</a>-->
-<!--</div>-->
-<!--</ion-content>-->
-<!--</div>-->
-<!--</ion-view>-->
-<!--</div>-->
