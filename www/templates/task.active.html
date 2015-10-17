@@ -36,6 +36,11 @@
                     </fieldset>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <a class='warning center-block assertive' ng-click="report()">Report user</a>
+                </div>
+            </div>
             <button class="button button-full button-balanced"
                     ng-click="completeTask()">
                 Confirm completion
@@ -75,10 +80,14 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length && task.status !=='completed'"
+            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.bro.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
+            </button>
+            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.savior.confirmed && task.bro.confirmed"
+                    class="button button-clear button-full">
+                <i class="icon ion-loading-c"></i> Awaiting other party to confirm...
             </button>
             <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
                     ng-click="dismissTask()">
@@ -167,10 +176,20 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length && task.status !=='completed'"
+            <div class="row" ng-if="!task.stage">
+                <div class="col center-block balanced">
+                    Click the steps above to update progress
+                </div>
+            </div>
+
+            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.savior.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
+            </button>
+            <button ng-if="task.stage == stages.length && task.status !=='completed' && !task.bro.confirmed && task.savior.confirmed"
+                    class="button button-clear button-full">
+                <i class="icon ion-loading-c"></i> Awaiting other party to confirm...
             </button>
             <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
                     ng-click="dismissTask()">

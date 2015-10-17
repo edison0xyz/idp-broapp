@@ -1,32 +1,48 @@
 <ion-view view-title="Request for Help">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
-        <form ng-submit="addTask(newTask)">
+        <form name="taskForm" ng-submit="taskForm.$valid && addTask(newTask)" novalidate>
             <div class="list">
 
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Task</span>
-                    <textarea required ng-required="true" ng-model="newTask.task"
+                    <textarea required name='taskText' ng-required="true" ng-model="newTask.task"
                               placeholder="E.g. Can someone help me buy some flowers?"></textarea>
                 </label>
+                <div role="alert">
+                  <span class="center-block assertive" ng-show="taskForm.$submitted && taskForm.taskText.$error.required">
+                   Please enter the task</span>
+                </div>
                 <label class="item item-input item-stacked-label">
                     <span class="input-label">Reward</span>
-                    <input required ng-required="true" ng-model="newTask.reward" type="number" placeholder="E.g. $20.00">
+                    <input name="reward" required ng-required="true" ng-model="newTask.reward" type="number"
+                           placeholder="E.g. $20.00">
                 </label>
+                <div role="alert">
+                  <span class="center-block assertive" ng-show="taskForm.$submitted && taskForm.reward.$error.required">
+                   Please enter the reward amount</span>
+                </div>
                 <ion-toggle ng-model="newTask.hasPurchase" toggle-class="toggle-calm">Require Purchase?</ion-toggle>
                 <div ng-show="newTask.hasPurchase">
                     <div class="row">
                         <div class="col">
                             <label class="item item-input">
                                 <span class="input-label">Budget min</span>
-                                <input ng-required="newTask.hasPurchase" ng-model="newTask.budget[0]" type="number" placeholder="10">
+                                <input name="min_amount" ng-required="newTask.hasPurchase" ng-model="newTask.budget[0]" type="number"
+                                       placeholder="10">
                             </label>
                         </div>
                         <div class="col">
                             <label class="item item-input">
                                 <span class="input-label">max</span>
-                                <input ng-required="newTask.hasPurchase" ng-model="newTask.budget[1]" type="number" placeholder="50">
+                                <input name="max_amount" ng-required="newTask.hasPurchase" ng-model="newTask.budget[1]" type="number"
+                                       placeholder="50">
                             </label>
                         </div>
+                    </div>
+                    <div role="alert">
+                        <span class="center-block assertive"
+                              ng-show="taskForm.$submitted && (taskForm.max_amount.$error.required || taskForm.min_amount.$error.required)">
+                            Please key in your budget</span>
                     </div>
                 </div>
             </div>

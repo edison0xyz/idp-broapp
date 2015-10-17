@@ -359,6 +359,7 @@ angular.module('starter.controllers', [])
         ionicMaterialInk.displayEffect();
 
         $scope.addTask = function (task) {
+            //console.log('submit')
             task.bro = $rootScope.user;
             task.status = "open";
             task.date = new Date();
@@ -500,7 +501,8 @@ angular.module('starter.controllers', [])
         }
 
         $scope.completeTask = function(){
-            Tasks.complete($scope.task);
+            //Tasks.complete($scope.task);
+            Tasks.confirm($scope.task);
             $scope.modal.hide();
         }
         $scope.dismissTask = function(){

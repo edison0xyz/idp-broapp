@@ -16,7 +16,7 @@ angular.module('starter.services', ['firebase'])
             if (event.event == 'child_removed') {
                 console.log('removed', event.key);
                 if ((mine.task && mine.task.$id == event.key)) {
-                    if(mine.task.bro.id !== $rootScope.user.id)
+                    if (mine.task.bro.id !== $rootScope.user.id)
                         $rootScope.$broadcast('cancelled');
                     mine.task = null;
                 }
@@ -96,8 +96,15 @@ angular.module('starter.services', ['firebase'])
                     taskArr.$save(task);
                 }
             },
-            complete: function(task){
-                task.status = 'completed';
+            confirm: function (task) {
+                if(task.bro.id == $rootScope.user.id) {
+                    task.bro.confirmed = true;
+                }else{
+                    task.savior.confirmed = true;
+                }
+                if(task.savior.confirmed  && task.bro.confirmed ){
+                    task.status = 'completed';
+                }
                 taskArr.$save(task);
             },
             save: function (task) {

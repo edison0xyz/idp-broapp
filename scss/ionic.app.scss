@@ -26,6 +26,12 @@ $dark:                            #444 !default;
   margin-top: 15px;
 }
 
+.center-block{
+  display: block;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 fieldset, label { margin: 0; padding: 0; }
 body{ margin: 20px; }
