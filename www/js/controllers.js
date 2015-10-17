@@ -352,7 +352,7 @@ angular.module('starter.controllers', [])
 
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
-        $scope.currentTime = new Date();
+        $scope.currentTime = new Date().toISOString();
         var defaultTime = moment().add(2, 'hours').toDate();
         $scope.newTask = {
             duetime: defaultTime
