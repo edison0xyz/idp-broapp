@@ -15,52 +15,97 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-.item.side-menu-item{
+.item.side-menu-item {
   background-color: white;
   font-size: large;
   text-align: center;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", "Segoe UI", sans-serif;
 }
 
-.progress-indicator.progress-top{
+.progress-indicator.progress-top {
   margin-top: 15px;
 }
 
-.center-block{
+.center-block {
   display: block;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.text-center{
-  text-align: center;
-}
-.discussion{
-  .avatar{
+.item.task-brief {
+  min-height: 98px;
+  .avatar {
     border-radius: 50%;
     left: 16px;
     max-height: 30px;
     max-width: 30px;
   }
-  .chat{
+  .requester {
+
+  }
+  .helper {
+
+  }
+}
+
+.chip {
+  display: inline-block;
+  height: 32px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  background-color: #E4E4E4;
+}
+
+.chip img {
+  float: left;
+  margin: 0 8px 0 -12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.chip i.material-icons {
+  cursor: pointer;
+  float: right;
+  font-size: 16px;
+  line-height: 32px;
+  padding-left: 8px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.discussion {
+  .avatar {
+    border-radius: 50%;
+    left: 16px;
+    max-height: 30px;
+    max-width: 30px;
+  }
+  .chat {
     min-height: 40px;
     border-bottom: 1px solid #dddddd;
-    .chat-text{
+    .chat-text {
 
     }
   }
-  .me{
+  .me {
     text-align: right;
-    .avatar{
-      float:right;
+    .avatar {
+      float: right;
     }
   }
 
-  .you{
+  .you {
     text-align: left;
-    .avatar{
-      float:left;
+    .avatar {
+      float: left;
     }
   }
 }
@@ -148,10 +193,19 @@ $dark:                            #444 !default;
 //  margin: 1px 0 0 30px;
 //}
 
+fieldset, label {
+  margin: 0;
+  padding: 0;
+}
 
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
+body {
+  margin: 20px;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
 
 /****** Style Star Rating Widget *****/
 
@@ -160,7 +214,10 @@ h1 { font-size: 1.5em; margin: 10px; }
   float: left;
 }
 
-.rating > input { display: none; }
+.rating > input {
+  display: none;
+}
+
 .rating > label:before {
   margin: 5px;
   font-size: 1.25em;
@@ -183,12 +240,19 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+.rating:not(:checked) > label:hover ~ label {
+  color: #FFD700;
+}
+
+/* hover previous stars in list */
 
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+.rating > input:checked ~ label:hover ~ label {
+  color: #FFED85;
+}
+
 /* Copyright 2013-2015 etc Chris Tabor. Licensed under MIT. */
 
 // colors
@@ -220,6 +284,7 @@ $mobile-size: 400px;
     border-color: darken($color, $darken-amount);
   }
 }
+
 .flexer {
   display: -webkit-box;
   display: -moz-box;
@@ -227,21 +292,25 @@ $mobile-size: 400px;
   display: -webkit-flex;
   display: flex;
 }
+
 .no-flexer {
   display: block;
 }
+
 .no-flexer-element {
   -ms-flex: 0;
   -webkit-flex: 0;
   -moz-flex: 0;
   flex: 0;
 }
+
 .flexer-element {
   -ms-flex: 1;
   -webkit-flex: 1;
   -moz-flex: 1;
   flex: 1;
 }
+
 .progress-indicator {
   @extend .flexer;
   margin: 0;
@@ -357,7 +426,6 @@ $mobile-size: 400px;
     font-size: 60%;
   }
 }
-
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;

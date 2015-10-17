@@ -23,12 +23,17 @@ angular.module('starter.services', ['firebase'])
             }
             if (event.event == 'child_changed') {
                 console.log('changed', event.key);
-                //if ((mine.task && mine.task.$id == event.key)) {
+                if ((mine.task && mine.task.$id == event.key)) {
+                    // event when task requires approval
+                    var task = taskArr.$getRecord(event.key);
+                    if(task.price_approval != undefined && task.price_approval == 0 && task.bro.id == $rootScope.user.id){
+                        console.log('onPrice')
+                        $rootScope.$broadcast('onPrice');
+                    }
+
                 //    //mine.task = null;
-                //    var task = taskArr.$getRecord(event.key);
-                //    $rootScope.$broadcast('completed');
                 //    updateActive();
-                //}
+                }
             }
             if (event.event == "child_added") {
                 console.log('added', event.key);
@@ -85,6 +90,19 @@ angular.module('starter.services', ['firebase'])
                 activeTask.savior = $rootScope.user;
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
+            },
+            setPrice: function(price){
+                mine.task.price = price;
+                mine.task.price_approval = 0;
+                taskArr.$save(mine.task);
+            },
+            approvePrice: function(){
+                mine.task.price_approval = 1;
+                taskArr.$save(mine.task);
+            },
+            rejectPrice: function(){
+                mine.task.price_approval = -1;
+                taskArr.$save(mine.task);
             },
             report: function (task) {
                 mine.task.status = 'In review';

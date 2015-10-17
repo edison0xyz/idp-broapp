@@ -454,9 +454,32 @@ angular.module('starter.controllers', [])
             });
             alertPopup.then(function (res) {
                 //Tasks.cancel($scope.task);
-                $state.go('app.tasks.list');
+                //$state.go('app.tasks.list');
             });
         });
+
+        $scope.$on('onPrice', function () {
+            var approvalPopup = $ionicPopup.confirm({
+                title: 'Price approval',
+                template: 'Approve purchase price of $' + $scope.task.price + '?'
+            });
+            approvalPopup.then(function (res) {
+                if(res){
+                    Tasks.approvePrice();
+                }else{
+                    Tasks.rejectPrice();
+                }
+            });
+        });
+        $scope.approvePrice = function(){
+            Tasks.approvePrice();
+        }
+        $scope.rejectPrice = function(){
+            Tasks.rejectPrice();
+        }
+
+        $scope.approval_status = ['Rejected', 'Pending', 'Approved'];
+
         if ($scope.task && $scope.task.hasPurchase) {
             $scope.stages = [
                 "Task started",
@@ -540,6 +563,16 @@ angular.module('starter.controllers', [])
             $scope.completion_modal.hide();
             //Tasks.mine.task.status = "In review";
             Tasks.report();
+        }
+
+        $scope.updatePrice = function(price){
+            if($scope.task.budget[0] <= price && price <= $scope.task.budget[1]){
+                // auto approves
+                Tasks.approvePrice();
+            }else{
+                // send for approval
+                Tasks.setPrice(price);
+            }
         }
     })
 ;
