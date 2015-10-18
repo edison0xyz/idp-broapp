@@ -514,10 +514,14 @@ angular.module('starter.controllers', [])
             }
             Tasks.save($scope.task);
         }
-        $scope.addMessage = function (message) {
-            if (message != "") {
-                Tasks.addMessage($scope.task, {user: $rootScope.user, message: message});
-                message = "";
+        $scope.chat = {
+            message: null
+        };
+        $scope.addMessage = function (chatMessage) {
+            if (chatMessage != "") {
+                Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage});
+                $scope.chat.message= null;
+                chatMessage = null;
             }
         }
 
