@@ -119,12 +119,12 @@ h1 {
 .rating > label:before {
   margin: 5px;
   font-size: 1.25em;
-  font-family: FontAwesome;
+  font-family: Ionicons;
   display: inline-block;
-  content: "\f005"; }
+  content: "\f4b3"; }
 
 .rating > .half:before {
-  content: "\f089";
+  content: "\f4b1";
   position: absolute; }
 
 .rating > label {
