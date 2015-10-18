@@ -204,11 +204,11 @@ angular.module('starter.controllers', [])
     })
 
     .controller('ActivityCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
-        $scope.$parent.showHeader();
+        //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
+        $scope.isExpanded = false;
+        $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
 
         $timeout(function () {
@@ -276,7 +276,6 @@ angular.module('starter.controllers', [])
                 selector: '.animate-fade-slide-in .item'
             });
         }, 200);
-
         // Activate ink for controller
         ionicMaterialInk.displayEffect();
         $scope.activeTask = Tasks.mine;
@@ -360,6 +359,9 @@ angular.module('starter.controllers', [])
 
         $scope.addTask = function (task) {
             //console.log('submit')
+
+
+            task.duetime = task.duetime.valueOf();
             task.bro = $rootScope.user;
             task.status = "open";
             task.date = new Date();
@@ -578,5 +580,61 @@ angular.module('starter.controllers', [])
                 Tasks.setPrice(price);
             }
         }
-    })
+    }).directive('momentCountdown', function (
+        $window,
+        $timeout
+    ) {
+        var dateTypes = [
+            'year',
+            'month',
+            'day',
+            'hour',
+            'minute',
+            'second',
+            'millisecond'
+        ];
+
+        function getDuration (time) {
+            var diff = $window.moment(time).diff();
+
+            return $window.moment.duration(diff);
+        }
+
+        function getDurationObject (time) {
+            var duration = getDuration(time);
+            var durationObject = {};
+
+            angular.forEach(dateTypes, function (type) {
+                var typeVal = duration[type + 's']();
+                if (typeVal) {
+                    durationObject[type] = typeVal;
+                }
+            });
+
+            return durationObject;
+        }
+
+        return {
+            restrict: 'EA',
+            controller: function ($scope, $element, $attrs) {
+                var self = this;
+                var interval = $attrs.momentInterval || 1000;
+
+                $attrs.$observe('moment', function (time) {
+                    self.countdown = getDurationObject(time);
+
+                    function countdown () {
+                        $timeout(function () {
+                            self.countdown = getDurationObject(time);
+
+                            countdown();
+                        }, interval);
+                    }
+
+                    countdown();
+                });
+            },
+            controllerAs: 'moment'
+        };
+    });
 ;

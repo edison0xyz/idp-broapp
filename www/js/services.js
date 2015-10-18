@@ -248,6 +248,21 @@ angular.module('starter.services', ['firebase'])
                 rank: 'Big Bro',
                 display_pic: 'img/chan.png',
                 map: 'img/map-Joshua.jpg'
+            },
+            {
+                id: 4,
+                name: 'Edison',
+                points: 880,
+                nextLevel: 900,
+                rank: 'Big Bro',
+                display_pic: 'img/edison.jpg'
+            },{
+                id: 5,
+                name: 'Zac',
+                points: 880,
+                nextLevel: 1100,
+                rank: 'Epic Bro',
+                display_pic: 'img/zac.jpg'
             }
         ];
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
@@ -261,7 +276,7 @@ angular.module('starter.services', ['firebase'])
                 budget: [10, 20],
                 date: moment().subtract(5, 'minutes').valueOf(),
                 reward: 10,
-                status: 'open',
+                status: 'completed',
                 savior: null,
                 distance: 2,
                 messages: []
@@ -273,7 +288,7 @@ angular.module('starter.services', ['firebase'])
                 budget: [40, 60],
                 reward: 25,
                 // open, active, completed
-                status: 'open',
+                status: 'completed',
                 savior: null,
                 distance: 8,
                 date: moment().subtract(2, 'minutes').valueOf(),
@@ -302,6 +317,20 @@ angular.module('starter.services', ['firebase'])
                 status: 'completed',
                 savior: bros[2],
                 distance: 4,
+                date: moment().valueOf(),
+                messages: []
+            },
+            {
+                id: 5,
+                bro: bros[3],
+                task: "I need a wingman tonight!",
+                hasPurchase: true,
+                budget: [50, 70],
+                reward: 30,
+                // open, active, completed
+                status: 'open',
+                savior: null,
+                distance: 7,
                 date: moment().valueOf(),
                 messages: []
             }

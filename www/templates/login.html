@@ -18,8 +18,8 @@
             <button ng-click="loginAs(bro)" class="button button-block button-positive" ng-repeat="bro in bros">
                 {{bro.name}}
             </button>
-
-            <button class="button button-small button-assertive" ng-click="reset()">Reset DB</button>
+            <input class="reset-pass" ng-model="resetPass" type="text" placeholder=""/>
+            <button ng-if="resetPass=='g1t6'" class="button button-small button-assertive" ng-click="reset()">Reset DB</button>
         </div>
 
     </ion-content>

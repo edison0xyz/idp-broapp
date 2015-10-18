@@ -21,6 +21,9 @@ $dark:                            #444 !default;
   text-align: center;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", "Segoe UI", sans-serif; }
 
+.reset-pass {
+  background-color: transparent; }
+
 .progress-indicator.progress-top {
   margin-top: 15px; }
 
@@ -65,6 +68,17 @@ $dark:                            #444 !default;
 
 .text-center {
   text-align: center; }
+
+.bro-header {
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+  margin: 0 12px; }
+
+.bro-subheader {
+  font-size: 15px;
+  font-weight: 400;
+  color: #606fc7 !important;
+  font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+  margin: 0 5px; }
 
 .discussion .avatar {
   border-radius: 50%;

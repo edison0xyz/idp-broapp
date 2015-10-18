@@ -1,4 +1,4 @@
-<ion-view view-title="Browse requests" ng-if="!activeTask.task">
+<ion-view view-title="Bro Help" ng-if="!activeTask.task">
     <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in">
         <div class="row" ng-if="tasks.length == 0">
             <div class="col col-center">
@@ -8,44 +8,55 @@
                 </div>
             </div>
         </div>
+        <div class="row" ng-if="tasks.length !== 0">
+            <div class="col">
+                <h4 class="bro-header positive">{{tasks.length}} Open {{tasks.length==1?'Request':'Requests'}}</h4>
+            </div>
+        </div>
         <div class="item card-item" ng-repeat="task in tasks | orderBy: '-date'">
-            <div ng-if="task.bro.id != user.id" ui-sref="app.tasks.detail({id: task.$id})" class="card stable-bg ink ink-dark">
+            <div ng-if="task.bro.id != user.id" ui-sref="app.tasks.detail({id: task.$id})"
+                 class="card stable-bg ink ink-dark">
                 <div class="item item-text-wrap">
-                  <div class="row">
-                      <div class="col">
-                        <h2>{{task.task}}</h2>
-                    </div>
-                  </div>
                     <div class="row">
-                      <div class="col">
-                        <i class="icon ion-clock"></i> <span am-time-ago="task.date"></span>
-                      </div>
-
-                      <div class="col text-right">
-                        <i class="icon ion-ios-location assertive"></i> {{task.reward}} km away<br>
-                        <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
-                      </div>
+                        <div class="col">
+                            <h2>{{task.task}}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <i class="icon ion-clock"></i> <span am-time-ago="task.date"></span>
+                        </div>
+                        <!--<div class="col">-->
+                            <!--<i class="icon ion-android-calendar"></i>-->
+                            <!--<span moment-countdown moment="task.duetime"></span>-->
+                        <!--</div>-->
+                        <div class="col text-right">
+                            <i class="icon ion-ios-location assertive"></i> {{task.distance}} km away<br>
+                            <i class="icon ion-cash assertive"></i> {{task.reward | currency}}
+                        </div>
                     </div>
 
 
                     <div class="card-footer text-left">
-                      <div class="row">
-                        <div class="col col-10 ">
-                          <span class="avatar history-displayPic" style="background-image: url({{task.bro.display_pic}});"></span>
+                        <div class="row">
+                            <div class="col col-10 ">
+                                <span class="avatar history-displayPic"
+                                      style="background-image: url({{task.bro.display_pic}});"></span>
+                            </div>
+                            <div class="col col-30">
+                                <strong>{{task.bro.name}}</strong>
+                            </div>
+                            <div class="col text-right">
+                                <button ui-sref="app.tasks.detail({id: task.$id})" style="padding: 5px;"
+                                        class="button-flat button-small button-assertive">
+                                    View More
+                                </button>
+                            </div>
                         </div>
-                        <div class="col col-30">
-                          <strong>{{task.bro.name}}</strong>
-                        </div>
-                        <div class="col text-right">
-                          <button ui-sref="app.tasks.detail({id: task.$id})" style="padding: 5px;" class="button-flat button-small button-assertive">
-                              View More
-                          </button>
-                        </div>
-                      </div>
-                    </div>
                     </div>
                 </div>
-              </div>
+            </div>
+        </div>
     </ion-content>
     <div class="bar bar-footer bar-assertive has-tabs" ui-sref="app.tasks.new">
         <div class="title">Call for Help!</div>
@@ -62,7 +73,9 @@
                 <div class="card-footer">
                     <div class="row">
                         <!-- Display Pic  -->
-                        <div class="col col-25"><span class="avatar" style="background-image: url({{activeTask.task.bro.display_pic}});"></span></div>
+                        <div class="col col-25"><span class="avatar"
+                                                      style="background-image: url({{activeTask.task.bro.display_pic}});"></span>
+                        </div>
                         <div class="col" ng-if="activeTask.task.savior">
                             <!-- Bro details -->
                             <strong>Savior Details:</strong><br>
