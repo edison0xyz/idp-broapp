@@ -518,9 +518,9 @@ angular.module('starter.controllers', [])
             message: null
         };
         $scope.addMessage = function (chatMessage) {
-            if (chatMessage != "") {
+            if (chatMessage && chatMessage != "") {
                 Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage});
-                $scope.chat.message= null;
+                $scope.chat.message = null;
                 chatMessage = null;
             }
         }
@@ -583,14 +583,13 @@ angular.module('starter.controllers', [])
         }
 
         $scope.updatePrice = function (price) {
-            if (price != $scope.task.price) {
-                if ($scope.task.budget[0] <= price && price <= $scope.task.budget[1]) {
-                    // auto approves
-                    Tasks.approvePrice();
-                } else {
-                    // send for approval
-                    Tasks.setPrice(price);
-                }
+            console.log(price);
+            if ($scope.task.budget[0] <= price && price <= $scope.task.budget[1]) {
+                // auto approves
+                Tasks.approvePrice();
+            } else {
+                // send for approval
+                Tasks.setPrice(price);
             }
         }
     }).directive('momentCountdown', function ($window,
