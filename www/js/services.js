@@ -225,7 +225,7 @@ angular.module('starter.services', ['firebase'])
         var bros = [
             {
                 id: 1,
-                name: 'Jia Jing',
+                name: 'Larry',
                 points: 100,
                 nextLevel: 120,
                 rank: 'Noob Bro',
@@ -234,8 +234,8 @@ angular.module('starter.services', ['firebase'])
             {
                 id: 2,
                 name: 'Sebastian',
-                points: 240,
-                nextLevel: 320,
+                points: 4557,
+                nextLevel: 5000,
                 rank: 'Super Bro',
                 display_pic: 'img/derrick.png',
                 map: 'img/map-Sebastian.jpg'
@@ -259,8 +259,8 @@ angular.module('starter.services', ['firebase'])
             },{
                 id: 5,
                 name: 'Zac',
-                points: 880,
-                nextLevel: 1100,
+                points: 7880,
+                nextLevel: 8100,
                 rank: 'Epic Bro',
                 display_pic: 'img/zac.jpg'
             }
