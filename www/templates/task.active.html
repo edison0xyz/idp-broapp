@@ -190,9 +190,9 @@
                         <li ng-show="!task.messages.length">No messages</li>
                     </ul>
                 </div>
-                <form ng-submit="addMessage(task)">
+                <form ng-submit="addMessage(newmessage)">
                     <label class="item item-input">
-                        <input ng-model="task.message" type="text" placeholder="New message">
+                        <input ng-model="newmessage" type="text" placeholder="New message">
                     </label>
                     <button class="button button-block button-positive" type="submit">
                         Send message
@@ -324,9 +324,9 @@
                         <li ng-show="!task.messages.length">No messages</li>
                     </ul>
                 </div>
-                <form ng-submit="addMessage(task)">
+                <form ng-submit="addMessage(newmessage)">
                     <label class="item item-input">
-                        <input ng-model="task.message" type="text" placeholder="New message">
+                        <input ng-model="newmessage" type="text" placeholder="New message">
                     </label>
                     <button class="button button-block button-positive" type="submit">
                         Send message
