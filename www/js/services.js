@@ -328,8 +328,8 @@ angular.module('starter.services', ['firebase'])
                 budget: [50, 70],
                 reward: 30,
                 // open, active, completed
-                status: 'open',
-                savior: null,
+                status: 'active',
+                savior: bros[4],
                 distance: 7,
                 date: moment().valueOf(),
                 messages: []
