@@ -348,11 +348,12 @@
                     <div class="col">{{task.budget[1] | currency}}</div>
                 </div>
 
-                <form ng-submit="updatePrice(task.price)">
+                <form novalidate ng-submit="updatePrice(task.price)">
                     <div class="row">
                         <div class="col"><label class="item item-input" style="margin-left:-10px;">
                             <span class="input-label">Actual price</span>
-                            <input ng-model="task.price" type="number" placeholder="10">
+                            <input min="0" ng-model="task.price" type="number" placeholder="10">
+
                         </label></div>
                         <div class="col">
                             <button class="button button-small button-energized" style="margin-right:5px;"

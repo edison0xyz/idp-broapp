@@ -577,6 +577,7 @@ angular.module('starter.controllers', [])
         }
 
         $scope.updatePrice = function(price){
+            console.log(price);
             if($scope.task.budget[0] <= price && price <= $scope.task.budget[1]){
                 // auto approves
                 Tasks.approvePrice();
