@@ -354,7 +354,8 @@ angular.module('starter.controllers', [])
         $scope.currentTime = new Date().toISOString();
         var defaultTime = moment().add(2, 'hours').toDate();
         $scope.newTask = {
-            duetime: defaultTime
+            duetime: defaultTime,
+            distance: (Math.random() * 10).toFixed(2)
         }
 
         $scope.addTask = function (task) {
