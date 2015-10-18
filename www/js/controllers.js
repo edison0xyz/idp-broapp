@@ -263,7 +263,7 @@ angular.module('starter.controllers', [])
     //    // Set Ink
     //    ionicMaterialInk.displayEffect();
     //})
-    .controller('BroHelpCtrl', function ($scope, $state, $ionicHistory, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    .controller('BroHelpCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -296,12 +296,14 @@ angular.module('starter.controllers', [])
 
         console.log('brohelpctrl');
     })
-    .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $ionicNavBarDelegate
+        ,ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
+        $ionicNavBarDelegate.showBackButton(true);
 
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
@@ -335,13 +337,15 @@ angular.module('starter.controllers', [])
             $state.go('app.tasks.active');
         }
     })
-    .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk,
+    .controller('NewTaskCtrl', function ($scope, $stateParams, $timeout, $ionicNavBarDelegate,
+                                         ionicMaterialMotion, ionicMaterialInk,
                                          Bros, $rootScope, Tasks, $ionicPopup, $state) {
         //$scope.$parent.showHeader();
         //$scope.$parent.clearFabs();
         $scope.isExpanded = false;
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
+        $ionicNavBarDelegate.showBackButton(true);
 
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({

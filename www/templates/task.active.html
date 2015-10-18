@@ -297,11 +297,17 @@
                     <img src="{{task.bro.display_pic}}">
 
                     <h2>{{task.bro.name}}</h2>
-
-                    <p am-time-ago="task.date"></p>
+                    <span>{{task.distance}} km away</span>
+                    <span am-time-ago="task.date"></span>
                 </div>
                 <div class="item item-text-wrap">
                     {{task.task}}
+                </div>
+                <div class="item item-text-wrap">
+                    <div class="row">
+                        <div class="col">Reward: {{task.reward | currency}}</div>
+                        <div class="col"></div>
+                    </div>
                 </div>
             </div>
 
