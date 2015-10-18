@@ -146,7 +146,7 @@ angular.module('starter.controllers', [])
     //    ionicMaterialInk.displayEffect();
     //})
 
-    .controller('HistoryCtrl', function ($scope,$ionicTabsDelegate,$stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, Tasks) {
+    .controller('HistoryCtrl', function ($scope, $ionicTabsDelegate, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion, Tasks) {
         // Set Header
         $scope.$parent.showHeader();
         $scope.$parent.clearFabs();
@@ -171,7 +171,7 @@ angular.module('starter.controllers', [])
         $scope.activeTask = Tasks.mine;
         console.log($scope.activeTask);
 
-        $scope.gotoActive = function(){
+        $scope.gotoActive = function () {
             $ionicTabsDelegate.select(1);
         }
 
@@ -297,7 +297,7 @@ angular.module('starter.controllers', [])
         console.log('brohelpctrl');
     })
     .controller('TaskCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $ionicNavBarDelegate
-        ,ionicMaterialMotion, ionicMaterialInk, Tasks) {
+        , ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.clearFabs();
         $scope.isExpanded = false;
@@ -379,7 +379,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($state,$ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state, $ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -402,7 +402,7 @@ angular.module('starter.controllers', [])
             }, 1000);
         };
 
-        $scope.openPopover = function() {
+        $scope.openPopover = function () {
 
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
@@ -412,19 +412,19 @@ angular.module('starter.controllers', [])
                 destructiveText: 'Cancel task',
                 //titleText: 'Modify your album',
                 cancelText: 'back',
-                cancel: function() {
+                cancel: function () {
                     // add cancel code..
                 },
-                buttonClicked: function(index) {
+                buttonClicked: function (index) {
                     return true;
                 },
-                destructiveButtonClicked: function(){
+                destructiveButtonClicked: function () {
                     $scope.cancelTask();
                 }
             });
 
             // For example's sake, hide the sheet after two seconds
-            $timeout(function() {
+            $timeout(function () {
                 hideSheet();
             }, 2000);
 
@@ -473,17 +473,17 @@ angular.module('starter.controllers', [])
                 okText: "Yes"
             });
             approvalPopup.then(function (res) {
-                if(res){
+                if (res) {
                     Tasks.approvePrice();
-                }else{
+                } else {
                     Tasks.rejectPrice();
                 }
             });
         });
-        $scope.approvePrice = function(){
+        $scope.approvePrice = function () {
             Tasks.approvePrice();
         }
-        $scope.rejectPrice = function(){
+        $scope.rejectPrice = function () {
             Tasks.rejectPrice();
         }
 
@@ -515,8 +515,10 @@ angular.module('starter.controllers', [])
             Tasks.save($scope.task);
         }
         $scope.addMessage = function (task) {
-            Tasks.addMessage($scope.task, {user: $rootScope.user, message: task.message});
-            task.message = "";
+            if (task.message && task.message != "") {
+                Tasks.addMessage($scope.task, {user: $rootScope.user, message: task.message});
+                task.message = "";
+            }
         }
 
         $scope.cancelTask = function () {
@@ -534,41 +536,41 @@ angular.module('starter.controllers', [])
             });
         }
 
-        $scope.completeTask = function(){
+        $scope.completeTask = function () {
             //Tasks.complete($scope.task);
             Tasks.confirm($scope.task);
             $scope.completion_modal.hide();
         }
-        $scope.dismissTask = function(){
+        $scope.dismissTask = function () {
             Tasks.mine.task = null;
             $state.go('app.tasks.list');
         }
         $ionicModal.fromTemplateUrl('report-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.report_modal = modal;
         });
         $ionicModal.fromTemplateUrl('completion-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
-        }).then(function(modal) {
+        }).then(function (modal) {
             $scope.completion_modal = modal;
         });
-        $scope.closeModal = function() {
+        $scope.closeModal = function () {
             $scope.completion_modal.hide();
         };
-        $scope.openModal = function() {
+        $scope.openModal = function () {
             $scope.completion_modal.show();
         };
 
-        $scope.reportUser = function(){
+        $scope.reportUser = function () {
             $scope.report_modal.show();
         }
-        $scope.closeReportModal = function() {
+        $scope.closeReportModal = function () {
             $scope.report_modal.hide();
         };
-        $scope.submitReport = function(report){
+        $scope.submitReport = function (report) {
             console.log('reporting');
             $scope.report_modal.hide();
             $scope.completion_modal.hide();
@@ -576,20 +578,19 @@ angular.module('starter.controllers', [])
             Tasks.report();
         }
 
-        $scope.updatePrice = function(price){
-            console.log(price);
-            if($scope.task.budget[0] <= price && price <= $scope.task.budget[1]){
-                // auto approves
-                Tasks.approvePrice();
-            }else{
-                // send for approval
-                Tasks.setPrice(price);
+        $scope.updatePrice = function (price) {
+            if (price != $scope.task.price) {
+                if ($scope.task.budget[0] <= price && price <= $scope.task.budget[1]) {
+                    // auto approves
+                    Tasks.approvePrice();
+                } else {
+                    // send for approval
+                    Tasks.setPrice(price);
+                }
             }
         }
-    }).directive('momentCountdown', function (
-        $window,
-        $timeout
-    ) {
+    }).directive('momentCountdown', function ($window,
+                                              $timeout) {
         var dateTypes = [
             'year',
             'month',
@@ -600,13 +601,13 @@ angular.module('starter.controllers', [])
             'millisecond'
         ];
 
-        function getDuration (time) {
+        function getDuration(time) {
             var diff = $window.moment(time).diff();
 
             return $window.moment.duration(diff);
         }
 
-        function getDurationObject (time) {
+        function getDurationObject(time) {
             var duration = getDuration(time);
             var durationObject = {};
 
@@ -629,7 +630,7 @@ angular.module('starter.controllers', [])
                 $attrs.$observe('moment', function (time) {
                     self.countdown = getDurationObject(time);
 
-                    function countdown () {
+                    function countdown() {
                         $timeout(function () {
                             self.countdown = getDurationObject(time);
 
