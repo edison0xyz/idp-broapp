@@ -139,6 +139,16 @@ angular.module('starter',
                     }
                 }
             })
+
+            .state('app.leaderboard', {
+                url: '/leaderboard',
+                views: {
+                    'leaderboardContent': {
+                        templateUrl: 'templates/leaderboard.html',
+                        controller: 'ProfileCtrl'
+                    }
+                }
+            })
             //.state('app.main', {
             //    url: '/main',
             //    views: {

@@ -11,6 +11,11 @@
     <!--</ion-tab>-->
 
     <!-- Chats Tab -->
+    <ion-tab title="Leaderboard" icon-off="ion-trophy" icon-on="ion-trophy" ui-sref="app.leaderboard">
+        <ion-nav-view name="leaderboardContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
+    </ion-tab>
+
+    <!-- Chats Tab -->
     <ion-tab title="Brommunity" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" ui-sref="app.brommunity">
         <ion-nav-view name="brommunityContent" ng-class="{expanded: isExpanded}"></ion-nav-view>
     </ion-tab>
