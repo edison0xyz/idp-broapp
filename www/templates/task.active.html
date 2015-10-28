@@ -80,10 +80,10 @@
     </ion-modal-view>
 </script>
 <ion-view view-title="{{task.bro.id == user.id ? 'Current request': 'Current Task'}}">
-    <ion-nav-buttons side="right">
+    <!-- <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">
         </button>
-    </ion-nav-buttons>
+    </ion-nav-buttons> -->
     <!--requester view-->
     <div ng-if="task.bro.id == user.id">
         <div class="bar bar-subheader"
@@ -145,22 +145,7 @@
             </div>
 
             <div class="card">
-                <!--<div class="item item-divider task-brief">-->
-                <!--<div class="row">-->
-                <!--<div class="col requester">-->
-                <!--<div class="chip">-->
-                <!--<img src="{{task.bro.display_pic}}" alt=""/>-->
-                <!--{{task.bro.name}}-->
-                <!--</div>-->
-                <!--<p am-time-ago="task.date"></p></div>-->
-                <!--<div class="col helper" ng-if="task.savior">-->
-                <!--<div class="chip">-->
-                <!--<img src="{{task.bro.display_pic}}" alt=""/>-->
-                <!--{{task.bro.name}}-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
+
                 <div class="item item-avatar item-divider">
                     <img src="{{task.bro.display_pic}}">
 
@@ -228,7 +213,14 @@
                         Approved price: {{task.price|currency}}
                     </div>
                 </div>
+                
             </div>
+            <div class="row" style="padding-bottom:50px;">
+                <div class="button-bar">
+                    <a class="button button-assertive" ng-click="cancelTask()">Cancel Task</a>
+                </div>
+            </div>
+
         </ion-content>
     </div>
     <!--savior view-->
@@ -367,6 +359,12 @@
                     <div class="col">
                     Approved price: {{task.price|currency}}
                     </div>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom:50px;">
+                <div class="button-bar">
+                    <a class="button button-assertive" ng-click="cancelTask()">Cancel Task</a>
                 </div>
             </div>
             <!--<div class="card" ng-if="task.hasPurchase">-->
