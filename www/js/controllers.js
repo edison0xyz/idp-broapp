@@ -475,7 +475,6 @@ angular.module('starter.controllers', [])
         } else {
             $scope.task = Tasks.mine.task;
             var title = $scope.task.bro.id == $rootScope.user.id ? 'My request' : 'My Task';
-            console.log(title)
             $ionicNavBarDelegate.title(title);
         }
         // Activate ink for controller
