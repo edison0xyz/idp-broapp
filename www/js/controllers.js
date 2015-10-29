@@ -446,7 +446,10 @@ angular.module('starter.controllers', [])
         $scope.read = 0;
 
          $scope.toggleChatView = function() { 
-            $scope.read = $scope.task.messages.length;
+            if($scope.task.messages) { 
+                $scope.read = $scope.task.messages.length;
+            }
+            // $scope.read = $scope.task.messages.length;
             $scope.detail = false ; 
             console.log('chat view logged') ; 
             $timeout(function () {
