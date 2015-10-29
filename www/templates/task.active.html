@@ -297,7 +297,12 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="button-bar">
+                <a class="button" ng-class="{'active': detail}" ng-click="toggleDetailView()">Detail</a>
+                <a class="button" ng-class="{'active': !detail}" ng-click="toggleChatView()"><span>{{task.messages.length - read}}</span> Chat</a>
+            </div>
+
+            <div ng-if="detail" class="card">
                 <div class="item item-avatar item-divider">
                     <img src="{{task.bro.display_pic}}">
 
@@ -317,7 +322,7 @@
             </div>
 
 
-            <div class="card">
+            <div ng-if="!detail" class="card">
                 <div class="item item-divider">
                     Chat
                 </div>
@@ -338,7 +343,7 @@
                     </button>
                 </form>
             </div>
-            <div class="card" ng-if="task.hasPurchase">
+            <div class="card" ng-if="task.hasPurchase && detail">
                 <div class="item item-divider">
                     <div class="bar" ng-class="{'bar-balanced': task.price_approval == 1}">
                         <div class="center-block">
