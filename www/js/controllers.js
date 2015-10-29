@@ -387,6 +387,7 @@ angular.module('starter.controllers', [])
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
         $ionicNavBarDelegate.showBackButton(false);
+
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
@@ -429,6 +430,31 @@ angular.module('starter.controllers', [])
             }, 2000);
 
         };
+
+        $scope.toggleDetailView = function() { 
+
+            $scope.detail = true ; 
+            console.log('detail view logged') ; 
+            $timeout(function () {
+            ionicMaterialMotion.fadeSlideIn({
+                selector: '.animate-fade-slide-in .item'
+            });
+        }, 100);
+        }
+        $scope.toggleDetailView() ; 
+
+        $scope.read = 0;
+
+         $scope.toggleChatView = function() { 
+            $scope.read = $scope.task.messages.length;
+            $scope.detail = false ; 
+            console.log('chat view logged') ; 
+            $timeout(function () {
+            ionicMaterialMotion.fadeSlideIn({
+                selector: '.animate-fade-slide-in .item'
+            });
+        }, 100);
+        }
 
         //$ionicPopover.fromTemplateUrl('task_options.html', {
         //    scope: $scope

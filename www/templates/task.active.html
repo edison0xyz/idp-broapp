@@ -145,11 +145,11 @@
             </div>
 
             <div class="button-bar">
-                <a class="button active" ng-click="detail=false">Detail</a>
-                <a class="button" ng-click="detail=true">Chat</a>
+                <a class="button" ng-class="{'active': detail}" ng-click="toggleDetailView()">Detail</a>
+                <a class="button" ng-class="{'active': !detail}" ng-click="toggleChatView()"><span>{{task.messages.length - read}}</span> Chat</a>
             </div>
 
-            <div ng-if="!detail">
+            <div ng-if="detail">
                 <div class="card">
 
                 <div class="item item-avatar item-divider">
@@ -166,7 +166,7 @@
             </div>
             </div>
 
-            <div ng-if="detail">
+            <div ng-if="!detail">
                 <div class="card">
                     <div class="item item-divider">
                         Chat
@@ -198,7 +198,7 @@
             
             
 
-            <div class="card" ng-if="task.hasPurchase">
+            <div class="card" ng-if="task.hasPurchase && detail">
                 <div class="item item-divider">
                     <div class="bar bar-stable">
                         <div class="center-block">
