@@ -144,7 +144,13 @@
                 </div>
             </div>
 
-            <div class="card">
+            <div class="button-bar">
+                <a class="button active" ng-click="detail=false">Detail</a>
+                <a class="button" ng-click="detail=true">Chat</a>
+            </div>
+
+            <div ng-if="!detail">
+                <div class="card">
 
                 <div class="item item-avatar item-divider">
                     <img src="{{task.bro.display_pic}}">
@@ -158,32 +164,39 @@
                     {{task.task}}
                 </div>
             </div>
-            <div class="card">
-                <div class="item item-divider">
-                    Chat
-                </div>
-                <div class="item item-text-wrap">
-                    <ul class="list discussion">
-                        <li ng-repeat="message in task.messages track by $index">{{message.user.name}} -
-                            {{message.message}}
-                        </li>
-                        <!--<li class="chat" ng-class="{'me': message.user.id==user.id, 'you': message.user.id!==user.id}"-->
-                        <!--ng-repeat="message in task.messages track by $index">-->
-                        <!--<img class='avatar' src="{{message.user.display_pic}}"/>-->
-                        <!--<span class="chat-text">{{message.message}} </span>-->
-                        <!--</li>-->
-                        <li ng-show="!task.messages.length">No messages</li>
-                    </ul>
-                </div>
-                <form ng-submit="addMessage(chat.message)">
-                    <label class="item item-input">
-                        <input ng-model="chat.message" type="text" placeholder="New message">
-                    </label>
-                    <button class="button button-block button-positive" type="submit">
-                        Send message
-                    </button>
-                </form>
             </div>
+
+            <div ng-if="detail">
+                <div class="card">
+                    <div class="item item-divider">
+                        Chat
+                    </div>
+                    <div class="item item-text-wrap">
+                        <ul class="list discussion">
+                            <li ng-repeat="message in task.messages track by $index">{{message.user.name}} -
+                                {{message.message}}
+                            </li>
+                            <!--<li class="chat" ng-class="{'me': message.user.id==user.id, 'you': message.user.id!==user.id}"-->
+                            <!--ng-repeat="message in task.messages track by $index">-->
+                            <!--<img class='avatar' src="{{message.user.display_pic}}"/>-->
+                            <!--<span class="chat-text">{{message.message}} </span>-->
+                            <!--</li>-->
+                            <li ng-show="!task.messages.length">No messages</li>
+                        </ul>
+                    </div>
+                    <form ng-submit="addMessage(chat.message)">
+                        <label class="item item-input">
+                            <input ng-model="chat.message" type="text" placeholder="New message">
+                        </label>
+                        <button class="button button-block button-positive" type="submit">
+                            Send message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+            
+            
 
             <div class="card" ng-if="task.hasPurchase">
                 <div class="item item-divider">
