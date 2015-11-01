@@ -538,10 +538,10 @@ angular.module('starter.controllers', [])
                 subTitle: 'You will be arriving in',
                 scope: $scope,
                 buttons: [
-                    { text: 'Back'},
+                    { text: 'Back', type: 'no-padding'},
                     {
                         text: '<b>Update</b>',
-                        type: 'button-positive',
+                        type: 'button-positive no-padding',
                         onTap: function(e) {
                             if (!$scope.data.hours && ! $scope.data.minutes) {
                                 //don't allow the user to close unless he enters wifi password
@@ -555,10 +555,21 @@ angular.module('starter.controllers', [])
             });
             myPopup.then(function(res) {
                 console.log(res);
-                $scope.updateTime(res);
+                if(res)
+                    $scope.updateMessageTime(res);
+                //$scope.updateTime(res);
             });
         }
-
+        $scope.updateMessageTime = function(time){
+            var formatted = "";
+            if(time==0){
+                formatted = "I've arrived";
+            }else{
+                formatted = "Arriving in " + time +" mins";
+            }
+            $scope.addMessage(formatted);
+            $scope.updateTime(time);
+        }
         $scope.updateTime = function(time){
             if(time == 0)
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
