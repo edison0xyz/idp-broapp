@@ -79,6 +79,14 @@
         </ion-content>
     </ion-modal-view>
 </script>
+<script id="timepicker.html" type="text/ng-template">
+    <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+            <input type="number" placeholder="hh" ng-model="data.hours">:<input type="number" placeholder="mm"
+                                                                                ng-model="data.minutes">
+        </label>
+    </div>
+</script>
 <ion-view view-title="{{task.bro.id == user.id ? 'Current request': 'Current Task'}}">
     <!-- <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">
@@ -101,9 +109,16 @@
 
             <h2 class="title" ng-if="task.status === 'completed'">Task completed! + 50 bro points</h2>
 
-            <h2 class="title" ng-if="task.savior && task.status === 'active'">{{task.savior.name}} is on his
+            <h2 class="title" ng-if="task.savior && task.status === 'active' && !task.eta">{{task.savior.name}} is on
+                his
                 way!</h2>
 
+            <h2 class="title" ng-if="task.savior && task.status === 'active' && task.eta">
+                {{task.savior.name}} arriving in ~
+                <timer end-time="task.eta" class="countdown">
+                    <span ng-show="hours">{{hours}}h</span><span ng-show="minutes"> {{minutes}}m</span><span
+                        ng-show="seconds"> {{seconds}}s</span></timer>
+            </h2>
         </div>
         <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
             <ul class="progress-indicator progress-top">
@@ -147,25 +162,26 @@
             </div>
 
             <div class="button-bar">
-                <a class="button" ng-class="{'active': detail}" ng-click="toggleDetailView()">Detail</a>
-                <a class="button" ng-class="{'active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>) </a>
+                <a class="button" ng-class="{'positive active': detail}" ng-click="toggleDetailView()">Detail</a>
+                <a class="button" ng-class="{'positive active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
+                </a>
             </div>
 
             <div ng-if="detail">
                 <div class="card">
 
-                <div class="item item-avatar item-divider">
-                    <img src="{{task.bro.display_pic}}">
+                    <div class="item item-avatar item-divider">
+                        <img src="{{task.bro.display_pic}}">
 
-                    <h2>{{task.bro.name}}</h2>
+                        <h2>{{task.bro.name}}</h2>
 
-                    <p am-time-ago="task.date"></p>
+                        <p am-time-ago="task.date"></p>
+                    </div>
+
+                    <div class="item item-text-wrap">
+                        {{task.task}}
+                    </div>
                 </div>
-
-                <div class="item item-text-wrap">
-                    {{task.task}}
-                </div>
-            </div>
             </div>
 
             <div ng-if="!detail">
@@ -197,39 +213,38 @@
                 </div>
 
             </div>
-            
-            
 
-     <!--        <div class="card" ng-if="task.hasPurchase && detail">
-                <div class="item item-divider">
-                    <div class="bar bar-stable">
-                        <div class="center-block">
-                            Purchase <span ng-if="task.price_approval != undefined">- {{approval_status[task.price_approval+1]}}</span>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="row">
-                    <div class="col">Budget:</div>
-                    <div class="col">{{task.budget[0] | currency}}</div>
-                    <div class="col">{{task.budget[1] | currency}}</div>
-                </div>
-                <div class="row" ng-if="task.price_approval == 0">
-                    <div class="col">
-                        Actual price: {{task.price|currency}}
-                        <div class="button-bar">
-                            <a class="button button-balanced" ng-click="approvePrice()">Accept</a>
-                            <a class="button button-assertive" ng-click="rejectPrice()">Reject</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" ng-if="task.price_approval == 1">
-                    <div class="col">
-                        Approved price: {{task.price|currency}}
-                    </div>
-                </div>
-                
-            </div> -->
+            <!--        <div class="card" ng-if="task.hasPurchase && detail">
+                       <div class="item item-divider">
+                           <div class="bar bar-stable">
+                               <div class="center-block">
+                                   Purchase <span ng-if="task.price_approval != undefined">- {{approval_status[task.price_approval+1]}}</span>
+                               </div>
+                           </div>
+
+                       </div>
+                       <div class="row">
+                           <div class="col">Budget:</div>
+                           <div class="col">{{task.budget[0] | currency}}</div>
+                           <div class="col">{{task.budget[1] | currency}}</div>
+                       </div>
+                       <div class="row" ng-if="task.price_approval == 0">
+                           <div class="col">
+                               Actual price: {{task.price|currency}}
+                               <div class="button-bar">
+                                   <a class="button button-balanced" ng-click="approvePrice()">Accept</a>
+                                   <a class="button button-assertive" ng-click="rejectPrice()">Reject</a>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="row" ng-if="task.price_approval == 1">
+                           <div class="col">
+                               Approved price: {{task.price|currency}}
+                           </div>
+                       </div>
+
+                   </div> -->
             <div class="row" style="padding-bottom:15px;">
                 <div class="button-bar">
                     <a class="button button-assertive" ng-click="cancelTask()">Cancel Task</a>
@@ -259,23 +274,46 @@
         <ion-content class="animate-fade-slide-in has-subheader">
 
             <!--<ul class="progress-indicator progress-top">-->
-                <!--<li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"-->
-                    <!--ng-click="setStage($index)">-->
-                    <!--<span class="bubble"></span><span class="fa fa-minus"></span>-->
-                    <!--{{stage}}-->
-                <!--</li>-->
+            <!--<li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"-->
+            <!--ng-click="setStage($index)">-->
+            <!--<span class="bubble"></span><span class="fa fa-minus"></span>-->
+            <!--{{stage}}-->
+            <!--</li>-->
             <!--</ul>-->
             <!--<div class="row" ng-if="!task.stage">-->
-                <!--<div class="col center-block balanced">-->
-                    <!--Click the steps above to update progress-->
-                <!--</div>-->
+            <!--<div class="col center-block balanced">-->
+            <!--Click the steps above to update progress-->
             <!--</div>-->
-            <div>
-                <span>ETA in:</span>
-                <timer end-time="task.eta" class="countdown">{{hours}}:{{minutes}}:{{seconds}}</timer>
-                <button ng-click="updateTime(5)">5 minutes away</button>
+            <!--</div>-->
+            <div ng-if="task.stage >= 1">
+                <div class="eta">
+                    <span class="sub-header">Arriving in </span>
+                    <br/>
+                    <timer ng-show="task.eta" end-time="task.eta" class="countdown">{{hours|digits}}:{{minutes|digits}}:{{seconds|digits}}
+                    </timer>
+                    <span class="countdown" ng-show="!task.eta">--:--:--</span>
+                    <br/>
+                    <span ng-show="task.eta">at {{task.eta | amDateFormat : "HH:mm a"}}</span>
+                </div>
+                <div class="card">
+                    <div class="item item-divider" style="text-align: center;">Update your ETA</div>
+                    <div class="button-bar button-positive">
+                        <a class="button button-positive" ng-click="updateTime(60)">1h</a>
+                        <a class="button button-positive" ng-click="updateTime(30)">30m</a>
+                        <a class="button button-positive" ng-click="updateTime(5)">5m</a>
+                        <a class="button button-positive" ng-click="customTime()">...</a>
+                    </div>
+                    <div>
+                        <button class="button button-full button-balanced" style="margin-top:0"
+                                ng-click="updateTime(0)">
+                            Arrived!
+                        </button>
+                    </div>
+                </div>
             </div>
-
+            <div ng-if="!task.stage">
+                <button class="button button-full button-positive" ng-click="setStage(1) && customTime()">Start Task</button>
+            </div>
             <button ng-if="task.stage == stages.length && task.status ==='active' && !task.savior.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
@@ -285,7 +323,8 @@
                     class="button button-clear button-full">
                 <i class="icon ion-loading-c"></i> Awaiting other party to confirm...
             </button>
-            <button ng-if="task.stage == stages.length && task.status=='completed'" class="button button-full bar-dark"
+            <button ng-if="task.stage == stages.length && task.status=='completed'"
+                    class="button button-full bar-dark"
                     ng-click="dismissTask()">
                 Close
             </button>
@@ -298,7 +337,8 @@
                 </div>
                 <div class="item item-text-wrap">
                     <p>
-                        Thank you for your feedback. It seems that there is a misunderstanding between two of you. We will review the case and get back to you soon.
+                        Thank you for your feedback. It seems that there is a misunderstanding between two of
+                        you. We will review the case and get back to you soon.
                     </p>
                 </div>
                 <div class="item item-text-wrap">
@@ -309,9 +349,18 @@
                 </div>
             </div>
 
+            <!--<div class="bro-tabs">-->
+                <!--<a class="button brotab-item" ng-class="{'active': detail}" ng-click="toggleDetailView()">-->
+                    <!--Detail-->
+                <!--</a>-->
+                <!--<a class="button brotab-item" ng-class="{'active': !detail}" ng-click="toggleChatView()">-->
+                    <!--Chat (<span>{{task.messages.length - read}}</span>)-->
+                <!--</a>-->
+            <!--</div>-->
             <div class="button-bar">
-                <a class="button" ng-class="{'active': detail}" ng-click="toggleDetailView()">Detail</a>
-                <a class="button" ng-class="{'active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>) </a>
+                <a class="button" ng-class="{'positive active': detail}" ng-click="toggleDetailView()">Detail</a>
+                <a class="button" ng-class="{'positive active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
+                </a>
             </div>
 
             <div ng-if="detail" class="card">
@@ -403,23 +452,23 @@
                 </div>
             </div>
             <!--<div class="card" ng-if="task.hasPurchase">-->
-                <!--<div class="item item-divider">-->
-                    <!--Purchase-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<div class="col">Budget:</div>-->
-                    <!--<div class="col">{{task.budget[0] | currency}}</div>-->
-                    <!--<div class="col">{{task.budget[1] | currency}}</div>-->
-                <!--</div>-->
-                <!--<form ng-submit="updatePrice()">-->
-                    <!--<label class="item item-input">-->
-                        <!--<span class="input-label">Actual price</span>-->
-                        <!--<input ng-model="task.price" type="number" placeholder="10">-->
-                    <!--</label>-->
-                    <!--<button class="button button-full button-energized" type="submit">-->
-                        <!--Update price-->
-                    <!--</button>-->
-                <!--</form>-->
+            <!--<div class="item item-divider">-->
+            <!--Purchase-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col">Budget:</div>-->
+            <!--<div class="col">{{task.budget[0] | currency}}</div>-->
+            <!--<div class="col">{{task.budget[1] | currency}}</div>-->
+            <!--</div>-->
+            <!--<form ng-submit="updatePrice()">-->
+            <!--<label class="item item-input">-->
+            <!--<span class="input-label">Actual price</span>-->
+            <!--<input ng-model="task.price" type="number" placeholder="10">-->
+            <!--</label>-->
+            <!--<button class="button button-full button-energized" type="submit">-->
+            <!--Update price-->
+            <!--</button>-->
+            <!--</form>-->
             <!--</div>-->
         </ion-content>
     </div>

@@ -123,7 +123,23 @@ $dark:                            #444 !default;
     }
   }
 }
+div.eta{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  .sub-header{
+    color: grey;
+    font-size: 1em;
+  }
+  .countdown{
+    font-size: 2em;
+  }
+}
+.bro-tabs{
+  .brotab-item{
 
+  }
+}
 //
 //
 //.bubble{
