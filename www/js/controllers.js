@@ -172,7 +172,7 @@ angular.module('starter.controllers', [])
         console.log($scope.activeTask);
 
         $scope.gotoActive = function () {
-            $ionicTabsDelegate.select(1);
+            $ionicTabsDelegate.select(2);
         }
 
 
@@ -560,6 +560,8 @@ angular.module('starter.controllers', [])
         }
 
         $scope.updateTime = function(time){
+            if(time == 0)
+                $scope.setStage( $scope.task.hasPurchase? 3 : 2);
             Tasks.updateETA($scope.task, time);
         }
         updateElapsed();
