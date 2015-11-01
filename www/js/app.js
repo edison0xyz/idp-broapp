@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
     ['ionic','ionic.service.core', 'starter.controllers', 'starter.services', 'ionic.service.analytics',
-        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment', 'ui.bootstrap.datetimepicker'])
+        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment', 'ui.bootstrap.datetimepicker', 'timer'])
 
     .run(function ($ionicPlatform, $ionicAnalytics) {
         $ionicPlatform.ready(function () {

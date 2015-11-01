@@ -118,6 +118,10 @@ angular.module('starter.services', ['firebase'])
                     taskArr.$save(task);
                 }
             },
+            updateETA: function(task, minutes){
+                task.eta = moment().add(minutes, "minutes").valueOf();
+                taskArr.$save(task);
+            },
             confirm: function (task) {
                 if(task.bro.id == $rootScope.user.id) {
                     task.bro.confirmed = true;

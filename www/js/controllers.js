@@ -457,7 +457,7 @@ angular.module('starter.controllers', [])
                 selector: '.animate-fade-slide-in .item'
             });
         }, 100);
-        }
+        };
 
         //$ionicPopover.fromTemplateUrl('task_options.html', {
         //    scope: $scope
@@ -528,6 +528,9 @@ angular.module('starter.controllers', [])
                 "Task started",
                 "Task completed"
             ];
+        }
+        $scope.updateTime = function(time){
+            Tasks.updateETA($scope.task, time);
         }
         updateElapsed();
         $scope.setStage = function (index) {

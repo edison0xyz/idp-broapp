@@ -84,7 +84,8 @@
         <button class="button button-icon button-clear ion-ios-more" ng-click="openPopover()">
         </button>
     </ion-nav-buttons> -->
-    <!--requester view-->
+
+    <!--Requester view-->
     <div ng-if="task.bro.id == user.id">
         <div class="bar bar-subheader"
              ng-class="{'bar-balanced': task.status == 'completed',
@@ -102,6 +103,7 @@
 
             <h2 class="title" ng-if="task.savior && task.status === 'active'">{{task.savior.name}} is on his
                 way!</h2>
+
         </div>
         <ion-content ng-class="{expanded:isExpanded}" class="animate-fade-slide-in has-subheader">
             <ul class="progress-indicator progress-top">
@@ -256,17 +258,22 @@
         </div>
         <ion-content class="animate-fade-slide-in has-subheader">
 
-            <ul class="progress-indicator progress-top">
-                <li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"
-                    ng-click="setStage($index)">
-                    <span class="bubble"></span><span class="fa fa-minus"></span>
-                    {{stage}}
-                </li>
-            </ul>
-            <div class="row" ng-if="!task.stage">
-                <div class="col center-block balanced">
-                    Click the steps above to update progress
-                </div>
+            <!--<ul class="progress-indicator progress-top">-->
+                <!--<li class="progress-step" ng-class="{'completed': task.stage > $index}" ng-repeat="stage in stages"-->
+                    <!--ng-click="setStage($index)">-->
+                    <!--<span class="bubble"></span><span class="fa fa-minus"></span>-->
+                    <!--{{stage}}-->
+                <!--</li>-->
+            <!--</ul>-->
+            <!--<div class="row" ng-if="!task.stage">-->
+                <!--<div class="col center-block balanced">-->
+                    <!--Click the steps above to update progress-->
+                <!--</div>-->
+            <!--</div>-->
+            <div>
+                <span>ETA in:</span>
+                <timer end-time="task.eta" class="countdown">{{hours}}:{{minutes}}:{{seconds}}</timer>
+                <button ng-click="updateTime(5)">5 minutes away</button>
             </div>
 
             <button ng-if="task.stage == stages.length && task.status ==='active' && !task.savior.confirmed"
