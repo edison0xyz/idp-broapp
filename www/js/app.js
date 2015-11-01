@@ -10,8 +10,8 @@ angular.module('starter',
 
     .run(function ($ionicPlatform, $ionicAnalytics) {
         $ionicPlatform.ready(function () {
-            $ionicAnalytics.dispatchInterval = 0;
             $ionicAnalytics.register();
+            $ionicAnalytics.dispatchInterval = 0;
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
