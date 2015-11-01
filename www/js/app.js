@@ -10,7 +10,7 @@ angular.module('starter',
 
     .run(function ($ionicPlatform, $ionicAnalytics) {
         $ionicPlatform.ready(function () {
-
+            $ionicAnalytics.dispatchInterval = 0;
             $ionicAnalytics.register();
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
