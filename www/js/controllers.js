@@ -379,7 +379,7 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($state, $ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($ionicAnalytics, $state, $ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -574,6 +574,9 @@ angular.module('starter.controllers', [])
             if(time == 0)
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
             Tasks.updateETA($scope.task, time);
+            $ionicAnalytics.track('UpdateTimeB', {
+                minutes: time
+            });
         }
         updateElapsed();
         $scope.setStage = function (index) {
