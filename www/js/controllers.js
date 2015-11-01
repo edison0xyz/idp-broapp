@@ -570,7 +570,7 @@ angular.module('starter.controllers', [])
             if(time == 0)
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
             Tasks.updateETA($scope.task, time);
-            $ionicAnalytics.track('UpdateTime', {
+            $ionicAnalytics.track('UpdateTimeA', {
                 minutes: time
             });
         }
