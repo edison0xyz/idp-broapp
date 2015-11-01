@@ -123,7 +123,19 @@ $dark:                            #444 !default;
     }
   }
 }
-
+div.eta{
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 10px;
+  .sub-header{
+    color: grey;
+    font-size: 1em;
+  }
+  .countdown{
+    font-size: 2em;
+  }
+}
 //
 //
 //.bubble{

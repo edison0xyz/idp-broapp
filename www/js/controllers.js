@@ -529,6 +529,36 @@ angular.module('starter.controllers', [])
                 "Task completed"
             ];
         }
+
+        $scope.customTime = function(){
+            $scope.data = {}
+            var myPopup = $ionicPopup.show({
+                templateUrl: 'timepicker.html',
+                title: 'Estimated time of arrival',
+                subTitle: 'You will be arriving in',
+                scope: $scope,
+                buttons: [
+                    { text: 'Back'},
+                    {
+                        text: '<b>Update</b>',
+                        type: 'button-positive',
+                        onTap: function(e) {
+                            if (!$scope.data.hours && ! $scope.data.minutes) {
+                                //don't allow the user to close unless he enters wifi password
+                                e.preventDefault();
+                            } else {
+                                return $scope.data.hours * 60 + $scope.data.minutes;
+                            }
+                        }
+                    }
+                ]
+            });
+            myPopup.then(function(res) {
+                console.log(res);
+                $scope.updateTime(res);
+            });
+        }
+
         $scope.updateTime = function(time){
             Tasks.updateETA($scope.task, time);
         }

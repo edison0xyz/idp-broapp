@@ -97,6 +97,17 @@ $dark:                            #444 !default;
   .discussion .you .avatar {
     float: left; }
 
+div.eta {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 10px; }
+  div.eta .sub-header {
+    color: grey;
+    font-size: 1em; }
+  div.eta .countdown {
+    font-size: 2em; }
+
 fieldset, label {
   margin: 0;
   padding: 0; }
