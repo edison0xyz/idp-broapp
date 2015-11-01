@@ -488,7 +488,7 @@ angular.module('starter.controllers', [])
                 template: 'The requester has cancelled this task'
             });
             alertPopup.then(function (res) {
-                Task.mine.task = null;
+                Tasks.mine.task = null;
                 $state.go('app.tasks.list');
             });
         });
