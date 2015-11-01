@@ -394,7 +394,7 @@ angular.module('starter.controllers', [])
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
         $ionicNavBarDelegate.showBackButton(false);
-
+        $ionicAnalytics.setDispatchInterval(0);
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
