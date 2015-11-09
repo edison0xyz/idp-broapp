@@ -122,6 +122,11 @@ angular.module('starter.controllers', [])
             User.login(bro);
             $state.go('app.tasks.list');
         }
+
+        $scope.login = function(name){
+            User.loginNew(name);
+            $state.go('app.tasks.list');
+        }
         $scope.reset = function () {
             Reset.reset();
         }
@@ -379,7 +384,14 @@ angular.module('starter.controllers', [])
                 $state.go('app.tasks.active');
             });
         }
-    }).controller('ActiveTaskCtrl', function ($ionicAnalytics, $state, $ionicActionSheet, $ionicModal, $ionicPopover, $ionicHistory, $ionicNavBarDelegate, $rootScope, $scope, $ionicPopup, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Tasks) {
+    }).controller('ActiveTaskCtrl', function ($state, $ionicActionSheet,
+                                              $ionicModal, $ionicPopover,
+                                              $ionicHistory, $ionicNavBarDelegate,
+                                              $rootScope, $scope, $ionicPopup,
+                                              $stateParams, $timeout,
+                                              $ionicAnalytics,
+                                              ionicMaterialMotion, ionicMaterialInk,
+                                              Tasks, User) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -387,6 +399,7 @@ angular.module('starter.controllers', [])
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
         $ionicNavBarDelegate.showBackButton(false);
+
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
@@ -574,6 +587,9 @@ angular.module('starter.controllers', [])
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
             Tasks.updateETA($scope.task, time);
             $ionicAnalytics.track('UpdateTimeB', {
+                minutes: time
+            });
+            User.track('UpdateTimeB', {
                 minutes: time
             });
         }

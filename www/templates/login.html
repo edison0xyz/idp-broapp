@@ -14,6 +14,13 @@
             </button>
         </div>
         <div ng-if="chooseUser">
+            <label class="item item-input" style="background-color: white;">
+                <span class="input-label">New User:</span>
+                <input type="text" ng-model="user.name">
+            </label>
+            <button class="button button-block button-positive" ng-click="login(user.name)">Login</button>
+        </div>
+        <div ng-if="chooseUser">
             <span style="color:white">Login as:</span>
             <button ng-click="loginAs(bro)" class="button button-block button-positive" ng-repeat="bro in bros">
                 {{bro.name}}

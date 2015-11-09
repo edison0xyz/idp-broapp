@@ -397,9 +397,11 @@
                 </div>
                 <form ng-submit="addMessage(chat.message)">
                     <div class="row">
-                        <div class="chip button-positive" ng-click="updateMessageTime(30)">In 30 mins</div>
-                        <div class="chip button-positive" ng-click="updateMessageTime(15)">In 15 mins</div>
-                        <div class="chip button-positive" ng-click="customTime()">In ... mins</div>
+                        <label for="">Arriving in </label>
+                        <div class="chip button-positive" ng-click="updateMessageTime(60)">1 hour</div>
+                        <div class="chip button-positive" ng-click="updateMessageTime(30)">30 mins</div>
+                        <div class="chip button-positive" ng-click="updateMessageTime(5)">5 mins</div>
+                        <div class="chip button-positive" ng-click="customTime()">... mins</div>
                         <div class="chip button-balanced" ng-click="updateMessageTime(0)">Arrived</div>
                     </div>
                     <label class="item item-input">
