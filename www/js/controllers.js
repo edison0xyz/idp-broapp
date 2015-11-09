@@ -583,8 +583,11 @@ angular.module('starter.controllers', [])
             $scope.updateTime(time);
         }
         $scope.updateTime = function(time){
-            if(time == 0)
+            if(time == 0){
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
+            }else{
+                $scope.setStage(1);
+            }
             Tasks.updateETA($scope.task, time);
             $ionicAnalytics.track('UpdateTimeB', {
                 minutes: time
@@ -595,15 +598,16 @@ angular.module('starter.controllers', [])
         }
         updateElapsed();
         $scope.setStage = function (index) {
-            index += 1;
-            if (!$scope.task.stage)
-                $scope.task.stage = 1;
-            else if (index !== $scope.task.stage) {
-                if ($scope.task.stage < index)
-                    $scope.task.stage += 1;
-                else
-                    $scope.task.stage = index
-            }
+            //index += 1;
+            //if (!$scope.task.stage)
+            //    $scope.task.stage = 1;
+            //else if (index !== $scope.task.stage) {
+            //    if ($scope.task.stage < index)
+            //        $scope.task.stage += 1;
+            //    else
+            //        $scope.task.stage = index
+            //}
+            $scope.task.stage = index;
             Tasks.save($scope.task);
         }
         $scope.chat = {
