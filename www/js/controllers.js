@@ -549,10 +549,10 @@ angular.module('starter.controllers', [])
                 subTitle: 'You will be arriving in',
                 scope: $scope,
                 buttons: [
-                    { text: 'Back'},
+                    { text: 'Back', type: 'no-padding'},
                     {
                         text: '<b>Update</b>',
-                        type: 'button-positive',
+                        type: 'button-positive no-padding',
                         onTap: function(e) {
                             if (!$scope.data.hours && ! $scope.data.minutes) {
                                 //don't allow the user to close unless he enters wifi password
