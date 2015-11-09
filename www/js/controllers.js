@@ -391,7 +391,7 @@ angular.module('starter.controllers', [])
                                               $stateParams, $timeout,
                                               $ionicAnalytics,
                                               ionicMaterialMotion, ionicMaterialInk,
-                                              Tasks) {
+                                              Tasks, User) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -575,6 +575,9 @@ angular.module('starter.controllers', [])
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
             Tasks.updateETA($scope.task, time);
             $ionicAnalytics.track('UpdateTimeA', {
+                minutes: time
+            });
+            User.track('UpdateTimeA', {
                 minutes: time
             });
         }
