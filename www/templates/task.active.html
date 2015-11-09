@@ -289,30 +289,31 @@
                 <div class="eta">
                     <span class="sub-header">Arriving in </span>
                     <br/>
-                    <timer ng-show="task.eta" end-time="task.eta" class="countdown">{{hours|digits}}:{{minutes|digits}}:{{seconds|digits}}
+                    <timer ng-show="task.eta" end-time="task.eta" class="countdown">
+                        {{hours|digits}}:{{minutes|digits}}:{{seconds|digits}}
                     </timer>
                     <span class="countdown" ng-show="!task.eta">--:--:--</span>
                     <br/>
                     <span ng-show="task.eta">at {{task.eta | amDateFormat : "HH:mm a"}}</span>
                 </div>
                 <!--<div class="card">-->
-                    <!--<div class="item item-divider" style="text-align: center;">Update your ETA</div>-->
-                    <!--<div class="button-bar button-positive">-->
-                        <!--<a class="button button-positive" ng-click="updateTime(60)">1h</a>-->
-                        <!--<a class="button button-positive" ng-click="updateTime(30)">30m</a>-->
-                        <!--<a class="button button-positive" ng-click="updateTime(5)">5m</a>-->
-                        <!--<a class="button button-positive" ng-click="customTime()">...</a>-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<button class="button button-full button-balanced" style="margin-top:0"-->
-                                <!--ng-click="updateTime(0)">-->
-                            <!--Arrived!-->
-                        <!--</button>-->
-                    <!--</div>-->
+                <!--<div class="item item-divider" style="text-align: center;">Update your ETA</div>-->
+                <!--<div class="button-bar button-positive">-->
+                <!--<a class="button button-positive" ng-click="updateTime(60)">1h</a>-->
+                <!--<a class="button button-positive" ng-click="updateTime(30)">30m</a>-->
+                <!--<a class="button button-positive" ng-click="updateTime(5)">5m</a>-->
+                <!--<a class="button button-positive" ng-click="customTime()">...</a>-->
+                <!--</div>-->
+                <!--<div>-->
+                <!--<button class="button button-full button-balanced" style="margin-top:0"-->
+                <!--ng-click="updateTime(0)">-->
+                <!--Arrived!-->
+                <!--</button>-->
+                <!--</div>-->
                 <!--</div>-->
             </div>
             <!--<div ng-if="!task.stage">-->
-                <!--<button class="button button-full button-positive" ng-click="setStage(1)">Start Task</button>-->
+            <!--<button class="button button-full button-positive" ng-click="setStage(1)">Start Task</button>-->
             <!--</div>-->
             <button ng-if="task.stage == stages.length && task.status ==='active' && !task.savior.confirmed"
                     class="button button-full bar-balanced"
@@ -350,12 +351,12 @@
             </div>
 
             <!--<div class="bro-tabs">-->
-                <!--<a class="button brotab-item" ng-class="{'active': detail}" ng-click="toggleDetailView()">-->
-                    <!--Detail-->
-                <!--</a>-->
-                <!--<a class="button brotab-item" ng-class="{'active': !detail}" ng-click="toggleChatView()">-->
-                    <!--Chat (<span>{{task.messages.length - read}}</span>)-->
-                <!--</a>-->
+            <!--<a class="button brotab-item" ng-class="{'active': detail}" ng-click="toggleDetailView()">-->
+            <!--Detail-->
+            <!--</a>-->
+            <!--<a class="button brotab-item" ng-class="{'active': !detail}" ng-click="toggleChatView()">-->
+            <!--Chat (<span>{{task.messages.length - read}}</span>)-->
+            <!--</a>-->
             <!--</div>-->
             <div class="button-bar">
                 <a class="button" ng-class="{'positive active': detail}" ng-click="toggleDetailView()">Detail</a>
@@ -397,7 +398,11 @@
                 </div>
                 <form ng-submit="addMessage(chat.message)">
                     <div class="row">
-                        <label for="">Arriving in </label>
+                        <div class="col update-time">
+                            <span>Update time - Arriving in </span>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="chip button-positive" ng-click="updateMessageTime(60)">1 hour</div>
                         <div class="chip button-positive" ng-click="updateMessageTime(30)">30 mins</div>
                         <div class="chip button-positive" ng-click="updateMessageTime(5)">5 mins</div>

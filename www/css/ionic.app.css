@@ -41,6 +41,10 @@ $dark:                            #444 !default;
     max-height: 30px;
     max-width: 30px; }
 
+.update-time {
+  text-align: center;
+  color: grey; }
+
 .chip {
   display: inline-block;
   height: 32px;
