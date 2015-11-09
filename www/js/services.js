@@ -149,7 +149,7 @@ angular.module('starter.services', ['firebase'])
             }
         };
     })
-    .factory('Bros', function ($firebaseArray) {
+    .factory('Bros', function ($firebaseArray, $q) {
         var BrosRef = new Firebase("https://broapp.firebaseio.com/bros");
         var BrosArr = $firebaseArray(BrosRef);
 
@@ -157,6 +157,40 @@ angular.module('starter.services', ['firebase'])
             all: BrosArr,
             get: function (i) {
                 return BrosArr.$getRecord(BrosArr.$keyAt(i));
+            },
+            findOrCreateBro: function(name){
+                var deferred = $q.defer();
+                var foundBro = null;
+                var maxId = 0;
+                BrosArr.$loaded(function(arr){
+                    arr.forEach(function(bro){
+                        if(bro.name == name){
+                            foundBro = bro;
+                        }
+                        if(bro.id > maxId)
+                            maxId = bro.id;
+                    });
+                    if(foundBro){
+                        deferred.resolve(foundBro);
+                        console.log("Bro found");
+                    }else{
+                        console.log("Creating new bro", name);
+
+                        var newBro = {
+                            id: maxId + 1,
+                            name: name,
+                            points: 0,
+                            nextLevel: 0,
+                            rank: 'New Bro',
+                            display_pic: 'img/default.png',
+                            map: 'img/map-Sebastian.jpg'
+                        };
+                        BrosArr.$add(newBro).then(function(broRef){
+                            deferred.resolve(BrosArr.$getRecord(broRef.key()));
+                        });
+                    }
+                });
+                return deferred.promise;
             }
         };
     })
@@ -353,7 +387,7 @@ angular.module('starter.services', ['firebase'])
             }
         };
     })
-    .factory('User', function ($rootScope, Tasks) {
+    .factory('User', function ($rootScope, Tasks, Bros) {
         var me = {};
         return {
             login: function (bro) {
@@ -361,6 +395,17 @@ angular.module('starter.services', ['firebase'])
                 Tasks.mine.task = null;
                 $rootScope.user = bro;
                 Tasks.update();
+            },
+            loginNew: function (username) {
+                Bros.findOrCreateBro(username).then(function(bro){
+                    if(bro) {
+                        console.log("Login as bro", bro);
+                        me = bro;
+                        Tasks.mine.task = null;
+                        $rootScope.user = bro;
+                        Tasks.update();
+                    }
+                });
             },
             current: me
         };

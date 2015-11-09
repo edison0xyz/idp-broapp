@@ -122,6 +122,11 @@ angular.module('starter.controllers', [])
             User.login(bro);
             $state.go('app.tasks.list');
         }
+
+        $scope.login = function(name){
+            User.loginNew(name);
+            $state.go('app.tasks.list');
+        }
         $scope.reset = function () {
             Reset.reset();
         }
