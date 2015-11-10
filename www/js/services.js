@@ -68,9 +68,12 @@ angular.module('starter.services', ['firebase'])
         }
 
         var webexBot = {
-            init: "Hey bro! Can you help me get a redbull and flowers from SIS R-labs " +
-            "and send it to library",
-            next: ["Keep me updated, thanks!","Sorry bro, can't talk now", "Thanks for your help bro!"],
+            init: "(bot) Hey bro! Can you help me get a ginseng drink from SIS Lvl 3 Research labs(Rlabs)" +
+            "and send it to T-junction",
+            next: ["(bot) Keep me updated, thanks!","(bot) Sorry bro, can't talk now",
+                "(bot) Oh that can't be helped, do what you can",
+                "(bot) I will be at T-junction on the Giant Smoo Smoo!",
+                "(bot) Thanks for your help bro!"],
             idx: 0
         };
         return {
@@ -288,45 +291,45 @@ angular.module('starter.services', ['firebase'])
         var bros = [
             {
                 id: 1,
-                name: 'Larry',
+                name: 'Smoo Smoo',
                 points: 100,
                 nextLevel: 120,
-                rank: 'Noob Bro',
-                display_pic: 'img/jj.jpg'
-            },
-            {
-                id: 2,
-                name: 'Sebastian',
-                points: 4557,
-                nextLevel: 5000,
-                rank: 'Super Bro',
-                display_pic: 'img/derrick.png',
-                map: 'img/map-Sebastian.jpg'
-            },
-            {
-                id: 3,
-                name: 'Joshua',
-                points: 780,
-                nextLevel: 900,
-                rank: 'Big Bro',
-                display_pic: 'img/chan.png',
-                map: 'img/map-Joshua.jpg'
-            },
-            {
-                id: 4,
-                name: 'Edison',
-                points: 880,
-                nextLevel: 900,
-                rank: 'Big Bro',
-                display_pic: 'img/edison.jpg'
-            }, {
-                id: 5,
-                name: 'Zac',
-                points: 7880,
-                nextLevel: 8100,
-                rank: 'Epic Bro',
-                display_pic: 'img/zac.jpg'
+                rank: 'Smoo-th Bro',
+                display_pic: 'img/smoo.jpg'
             }
+            //{
+            //    id: 2,
+            //    name: 'Sebastian',
+            //    points: 4557,
+            //    nextLevel: 5000,
+            //    rank: 'Super Bro',
+            //    display_pic: 'img/derrick.png',
+            //    map: 'img/map-Sebastian.jpg'
+            //},
+            //{
+            //    id: 3,
+            //    name: 'Joshua',
+            //    points: 780,
+            //    nextLevel: 900,
+            //    rank: 'Big Bro',
+            //    display_pic: 'img/chan.png',
+            //    map: 'img/map-Joshua.jpg'
+            //},
+            //{
+            //    id: 4,
+            //    name: 'Edison',
+            //    points: 880,
+            //    nextLevel: 900,
+            //    rank: 'Big Bro',
+            //    display_pic: 'img/edison.jpg'
+            //}, {
+            //    id: 5,
+            //    name: 'Zac',
+            //    points: 7880,
+            //    nextLevel: 8100,
+            //    rank: 'Epic Bro',
+            //    display_pic: 'img/zac.jpg'
+            //}
         ];
         var TaskRef = new Firebase("https://broapp.firebaseio.com/tasks");
         var TaskArr = $firebaseArray(TaskRef);
@@ -334,69 +337,69 @@ angular.module('starter.services', ['firebase'])
             {
                 id: 1,
                 bro: bros[0],
-                task: "HELP! Can anyone get me some flowers?",
-                hasPurchase: true,
-                budget: [10, 20],
+                task: "(Web Experiment) Need help collecting welfare for my girlfriend! " +
+                "Welfare is held at SIS L3 Rlabs please send it to T-Junction! Thank you!",
                 date: moment().subtract(5, 'minutes').valueOf(),
                 reward: 10,
-                status: 'completed',
+                status: 'open',
                 savior: null,
                 distance: 2,
                 messages: []
-            }, {
-                id: 2,
-                bro: bros[1],
-                task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
-                hasPurchase: true,
-                budget: [40, 60],
-                reward: 25,
-                // open, active, completed
-                status: 'completed',
-                savior: null,
-                distance: 8,
-                date: moment().subtract(2, 'minutes').valueOf(),
-                messages: []
-            }, {
-                id: 3,
-                bro: bros[2],
-                task: "I need a Bro to take care of our pet dog tonight!",
-                hasPurchase: false,
-                //budget: [40, 60],
-                reward: 50,
-                // open, active, completed
-                status: 'completed',
-                savior: bros[1],
-                distance: 6,
-                date: moment().valueOf(),
-                messages: []
-            }, {
-                id: 4,
-                bro: bros[0],
-                task: "Can someone help buy a gift for my girlfriend",
-                hasPurchase: true,
-                budget: [50, 70],
-                reward: 30,
-                // open, active, completed
-                status: 'completed',
-                savior: bros[2],
-                distance: 4,
-                date: moment().valueOf(),
-                messages: []
-            },
-            {
-                id: 5,
-                bro: bros[3],
-                task: "I need a wingman tonight!",
-                hasPurchase: true,
-                budget: [50, 70],
-                reward: 30,
-                // open, active, completed
-                status: 'active',
-                savior: bros[4],
-                distance: 7,
-                date: moment().valueOf(),
-                messages: []
             }
+            //}, {
+            //    id: 2,
+            //    bro: bros[1],
+            //    task: "Can anyone help me buy a cake please? Chocolate flavor will be great!",
+            //    hasPurchase: true,
+            //    budget: [40, 60],
+            //    reward: 25,
+            //    // open, active, completed
+            //    status: 'completed',
+            //    savior: null,
+            //    distance: 8,
+            //    date: moment().subtract(2, 'minutes').valueOf(),
+            //    messages: []
+            //}, {
+            //    id: 3,
+            //    bro: bros[2],
+            //    task: "I need a Bro to take care of our pet dog tonight!",
+            //    hasPurchase: false,
+            //    //budget: [40, 60],
+            //    reward: 50,
+            //    // open, active, completed
+            //    status: 'completed',
+            //    savior: bros[1],
+            //    distance: 6,
+            //    date: moment().valueOf(),
+            //    messages: []
+            //}, {
+            //    id: 4,
+            //    bro: bros[0],
+            //    task: "Can someone help buy a gift for my girlfriend",
+            //    hasPurchase: true,
+            //    budget: [50, 70],
+            //    reward: 30,
+            //    // open, active, completed
+            //    status: 'completed',
+            //    savior: bros[2],
+            //    distance: 4,
+            //    date: moment().valueOf(),
+            //    messages: []
+            //},
+            //{
+            //    id: 5,
+            //    bro: bros[3],
+            //    task: "I need a wingman tonight!",
+            //    hasPurchase: true,
+            //    budget: [50, 70],
+            //    reward: 30,
+            //    // open, active, completed
+            //    status: 'active',
+            //    savior: bros[4],
+            //    distance: 7,
+            //    date: moment().valueOf(),
+            //    messages: []
+            //}
         ];
 
         return {
