@@ -618,6 +618,7 @@ angular.module('starter.controllers', [])
                 Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage});
                 $scope.chat.message = null;
                 chatMessage = null;
+                $scope.read++;
             }
         }
 
