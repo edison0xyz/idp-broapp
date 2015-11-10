@@ -67,6 +67,12 @@ angular.module('starter.services', ['firebase'])
             }
         }
 
+        var webexBot = {
+            init: "Hey bro! Can you help me get a redbull and flowers from SIS R-labs " +
+            "and send it to library",
+            next: ["Keep me updated, thanks!","Sorry bro, can't talk now"],
+            idx: 0
+        };
         return {
             all: taskArr,
             opened: openArr,
@@ -90,6 +96,11 @@ angular.module('starter.services', ['firebase'])
                 activeTask.savior = $rootScope.user;
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
+                var self = this;
+                setTimeout(function () {
+                    self.addMessage(mine.task, {user: mine.task.bro, message: webexBot.init});
+                }, 3000);
+
             },
             setPrice: function (price) {
                 mine.task.price = price;
@@ -143,6 +154,16 @@ angular.module('starter.services', ['firebase'])
                 message.time = Firebase.ServerValue.TIMESTAMP;
                 task.messages.push(message);
                 taskArr.$save(task);
+                var self = this;
+                if (message.user.id !== task.bro.id) {
+                    setTimeout(function () {
+                        self.addMessage(mine.task, {user: task.bro, message: webexBot.next[webexBot.idx]});
+                        if(webexBot.idx < webexBot.next.length-1)
+                            webexBot.idx++;
+                        else
+                            webexBot.idx = 0;
+                    }, Math.floor((Math.random() * 1000) + 2000));
+                }
             },
             $watch: function (cb) {
                 listener = cb;
