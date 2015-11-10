@@ -555,8 +555,7 @@ angular.module('starter.controllers', [])
                         text: '<b>Update</b>',
                         type: 'button-positive no-padding',
                         onTap: function(e) {
-                            if (!$scope.data.hours && ! $scope.data.minutes) {
-                                //don't allow the user to close unless he enters wifi password
+                            if (!($scope.data.hours || $scope.data.minutes)) {
                                 e.preventDefault();
                             } else {
                                 return $scope.data.hours * 60 + $scope.data.minutes;
