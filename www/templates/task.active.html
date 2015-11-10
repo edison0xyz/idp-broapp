@@ -163,7 +163,7 @@
 
             <div class="button-bar">
                 <a class="button" ng-class="{'positive active': detail}" ng-click="toggleDetailView()">Detail</a>
-                <a class="button" ng-class="{'positive active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
+                <a class="button" ng-class="{'positive active': !detail, 'button-assertive': task.messages.length - read > 0 }" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
                 </a>
             </div>
 
@@ -359,7 +359,7 @@
             <!--</div>-->
             <div class="button-bar">
                 <a class="button" ng-class="{'positive active': detail}" ng-click="toggleDetailView()">Detail</a>
-                <a class="button" ng-class="{'positive active': !detail}" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
+                <a class="button" ng-class="{'positive active': !detail, 'button-assertive': task.messages.length - read > 0 }" ng-click="toggleChatView()">Chat (<span>{{task.messages.length - read}}</span>)
                 </a>
             </div>
 
