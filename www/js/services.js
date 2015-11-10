@@ -70,7 +70,7 @@ angular.module('starter.services', ['firebase'])
         var webexBot = {
             init: "Hey bro! Can you help me get a redbull and flowers from SIS R-labs " +
             "and send it to library",
-            next: ["Keep me updated, thanks!","Sorry bro, can't talk now"],
+            next: ["Keep me updated, thanks!","Sorry bro, can't talk now", "Thanks for your help bro!"],
             idx: 0
         };
         return {
