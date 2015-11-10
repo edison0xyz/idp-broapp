@@ -565,8 +565,8 @@ angular.module('starter.controllers', [])
                 ]
             });
             myPopup.then(function(res) {
-                console.log(res);
-                $scope.updateTime(res);
+                if(res)
+                    $scope.updateTime(res);
             });
         }
 
