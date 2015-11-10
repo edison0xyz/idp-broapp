@@ -96,6 +96,10 @@ $dark:                            #444 !default;
   margin: 0 5px;
 }
 .discussion {
+  &.list{
+    max-height: 250px;
+    overflow-y: scroll;
+  }
   .avatar {
     border-radius: 50%;
     left: 16px;

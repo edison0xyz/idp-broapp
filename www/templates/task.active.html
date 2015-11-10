@@ -190,7 +190,7 @@
                         Chat
                     </div>
                     <div class="item item-text-wrap">
-                        <ul class="list discussion">
+                        <ul class="list discussion" scroll-glue>
                             <li ng-repeat="message in task.messages track by $index">{{message.user.name}} -
                                 {{message.message}}
                             </li>
@@ -388,7 +388,7 @@
                     Chat
                 </div>
                 <div class="item item-text-wrap">
-                    <ul class="list">
+                    <ul class="list discussion" scroll-glue>
                         <li ng-repeat="message in task.messages track by $index">
                             {{message.user.name}} - {{message.message}}
                         </li>
