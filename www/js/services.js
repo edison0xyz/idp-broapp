@@ -94,6 +94,7 @@ angular.module('starter.services', ['firebase'])
             setActive: function (activeTask) {
                 activeTask.status = 'active';
                 activeTask.savior = $rootScope.user;
+                activeTask.start_time = Firebase.ServerValue.TIMESTAMP;
                 taskArr.$save(activeTask);
                 mine.task = activeTask;
                 var self = this;
@@ -136,11 +137,15 @@ angular.module('starter.services', ['firebase'])
             confirm: function (task) {
                 if (task.bro.id == $rootScope.user.id) {
                     task.bro.confirmed = true;
+                    task.bro.end_time = Firebase.ServerValue.TIMESTAMP;
+
                 } else {
                     task.savior.confirmed = true;
+                    task.savior.end_time = Firebase.ServerValue.TIMESTAMP;
                 }
                 if (task.savior.confirmed && task.bro.confirmed) {
                     task.status = 'completed';
+                    task.end_time = Firebase.ServerValue.TIMESTAMP;
                 }
                 taskArr.$save(task);
             },
