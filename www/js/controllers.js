@@ -579,7 +579,7 @@ angular.module('starter.controllers', [])
             }else{
                 formatted = "Arriving in " + time +" mins";
             }
-            $scope.addMessage(formatted);
+            $scope.addMessage(formatted,true);
             $scope.updateTime(time);
         }
         $scope.updateTime = function(time){
@@ -613,9 +613,9 @@ angular.module('starter.controllers', [])
         $scope.chat = {
             message: null
         };
-        $scope.addMessage = function (chatMessage) {
+        $scope.addMessage = function (chatMessage, formatted) {
             if (chatMessage && chatMessage != "") {
-                Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage});
+                Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage}, formatted);
                 $scope.chat.message = null;
                 chatMessage = null;
                 $scope.read++;

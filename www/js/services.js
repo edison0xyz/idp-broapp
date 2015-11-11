@@ -155,7 +155,7 @@ angular.module('starter.services', ['firebase'])
             save: function (task) {
                 taskArr.$save(task);
             },
-            addMessage: function (task, message) {
+            addMessage: function (task, message, isFormatted) {
                 if (!task.messages)
                     task.messages = [];
                 delete task.message;
@@ -163,7 +163,7 @@ angular.module('starter.services', ['firebase'])
                 task.messages.push(message);
                 taskArr.$save(task);
                 var self = this;
-                if (message.user.id !== task.bro.id) {
+                if (message.user.id !== task.bro.id && !isFormatted) {
                     setTimeout(function () {
                         self.addMessage(mine.task, {user: task.bro, message: webexBot.next[webexBot.idx]});
                         if(webexBot.idx < webexBot.next.length-1)
