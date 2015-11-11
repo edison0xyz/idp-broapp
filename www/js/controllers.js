@@ -408,8 +408,8 @@ angular.module('starter.controllers', [])
         var updateElapsed = function () {
             $timeout(function () {
                 if ($scope.task) {
-
-                    $scope.elasped = moment().diff($scope.task.date);
+                    $scope.currentTime = Date.now();
+                    console.log($scope.currentTime);
                 }
                 updateElapsed();
             }, 1000);

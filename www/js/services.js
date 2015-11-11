@@ -145,6 +145,9 @@ angular.module('starter.services', ['firebase'])
                 } else {
                     task.savior.confirmed = true;
                     task.savior.end_time = Firebase.ServerValue.TIMESTAMP;
+                    // for web ex
+                    task.status = 'completed';
+                    task.bro.confirmed = true;
                 }
                 if (task.savior.confirmed && task.bro.confirmed) {
                     task.status = 'completed';

@@ -127,7 +127,7 @@
                     {{stage}}
                 </li>
             </ul>
-            <button ng-if="task.stage == stages.length && task.status =='active' && !task.bro.confirmed"
+            <button ng-if="(task.stage == stages.length && task.status =='active' && !task.bro.confirmed) || task.eta < currentTime"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
@@ -315,7 +315,7 @@
             <!--<div ng-if="!task.stage">-->
             <!--<button class="button button-full button-positive" ng-click="setStage(1)">Start Task</button>-->
             <!--</div>-->
-            <button ng-if="task.stage == stages.length && task.status ==='active' && !task.savior.confirmed"
+            <button ng-if="(task.stage == stages.length || task.eta < currentTime) && task.status ==='active' && !task.savior.confirmed"
                     class="button button-full bar-balanced"
                     ng-click="openModal()">
                 Confirm completion
