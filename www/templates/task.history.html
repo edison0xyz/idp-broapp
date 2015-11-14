@@ -70,7 +70,15 @@
 
             <div class="row content">
                 <h4 class="assertive">Completed</h4>
+
+
             </div>
+    <div class="row">
+        <div ng-if="history.bro.id != user.id && history.savior.id != user.id">
+            <!--Not Active-->
+            You have no task completed yet. Start by helping a bro today!
+        </div>
+    </div>
 
 
             <div class="item card-item" ng-if="history.bro.id == user.id || history.savior.id == user.id" ng-repeat="history in histories |orderBy: '-history.date'">
