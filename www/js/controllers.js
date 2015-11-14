@@ -122,6 +122,11 @@ angular.module('starter.controllers', [])
             User.login(bro);
             $state.go('app.tasks.list');
         }
+
+        $scope.login = function(name){
+            User.loginNew(name);
+            $state.go('app.tasks.list');
+        }
         $scope.reset = function () {
             Reset.reset();
         }
@@ -386,7 +391,7 @@ angular.module('starter.controllers', [])
                                               $stateParams, $timeout,
                                               $ionicAnalytics,
                                               ionicMaterialMotion, ionicMaterialInk,
-                                              Tasks) {
+                                              Tasks, User) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -394,6 +399,7 @@ angular.module('starter.controllers', [])
         $scope.$parent.setExpanded(false);
         $scope.$parent.setHeaderFab('right');
         $ionicNavBarDelegate.showBackButton(false);
+
         $timeout(function () {
             ionicMaterialMotion.fadeSlideIn({
                 selector: '.animate-fade-slide-in .item'
@@ -402,8 +408,8 @@ angular.module('starter.controllers', [])
         var updateElapsed = function () {
             $timeout(function () {
                 if ($scope.task) {
-
-                    $scope.elasped = moment().diff($scope.task.date);
+                    $scope.currentTime = Date.now();
+                    console.log($scope.currentTime);
                 }
                 updateElapsed();
             }, 1000);
@@ -544,13 +550,12 @@ angular.module('starter.controllers', [])
                 subTitle: 'You will be arriving in',
                 scope: $scope,
                 buttons: [
-                    { text: 'Back'},
+                    { text: 'Back', type: 'no-padding'},
                     {
                         text: '<b>Update</b>',
-                        type: 'button-positive',
+                        type: 'button-positive no-padding',
                         onTap: function(e) {
-                            if (!$scope.data.hours && ! $scope.data.minutes) {
-                                //don't allow the user to close unless he enters wifi password
+                            if (!($scope.data.hours || $scope.data.minutes)) {
                                 e.preventDefault();
                             } else {
                                 return $scope.data.hours * 60 + $scope.data.minutes;
@@ -561,39 +566,59 @@ angular.module('starter.controllers', [])
             });
             myPopup.then(function(res) {
                 console.log(res);
-                $scope.updateTime(res);
+                if(res){
+                    //$scope.updateTime(res);
+                    $scope.updateMessageTime(res);
+                }
             });
         }
-
+        $scope.updateMessageTime = function(time){
+            var formatted = "";
+            if(time==0){
+                formatted = "I've arrived";
+            }else{
+                formatted = "Arriving in " + time +" mins";
+            }
+            $scope.addMessage(formatted,true);
+            $scope.updateTime(time);
+        }
         $scope.updateTime = function(time){
-            if(time == 0)
+            if(time == 0){
                 $scope.setStage( $scope.task.hasPurchase? 3 : 2);
+            }else{
+                $scope.setStage(1);
+            }
             Tasks.updateETA($scope.task, time);
-            $ionicAnalytics.track('UpdateTimeA', {
+            $ionicAnalytics.track('UpdateTimeB', {
+                minutes: time
+            });
+            User.track('UpdateTimeB', {
                 minutes: time
             });
         }
         updateElapsed();
         $scope.setStage = function (index) {
-            index += 1;
-            if (!$scope.task.stage)
-                $scope.task.stage = 1;
-            else if (index !== $scope.task.stage) {
-                if ($scope.task.stage < index)
-                    $scope.task.stage += 1;
-                else
-                    $scope.task.stage = index
-            }
+            //index += 1;
+            //if (!$scope.task.stage)
+            //    $scope.task.stage = 1;
+            //else if (index !== $scope.task.stage) {
+            //    if ($scope.task.stage < index)
+            //        $scope.task.stage += 1;
+            //    else
+            //        $scope.task.stage = index
+            //}
+            $scope.task.stage = index;
             Tasks.save($scope.task);
         }
         $scope.chat = {
             message: null
         };
-        $scope.addMessage = function (chatMessage) {
+        $scope.addMessage = function (chatMessage, formatted) {
             if (chatMessage && chatMessage != "") {
-                Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage});
+                Tasks.addMessage($scope.task, {user: $rootScope.user, message: chatMessage}, formatted);
                 $scope.chat.message = null;
                 chatMessage = null;
+                $scope.read++;
             }
         }
 

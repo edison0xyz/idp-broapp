@@ -6,11 +6,11 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter',
     ['ionic','ionic.service.core', 'starter.controllers', 'starter.services', 'ionic.service.analytics',
-        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment', 'ui.bootstrap.datetimepicker', 'timer'])
+        'ionic-material', 'ionMdInput', 'firebase', 'angularMoment', 'ui.bootstrap.datetimepicker', 'timer',
+        'luegg.directives'])
 
     .run(function ($ionicPlatform, $ionicAnalytics) {
         $ionicPlatform.ready(function () {
-
             $ionicAnalytics.register();
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)

@@ -4,7 +4,7 @@
             <div class="content">
                 <div class="app-icon"></div>
                 <h1>BroApp</h1>
-                By bros for bros (Prototype A)
+                By bros for bros (Prototype B)
 
             </div>
         </div>
@@ -12,6 +12,13 @@
         <div class="padding">
             <button ng-click="chooseUser=!chooseUser" class="button button-full button-positive-900 ink icon-left ion-social-facebook button-positive-900">Login with Facebook
             </button>
+        </div>
+        <div ng-if="chooseUser">
+            <label class="item item-input" style="background-color: white;">
+                <span class="input-label">New User:</span>
+                <input type="text" ng-model="user.name">
+            </label>
+            <button class="button button-block button-positive" ng-click="login(user.name)">Login</button>
         </div>
         <div ng-if="chooseUser">
             <span style="color:white">Login as:</span>
