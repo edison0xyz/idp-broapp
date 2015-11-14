@@ -300,7 +300,7 @@ angular.module('starter.services', ['firebase'])
                 nextLevel: 120,
                 rank: 'Smoo-th Bro',
                 display_pic: 'img/smoo.jpg',
-                map: 'img/map-SmooSmoo.jpg'
+                map: 'img/map1.png'
             }
             //{
             //    id: 2,
