@@ -298,7 +298,8 @@ angular.module('starter.services', ['firebase'])
                 points: 100,
                 nextLevel: 120,
                 rank: 'Smoo-th Bro',
-                display_pic: 'img/smoo.jpg'
+                display_pic: 'img/smoo.jpg',
+                map: 'img/map1.jpg'
             }
             //{
             //    id: 2,
