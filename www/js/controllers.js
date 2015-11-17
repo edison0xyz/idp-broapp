@@ -391,7 +391,7 @@ angular.module('starter.controllers', [])
                                               $stateParams, $timeout,
                                               $ionicAnalytics,
                                               ionicMaterialMotion, ionicMaterialInk,
-                                              Tasks, User) {
+                                              Tasks, User, $window) {
         //$scope.$parent.showHeader();
         $scope.$parent.noHeader();
         $scope.$parent.clearFabs();
@@ -627,6 +627,7 @@ angular.module('starter.controllers', [])
             //Tasks.complete($scope.task);
             Tasks.confirm($scope.task);
             $scope.completion_modal.hide();
+            $window.open('//docs.google.com/a/smu.edu.sg/forms/d/1xGdaC26-wUa0B2NrnXqXMeCy0zEri6lcmQfXDAFik8U/edit');
         }
         $scope.dismissTask = function () {
             Tasks.mine.task = null;
