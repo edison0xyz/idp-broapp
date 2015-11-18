@@ -68,8 +68,7 @@ angular.module('starter.services', ['firebase'])
         }
 
         var webexBot = {
-            init: "(bot) Hey bro! Can you help me get a ginseng drink from SIS Lvl 3 Research labs(Rlabs)" +
-            "and send it to T-junction",
+            init: "(bot) Hey bro, thanks for your help!",
             next: ["(bot) Keep me updated, thanks!","(bot) Sorry bro, can't talk now",
                 "(bot) Oh that can't be helped, do what you can",
                 "(bot) I will be at T-junction on the Giant Smoo Smoo!",
@@ -166,7 +165,7 @@ angular.module('starter.services', ['firebase'])
                 task.messages.push(message);
                 taskArr.$save(task);
                 var self = this;
-                if (message.user.id !== task.bro.id && !isFormatted) {
+                if (message.user.id !== task.bro.id && !isFormatted && task.bro.name.indexOf("Smoo") != -1) {
                     setTimeout(function () {
                         self.addMessage(mine.task, {user: task.bro, message: webexBot.next[webexBot.idx]});
                         if(webexBot.idx < webexBot.next.length-1)
